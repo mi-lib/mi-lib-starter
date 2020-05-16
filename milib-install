@@ -64,7 +64,7 @@ echo "installing required packages..."
 # (for download & compilation)
 sudo apt install git wget unzip rename make gcc
 # (for X11 & GL)
-sudo apt install xorg-dev libjpeg-dev freeglut3-dev
+sudo apt install xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
 
 # download archive files from GitHub, compile, and install libraries
 for lib in ${LIBS}
