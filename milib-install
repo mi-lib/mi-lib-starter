@@ -20,7 +20,7 @@ BINDIR=${PREFIX}/bin
 INCDIR=${PREFIX}/include
 LIBDIR=${PREFIX}/lib
 
-LIBS="zeda zm zeo dzco roki zx11 liw roki-gl"
+LIBS="zeda zm neuz dzco zeo roki zx11 liw roki-gl"
 
 # make directories
 

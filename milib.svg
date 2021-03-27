@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="libraries.svg"
+   sodipodi:docname="milib.svg"
    inkscape:export-filename="/home/zhidao/milib.png"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300">
@@ -34,8 +34,8 @@
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1642"
-     inkscape:window-height="839"
+     inkscape:window-width="1621"
+     inkscape:window-height="843"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1">
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -87,9 +87,9 @@
        rx="5.6843348e-14"
        ry="5.6843348e-14" />
     <rect
-       style="fill:#ffff5a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291667;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="fill:#ffff5a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291663;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect912"
-       width="80"
+       width="40"
        height="15"
        x="95"
        y="247"
@@ -275,12 +275,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="125.4967"
+       x="105.4967"
        y="258.30597"
        id="text865"><tspan
          sodipodi:role="line"
          id="tspan863"
-         x="125.4967"
+         x="105.4967"
          y="258.30597"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">Zeo</tspan></text>
     <text
@@ -396,5 +396,25 @@
            x="48.392056"
            sodipodi:role="line">libX11</tspan></text>
     </g>
+    <rect
+       style="fill:#c896ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291663;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect912-7"
+       width="40"
+       height="15"
+       x="135"
+       y="247"
+       rx="5.6843348e-14"
+       ry="5.6843348e-14" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="141.93103"
+       y="258.30597"
+       id="text865-4"><tspan
+         sodipodi:role="line"
+         id="tspan863-6"
+         x="141.93103"
+         y="258.30597"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">neuZ</tspan></text>
   </g>
 </svg>

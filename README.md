@@ -13,8 +13,9 @@ milib is a collection of libraries developed for the robot control
 and simulation. The libraries include:
 ZEDA - Elementary Data and Algorithms
 ZM - a handy mathematics library
-Zeo - Z/Geometry and optics computation library
+neuZ - neural network library
 DZco - digital control library
+Zeo - Z/Geometry and optics computation library
 RoKi - Robot Kinetics library
 ZX11 - a wrapper for interface library to the X Window System
 LIW - Linux Wizard to assist system dependent operations on Linux
