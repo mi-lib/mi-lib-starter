@@ -66,17 +66,19 @@ sudo apt install git wget unzip rename make gcc
 # (for ZEDA & X11 & GL)
 sudo apt install libxml2-dev xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
 
+MAIN=main
+
 # download archive files from GitHub, compile, and install libraries
 for lib in ${LIBS}
 do
   # download & unarchive
   if [ ! -d ${lib} ]; then
     echo "downloading" ${lib} "..."
-    wget https://github.com/zhidao/${lib}/archive/master.zip
+    wget https://github.com/zhidao/${lib}/archive/refs/heads/${MAIN}.zip
     echo "unarchiving" ${lib} "..."
-    unzip master.zip
-    rm master.zip
-    rename 's/-master//' *-master
+    unzip ${MAIN}.zip
+    rm ${MAIN}.zip
+    rename 's/-${MAIN}//' *-${MAIN}
   fi
   # compile & install
   echo "compiling" ${lib} "..."
