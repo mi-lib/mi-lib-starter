@@ -8,6 +8,7 @@ compile(){
     cd ${lib}
     make clean
     make && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    make deb && mv *.deb ..
     cd -
   else
     echo "cannot find directory" ${lib}
