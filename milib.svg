@@ -89,7 +89,7 @@
     <rect
        style="fill:#ffff5a;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291663;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect912"
-       width="40"
+       width="45"
        height="15"
        x="95"
        y="247"
@@ -188,12 +188,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="155.69009"
+       x="136.26721"
        y="290.90933"
        id="text819"><tspan
          sodipodi:role="line"
          id="tspan817"
-         x="155.69009"
+         x="136.26721"
          y="290.90933"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">ZEDA</tspan></text>
     <text
@@ -275,12 +275,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="105.4967"
+       x="107.9967"
        y="258.30597"
        id="text865"><tspan
          sodipodi:role="line"
          id="tspan863"
-         x="105.4967"
+         x="107.9967"
          y="258.30597"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">Zeo</tspan></text>
     <text
@@ -298,12 +298,12 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="181.28249"
-       y="243.06648"
+       y="236.18741"
        id="text873"><tspan
          sodipodi:role="line"
          id="tspan871"
          x="181.28249"
-         y="243.06648"
+         y="236.18741"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">DZco</tspan></text>
     <text
        xml:space="preserve"
@@ -399,22 +399,42 @@
     <rect
        style="fill:#c896ff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291663;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect912-7"
-       width="40"
+       width="55"
        height="15"
-       x="135"
+       x="140"
        y="247"
        rx="5.6843348e-14"
        ry="5.6843348e-14" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="141.93103"
+       x="154.43103"
        y="258.30597"
        id="text865-4"><tspan
          sodipodi:role="line"
          id="tspan863-6"
-         x="141.93103"
+         x="154.43103"
          y="258.30597"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">neuZ</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.32291663;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect908-9"
+       width="50"
+       height="15"
+       x="180"
+       y="282"
+       rx="5.6843348e-14"
+       ry="5.6843348e-14" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:'Takao Pゴシック';-inkscape-font-specification:'Takao Pゴシック';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="186.71429"
+       y="293.43774"
+       id="text823-7"><tspan
+         sodipodi:role="line"
+         id="tspan821-8"
+         x="186.71429"
+         y="293.43774"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">libxml2</tspan></text>
   </g>
 </svg>
