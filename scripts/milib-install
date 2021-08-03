@@ -16,7 +16,7 @@ if [ "$1" = "deb" ]; then
     echo "installing libraries from .deb packages..."
     for lib in ${LIBS}
     do
-	sudo dpkg -i ${lib}_*.*.*.deb
+	sudo dpkg -i deb/${lib}_*.*.*.deb
     done
     echo "completed."
     exit 0
