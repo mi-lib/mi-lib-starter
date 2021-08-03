@@ -1,6 +1,9 @@
 *
 !README.md
 !scripts
+!scripts/*
 !deb
+!deb/*
+!deb/.gitkeep
 !tutorial
 !.gitignore

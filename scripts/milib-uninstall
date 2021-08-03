@@ -1,0 +1,31 @@
+#!/bin/sh
+
+echo "uninstall libraries..."
+
+# read variables in config file.
+. ./config
+
+SUDO=sudo
+
+# uninstall Debian packages
+if [ "$1" = "deb" ]; then
+  ${SUDO} dpkg --purge ${LIBS}
+  echo "completed."
+  exit 0
+fi
+
+for lib in ${LIBS}
+do
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    ${SUDO} make uninstall
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+done
+
+echo "completed."
+
+exit 0

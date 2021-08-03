@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# read variables in config file.
+. ./config
+
+# compile
+compile(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    make clean
+    make && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    rm deb/*.deb
+    make deb && mv *.deb ../deb
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+# makeclean
+makeclean(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    make clean
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+case $1 in
+  install)
+    for lib in ${LIBS}
+    do
+      compile
+    done
+  ;;
+  clean)
+    for lib in $LIBS
+    do
+      makeclean
+    done
+  ;;
+  *)
+    for lib in ${LIBS}
+    do
+      compile
+    done
+  ;;
+esac
+
+exit 0

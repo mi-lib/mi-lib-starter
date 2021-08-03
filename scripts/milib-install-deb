@@ -1,0 +1,31 @@
+#!/bin/sh
+
+SUDO=sudo
+
+LIBS="zeda zm neuz dzco zeo roki zx11 liw roki-gl"
+
+echo "installing required packages..."
+
+# get apt packages
+# (for download & compilation)
+sudo apt install git wget unzip rename make gcc
+# (for ZEDA & X11 & GL)
+sudo apt install libxml2-dev xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
+
+# install libraries from .deb packages
+for lib in ${LIBS}
+do
+  # dpkg
+  debfile=${lib}_*.*.*-*_*.deb
+  echo "installing" ${debfile} "..."
+  if [ -e ${debfile} ]; then
+    ${SUDO} dpkg -i ${debfile}
+  else
+    echo "cannot unpack the file" ${lib}
+    exit 1
+  fi
+done
+
+echo "completed."
+
+exit 0
