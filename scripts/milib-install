@@ -23,8 +23,7 @@ if [ "$1" = "deb" ]; then
 fi
 
 if [ -z ${PREFIX} ]; then
-  echo "PREFIX not specified."
-  exit 1
+  PREFIX=${HOME}/
 fi
 
 # check if installer has to be run by the superuser
