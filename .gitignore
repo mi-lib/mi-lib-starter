@@ -1,7 +1,6 @@
 *
 !README.md
-!milib-*
+!scripts
+!deb
 !tutorial
 !.gitignore
-!milib.svg
-!*.deb

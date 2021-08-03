@@ -6,8 +6,8 @@ Copyright (C) Tomomichi Sugihara (Zhidao) since 1998
 ## [What is this?]
 
 This starter kit includes an installer, an uninstaller and a script
-for a rebuild of milib. They run on Ubuntu (might run on Debian
-though the author did not try to do it).
+to rebuild the milib. They run on Ubuntu (and might run on Debian
+though we did not try to do it).
 
 milib is a collection of libraries developed for the robot control
 and simulation. The libraries include:
@@ -26,28 +26,34 @@ RoKi-GL - Robot Kinetics library: visualization using OpenGL
 
 ### install
 
+Edit PREFIX in config in order to specify where the libraries are
+to be installed, if necessary.
+
 Do:
    ```
-   % milib-install <dir>
+   % milib-install [clone/deb]
    ```
-where <dir> is a name of directory where the ibraries and tools
-re installed. After completion, <dir>/bin, <dir>/include, and
-<dir>/lib are generated.
-If <dir> is omitted, the libraries and tools are installed under
-/bin.
+The meanings of the command-line options are as follows.
+clone: Source codes of the libraries are cloned from the GitHub
+     repositories.
+deb: The libraries are installed from Debian packages under deb/.
+If the option is omitted, source codes without Git information
+are downloaded from the repositories.
 
 ### uninstall
 
 Do:
    ```
-   % milib-uninstall
+   % milib-uninstall [deb]
    ```
+where deb option is valid only when the libraries are installed
+from Debian packages.
 
 -----------------------------------------------------------------
 ## [How to use]
 
-Set your **PATH** and **LD\_LIBRARY\_PATH** environment variables.
-This is done by:
+Set your **PATH** and **LD\_LIBRARY\_PATH** environment variables,
+if necessary. This is done by
 
    ```
    % export PATH=$PATH:$PREFIX/bin
