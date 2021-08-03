@@ -1,0 +1,2 @@
+PREFIX="\$(HOME)/usr"
+LIBS="zeda zm neuz dzco zeo roki zx11 roki-gl roki-fd"
