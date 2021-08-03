@@ -75,7 +75,7 @@ echo ${LIBDIR} "in LD_LIBRARY_PATH."
 # download zip files from GitHub repositories and unzip them.
 download_and_unzip(){
   echo "downloading" ${lib} "..."
-  wget https://github.com/zhidao/${lib}/archive/refs/heads/main.zip
+  wget https://github.com/mi-lib/${lib}/archive/refs/heads/main.zip
   echo "unarchiving" ${lib} "..."
   unzip main.zip
   rm main.zip
