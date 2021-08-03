@@ -29,7 +29,6 @@ do
     cd -
   else
     echo "cannot find directory" ${lib}
-    exit 1
   fi
 done
 
