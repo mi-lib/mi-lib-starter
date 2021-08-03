@@ -14,7 +14,14 @@ if [ "$1" = "deb" ]; then
   exit 0
 fi
 
+# uninstall libraries in the reverse order.
+LIBS_REV=
 for lib in ${LIBS}
+do
+    LIBS_REV="${lib} ${LIBS_REV}"
+done
+
+for lib in ${LIBS_REV}
 do
   if [ -d ${lib} ]; then
     cd ${lib}
