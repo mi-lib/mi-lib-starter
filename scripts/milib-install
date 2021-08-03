@@ -45,7 +45,7 @@ for dir in ${BINDIR} ${INCDIR} ${LIBDIR}
 do
   if [ ! -d ${dir} ]; then
     echo "making directory" ${dir} "..."
-    ${SUDO} mkdir -p ${dir}
+    ${SUDO} mkdir -m 755 -p ${dir}
   fi
 done
 
