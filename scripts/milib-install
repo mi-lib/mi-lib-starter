@@ -23,7 +23,7 @@ if [ "$1" = "deb" ]; then
 fi
 
 if [ -z ${PREFIX} ]; then
-  PREFIX=${HOME}/
+  PREFIX=${HOME}/usr
 fi
 
 # check if installer has to be run by the superuser
