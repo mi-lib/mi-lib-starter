@@ -4,7 +4,7 @@ echo "installing required packages..."
 
 # get apt packages
 # (for download & compilation)
-sudo apt install git wget unzip rename make gcc
+sudo apt install git wget unzip rename make gcc fakeroot
 # (for ZEDA & X11 & GL)
 sudo apt install libxml2-dev xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
 
