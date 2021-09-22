@@ -9,6 +9,17 @@ compile(){
     cd ${lib}
     make clean
     make && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+# makedeb
+makedeb(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
     rm deb/*.deb
     make deb && mv *.deb ../deb
     cd -
@@ -36,19 +47,26 @@ case $1 in
     do
       compile
     done
-  ;;
+    ;;
+  deb)
+    rm deb/*.deb
+    for lib in ${LIBS}
+    do
+      makedeb
+    done
+    ;;
   clean)
-    for lib in $LIBS
+    for lib in ${LIBS}
     do
       makeclean
     done
-  ;;
+    ;;
   *)
     for lib in ${LIBS}
     do
       compile
     done
-  ;;
+    ;;
 esac
 
 exit 0
