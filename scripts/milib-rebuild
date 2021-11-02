@@ -20,7 +20,6 @@ compile(){
 makedeb(){
   if [ -d ${lib} ]; then
     cd ${lib}
-    rm deb/*.deb
     make deb && mv *.deb ../deb
     cd -
   else
