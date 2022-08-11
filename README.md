@@ -1,4 +1,4 @@
-milib starter
+mi-lib starter
 =================================================================
 Copyright (C) Tomomichi Sugihara (Zhidao) since 1998
 
@@ -6,10 +6,10 @@ Copyright (C) Tomomichi Sugihara (Zhidao) since 1998
 ## [What is this?]
 
 This starter kit includes an installer, an uninstaller and a script
-to rebuild the milib. They run on Ubuntu (and might run on Debian
+to rebuild the mi-lib. They run on Ubuntu (and might run on Debian
 though we did not try to do it).
 
-milib is a collection of libraries developed for the robot control
+mi-lib is a collection of libraries developed for the robot control
 and simulation. The libraries include:
 ZEDA - Elementary Data and Algorithms
 ZM - a handy mathematics library
@@ -31,7 +31,7 @@ to be installed, if necessary.
 
 Do:
    ```
-   % milib-install [clone/deb]
+   % scripts/mi-lib-install [clone/deb]
    ```
 The meanings of the command-line options are as follows.
 clone: Source codes of the libraries are cloned from the GitHub
@@ -44,7 +44,7 @@ are downloaded from the repositories.
 
 Do:
    ```
-   % milib-uninstall [deb]
+   % scripts/mi-lib-uninstall [deb]
    ```
 where deb option is valid only when the libraries are installed
 from Debian packages.
