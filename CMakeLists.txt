@@ -11,13 +11,6 @@ set(PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/out/build/bin")
 set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/out/build/bin")
 set(CMAKE_CXX_STANDARD 17)
 
-# source
-add_executable (mi-lib-starter "mi-lib-starter.c" "mi-lib-starter.h")
-
-if (CMAKE_VERSION VERSION_GREATER 3.16)
-  set_property(TARGET mi-lib-starter PROPERTY CXX_STANDARD 17)
-endif()
-
 
 # Switch build type
 if(NOT CMAKE_BUILD_TYPE)
