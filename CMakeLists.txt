@@ -5,10 +5,10 @@ project ("mi-lib-starter" LANGUAGES CXX C)
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
-set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/build/bin")
-set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/out/build/lib")
-set(PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/out/build/bin")
-set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/out/build/bin")
+set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/bin")
+set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/lib")
+set(PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/build/bin")
+set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build/bin")
 set(CMAKE_CXX_STANDARD 17)
 
 
@@ -24,10 +24,10 @@ set(LIBXML2_WITH_PYTHON OFF)
 set(LIBXML2_WITH_ZLIB OFF)
 set(BUILD_SHARED_LIBS OFF)
 
-
+# TODO remove for DLL
 add_compile_definitions("__STATIC_BUILD")
 
-add_subdirectory("libxml")
+add_subdirectory("libxml2")
 
 # zeda ----------------------------------------------------------------------
 
@@ -87,7 +87,7 @@ endif()
 
 target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
 target_include_directories(zeda PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/libxml/include)
+target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 
 add_dependencies(zeda LibXml2)
 
@@ -286,6 +286,5 @@ endif()
 target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
 target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
 target_include_directories(zm PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml/include)
+target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(zm zeda LibXml2)
-
