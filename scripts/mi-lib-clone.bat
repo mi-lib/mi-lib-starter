@@ -51,8 +51,13 @@ exit /b 0
     echo git_clone %LIB%
     set LIB=%1
     
-    echo git.exe clone https://github.com/mi-lib/%LIB%
-    echo git.exe clone https://github.com/mi-lib/%LIB%
+    if "%LIB%"=="libxml" (
+        echo git.exe clone -b 2.9 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+        git.exe clone -b 2.9 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+    ) else (
+        echo git.exe clone https://github.com/mi-lib/%LIB%.git
+        echo git.exe clone https://github.com/mi-lib/%LIB%.git
+    )
     
     exit /b 0
 
@@ -60,10 +65,19 @@ exit /b 0
 :download_and_unzip
     echo download_and_unzip %LIB%
     set LIB=%1
-    set ZIP_FILENAME=%LIB%-main
     
-    echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
-    bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+    if "%LIB%"=="libxml" (
+        set TAG=2.9
+        set REMOTE_NAME=libxml2
+        set ZIP_FILENAME=%REMOTE_NAME%-%TAG%
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%REMOTE_NAME%/-/archive/2.9/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%REMOTE_NAME%/-/archive/2.9/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+    ) else (
+        set BRANCH=main
+        set ZIP_FILENAME=%LIB%-%BRANCH%
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+    )
     
     echo call powershell -command "Expand-Archive -Force %ZIP_FILENAME%.zip %CURDIR%"
     call powershell -command "Expand-Archive -Force %ZIP_FILENAME%.zip %CURDIR%"
