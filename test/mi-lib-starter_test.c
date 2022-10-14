@@ -2,6 +2,8 @@
 
 #include "zeda/zeda.h"
 #include "zm/zm.h"
+#include "zeo/zeo.h"
+#include "roki/roki.h"
 
 int main(void)
 {

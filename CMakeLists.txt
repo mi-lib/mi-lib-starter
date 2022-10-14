@@ -17,6 +17,9 @@ if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
+
+# libxml2 ----------------------------------------------------------------------
+
 # libxml2 setting
 set(LIBXML2_WITH_ICONV OFF)
 set(LIBXML2_WITH_LZMA OFF)
@@ -24,13 +27,16 @@ set(LIBXML2_WITH_PYTHON OFF)
 set(LIBXML2_WITH_ZLIB OFF)
 set(BUILD_SHARED_LIBS OFF)
 
+add_subdirectory("libxml2")
+
+
+# mi-lib ----------------------------------------------------------------------
+
 # TODO remove for DLL
 add_compile_definitions("__STATIC_BUILD")
 
-add_subdirectory("libxml2")
 
 # zeda ----------------------------------------------------------------------
-
 
 set(ZEDA_HEADERS
   zeda/include/zeda/zeda.h
@@ -96,7 +102,6 @@ add_compile_definitions(__ZEDA_USE_LIBXML true)
 
 
 # zm ----------------------------------------------------------------------
-
 
 set(ZM_SOURCES
   zm/src/zm_cmat.c
@@ -438,14 +443,105 @@ target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(zeo zm zeda LibXml2)
 
 
+# roki ------------------------------------------------------------------
+
+
+set(ROKI_SOURCES 
+  roki/src/rk_abi.c
+  roki/src/rk_body.c
+  roki/src/rk_cd.c
+  roki/src/rk_cd_brep.c
+  roki/src/rk_cd_brep_trunc.c
+  roki/src/rk_chain.c
+  roki/src/rk_contact.c
+  roki/src/rk_force.c
+  roki/src/rk_g3d.c
+  roki/src/rk_ik.c
+  roki/src/rk_ik_cell.c
+  roki/src/rk_ik_imp.c
+  roki/src/rk_ik_seq.c
+  roki/src/rk_jacobi.c
+  roki/src/rk_joint.c
+  roki/src/rk_joint_brfloat.c
+  roki/src/rk_joint_cylin.c
+  roki/src/rk_joint_fixed.c
+  roki/src/rk_joint_float.c
+  roki/src/rk_joint_hooke.c
+  roki/src/rk_joint_prism.c
+  roki/src/rk_joint_revol.c
+  roki/src/rk_joint_spher.c
+  roki/src/rk_link.c
+  roki/src/rk_motor.c
+  roki/src/rk_motor_dc.c
+  roki/src/rk_motor_none.c
+  roki/src/rk_motor_trq.c
+)
+
+set(ROKI_HEADERS
+  roki/include/roki/rk_abi.h
+  roki/include/roki/rk_body.h
+  roki/include/roki/rk_cd.h
+  roki/include/roki/rk_cd_brep.h
+  roki/include/roki/rk_cd_brep_trunc.h
+  roki/include/roki/rk_chain.h
+  roki/include/roki/rk_contact.h
+  roki/include/roki/rk_errmsg.h
+  roki/include/roki/rk_force.h
+  roki/include/roki/rk_g.h
+  roki/include/roki/rk_g3d.h
+  roki/include/roki/rk_ik.h
+  roki/include/roki/rk_ik_cell.h
+  roki/include/roki/rk_ik_imp.h
+  roki/include/roki/rk_ik_seq.h
+  roki/include/roki/rk_jacobi.h
+  roki/include/roki/rk_joint.h
+  roki/include/roki/rk_joint_brfloat.h
+  roki/include/roki/rk_joint_cylin.h
+  roki/include/roki/rk_joint_fixed.h
+  roki/include/roki/rk_joint_float.h
+  roki/include/roki/rk_joint_hooke.h
+  roki/include/roki/rk_joint_prism.h
+  roki/include/roki/rk_joint_revol.h
+  roki/include/roki/rk_joint_spher.h
+  roki/include/roki/rk_link.h
+  roki/include/roki/rk_motor.h
+  roki/include/roki/rk_motor_dc.h
+  roki/include/roki/rk_motor_none.h
+  roki/include/roki/rk_motor_trq.h
+  roki/include/roki/roki.h
+)
+
+# TODO change from STATIC for DLL
+add_library(roki STATIC 
+  ${ROKI_SOURCES}
+  ${ROKI_HEADERS}
+)
+
+if (MSVC)
+  target_compile_options(roki PUBLIC /std:c17)
+  target_compile_definitions(roki PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/roki/include)
+target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
+target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
+target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
+target_include_directories(roki PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
+target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+add_dependencies(roki zeo zm zeda LibXml2)
+
+
 # test include & link ------------------------------------------------------------------
+
 add_executable(mi-lib-starter_test
   test/mi-lib-starter_test.c
 )
+target_include_directories(mi-lib-starter_test PUBLIC roki/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
+target_link_libraries(mi-lib-starter_test PUBLIC roki)
 target_link_libraries(mi-lib-starter_test PUBLIC zeo)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
 target_link_libraries(mi-lib-starter_test PUBLIC zeda)
