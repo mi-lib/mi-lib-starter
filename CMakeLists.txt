@@ -329,6 +329,61 @@ target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(neuz zm zeda LibXml2)
 
 
+# dzco ----------------------------------------------------------------------
+
+set(DZCO_SOURCES
+  dzco/src/dz_ident_lag.c
+  dzco/src/dz_lin.c
+  dzco/src/dz_sys.c
+  dzco/src/dz_sys_fg.c
+  dzco/src/dz_sys_filt_bw.c
+  dzco/src/dz_sys_filt_maf.c
+  dzco/src/dz_sys_lag.c
+  dzco/src/dz_sys_lin.c
+  dzco/src/dz_sys_misc.c
+  dzco/src/dz_sys_pid.c
+  dzco/src/dz_sys_tf.c
+  dzco/src/dz_tf.c
+  dzco/src/dz_tf_fr.c
+)
+
+set(DZCO_HEADERS
+  dzco/include/dzco/dzco.h
+  dzco/include/dzco/dz_errmsg.h
+  dzco/include/dzco/dz_ident_lag.h
+  dzco/include/dzco/dz_lin.h
+  dzco/include/dzco/dz_sys.h
+  dzco/include/dzco/dz_sys_fg.h
+  dzco/include/dzco/dz_sys_filt_bw.h
+  dzco/include/dzco/dz_sys_filt_maf.h
+  dzco/include/dzco/dz_sys_lag.h
+  dzco/include/dzco/dz_sys_lin.h
+  dzco/include/dzco/dz_sys_misc.h
+  dzco/include/dzco/dz_sys_pid.h
+  dzco/include/dzco/dz_sys_tf.h
+  dzco/include/dzco/dz_tf.h
+  dzco/include/dzco/dz_tf_fr.h
+)
+
+add_library(dzco STATIC 
+  ${DZCO_SOURCES}
+  ${DZCO_HEADERS}
+)
+
+if (MSVC)
+  target_compile_options(dzco PUBLIC /std:c17)
+  target_compile_definitions(dzco PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/dzco/include)
+target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/neuz/include)
+target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
+target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
+target_include_directories(dzco PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
+target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+add_dependencies(dzco neuz zm zeda LibXml2)
+
+
 # zeo ----------------------------------------------------------------------
 
 set(ZEO_SOURCES 
@@ -476,7 +531,6 @@ add_dependencies(zeo zm zeda LibXml2)
 
 # roki ------------------------------------------------------------------
 
-
 set(ROKI_SOURCES 
   roki/src/rk_abi.c
   roki/src/rk_body.c
@@ -621,6 +675,7 @@ target_include_directories(mi-lib-starter_test PUBLIC roki-fd/include)
 target_include_directories(mi-lib-starter_test PUBLIC roki/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
 target_include_directories(mi-lib-starter_test PUBLIC neuz/include)
+target_include_directories(mi-lib-starter_test PUBLIC dzco/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
@@ -628,6 +683,7 @@ target_link_libraries(mi-lib-starter_test PUBLIC roki-fd)
 target_link_libraries(mi-lib-starter_test PUBLIC roki)
 target_link_libraries(mi-lib-starter_test PUBLIC zeo)
 target_link_libraries(mi-lib-starter_test PUBLIC neuz)
+target_link_libraries(mi-lib-starter_test PUBLIC dzco)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
 target_link_libraries(mi-lib-starter_test PUBLIC zeda)
 target_link_libraries(mi-lib-starter_test PUBLIC LibXml2)
