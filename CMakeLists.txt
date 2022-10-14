@@ -75,6 +75,7 @@ set(ZEDA_SOURCES
   zeda/src/zeda_ztk.c
 )
 
+# TODO change from STATIC for DLL
 add_library(zeda STATIC
   ${ZEDA_SOURCES}
   ${ZEDA_HEADERS}
@@ -91,6 +92,7 @@ target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 
 add_dependencies(zeda LibXml2)
 
+add_compile_definitions(__ZEDA_USE_LIBXML true)
 
 
 # zm ----------------------------------------------------------------------
@@ -273,6 +275,7 @@ set(ZM_HEADERS
   zm/include/zm/zm_vec_tree.h
 )
 
+# TODO change from STATIC for DLL
 add_library(zm STATIC 
   ${ZM_SOURCES}
   ${ZM_HEADERS}
@@ -290,13 +293,160 @@ target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(zm zeda LibXml2)
 
 
+# zeo ----------------------------------------------------------------------
+
+set(ZEO_SOURCES 
+  zeo/src/zeo_brep.c
+  zeo/src/zeo_brep_bool.c
+  zeo/src/zeo_brep_trunc.c
+  zeo/src/zeo_bv2d_aabb.c
+  zeo/src/zeo_bv2d_bdisk.c
+  zeo/src/zeo_bv2d_ch.c
+  zeo/src/zeo_bv3d_aabb.c
+  zeo/src/zeo_bv3d_bball.c
+  zeo/src/zeo_bv3d_ch.c
+  zeo/src/zeo_bv3d_obb.c
+  zeo/src/zeo_col.c
+  zeo/src/zeo_col_box.c
+  zeo/src/zeo_col_gjk.c
+  zeo/src/zeo_col_minkowski.c
+  zeo/src/zeo_col_mpr.c
+  zeo/src/zeo_col_ph.c
+  zeo/src/zeo_elem2d.c
+  zeo/src/zeo_elem3d.c
+  zeo/src/zeo_elem3d_list.c
+  zeo/src/zeo_ep.c
+  zeo/src/zeo_frame3d.c
+  zeo/src/zeo_map.c
+  zeo/src/zeo_mapnet.c
+  zeo/src/zeo_map_terra.c
+  zeo/src/zeo_mat2d.c
+  zeo/src/zeo_mat3d.c
+  zeo/src/zeo_mat6d.c
+  zeo/src/zeo_misc.c
+  zeo/src/zeo_mshape3d.c
+  zeo/src/zeo_nurbs.c
+  zeo/src/zeo_ph.c
+  zeo/src/zeo_ph_dae.c
+  zeo/src/zeo_ph_obj.c
+  zeo/src/zeo_ph_ply.c
+  zeo/src/zeo_ph_stl.c
+  zeo/src/zeo_pointcloud.c
+  zeo/src/zeo_render_color.c
+  zeo/src/zeo_render_optic.c
+  zeo/src/zeo_render_texture.c
+  zeo/src/zeo_shape3d.c
+  zeo/src/zeo_shape3d_box.c
+  zeo/src/zeo_shape3d_cone.c
+  zeo/src/zeo_shape3d_cyl.c
+  zeo/src/zeo_shape3d_ecyl.c
+  zeo/src/zeo_shape3d_ellips.c
+  zeo/src/zeo_shape3d_list.c
+  zeo/src/zeo_shape3d_nurbs.c
+  zeo/src/zeo_shape3d_ph.c
+  zeo/src/zeo_shape3d_sphere.c
+  zeo/src/zeo_vec2d.c
+  zeo/src/zeo_vec2d_list.c
+  zeo/src/zeo_vec3d.c
+  zeo/src/zeo_vec3d_list.c
+  zeo/src/zeo_vec3d_pca.c
+  zeo/src/zeo_vec3d_tree.c
+  zeo/src/zeo_vec6d.c
+  zeo/src/zeo_voronoi2d.c
+)
+
+set(ZEO_HEADERS
+  zeo/include/zeo/zeo.h
+  zeo/include/zeo/zeo_brep.h
+  zeo/include/zeo/zeo_brep_bool.h
+  zeo/include/zeo/zeo_brep_trunc.h
+  zeo/include/zeo/zeo_bv2d.h
+  zeo/include/zeo/zeo_bv2d_aabb.h
+  zeo/include/zeo/zeo_bv2d_bdisk.h
+  zeo/include/zeo/zeo_bv2d_ch.h
+  zeo/include/zeo/zeo_bv3d.h
+  zeo/include/zeo/zeo_bv3d_aabb.h
+  zeo/include/zeo/zeo_bv3d_bball.h
+  zeo/include/zeo/zeo_bv3d_ch.h
+  zeo/include/zeo/zeo_bv3d_obb.h
+  zeo/include/zeo/zeo_col.h
+  zeo/include/zeo/zeo_col_box.h
+  zeo/include/zeo/zeo_col_gjk.h
+  zeo/include/zeo/zeo_col_minkowski.h
+  zeo/include/zeo/zeo_col_mpr.h
+  zeo/include/zeo/zeo_col_ph.h
+  zeo/include/zeo/zeo_elem2d.h
+  zeo/include/zeo/zeo_elem3d.h
+  zeo/include/zeo/zeo_elem3d_list.h
+  zeo/include/zeo/zeo_ep.h
+  zeo/include/zeo/zeo_errmsg.h
+  zeo/include/zeo/zeo_frame3d.h
+  zeo/include/zeo/zeo_map.h
+  zeo/include/zeo/zeo_mapnet.h
+  zeo/include/zeo/zeo_map_terra.h
+  zeo/include/zeo/zeo_mat2d.h
+  zeo/include/zeo/zeo_mat3d.h
+  zeo/include/zeo/zeo_mat6d.h
+  zeo/include/zeo/zeo_misc.h
+  zeo/include/zeo/zeo_mshape3d.h
+  zeo/include/zeo/zeo_nurbs.h
+  zeo/include/zeo/zeo_ph.h
+  zeo/include/zeo/zeo_ph_dae.h
+  zeo/include/zeo/zeo_ph_obj.h
+  zeo/include/zeo/zeo_ph_ply.h
+  zeo/include/zeo/zeo_ph_stl.h
+  zeo/include/zeo/zeo_pointcloud.h
+  zeo/include/zeo/zeo_render_color.h
+  zeo/include/zeo/zeo_render_optic.h
+  zeo/include/zeo/zeo_render_texture.h
+  zeo/include/zeo/zeo_shape3d.h
+  zeo/include/zeo/zeo_shape3d_box.h
+  zeo/include/zeo/zeo_shape3d_cone.h
+  zeo/include/zeo/zeo_shape3d_cyl.h
+  zeo/include/zeo/zeo_shape3d_ecyl.h
+  zeo/include/zeo/zeo_shape3d_ellips.h
+  zeo/include/zeo/zeo_shape3d_list.h
+  zeo/include/zeo/zeo_shape3d_nurbs.h
+  zeo/include/zeo/zeo_shape3d_ph.h
+  zeo/include/zeo/zeo_shape3d_sphere.h
+  zeo/include/zeo/zeo_vec2d.h
+  zeo/include/zeo/zeo_vec2d_list.h
+  zeo/include/zeo/zeo_vec3d.h
+  zeo/include/zeo/zeo_vec3d_list.h
+  zeo/include/zeo/zeo_vec3d_pca.h
+  zeo/include/zeo/zeo_vec3d_tree.h
+  zeo/include/zeo/zeo_vec6d.h
+  zeo/include/zeo/zeo_voronoi2d.h
+)
+
+# TODO change from STATIC for DLL
+add_library(zeo STATIC 
+  ${ZEO_SOURCES}
+  ${ZEO_HEADERS}
+)
+
+if (MSVC)
+  target_compile_options(zeo PUBLIC /std:c17)
+  target_compile_definitions(zeo PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
+target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
+target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
+target_include_directories(zeo PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
+target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+add_dependencies(zeo zm zeda LibXml2)
+
+
 # test include & link ------------------------------------------------------------------
 add_executable(mi-lib-starter_test
   test/mi-lib-starter_test.c
 )
+target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
+target_link_libraries(mi-lib-starter_test PUBLIC zeo)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
 target_link_libraries(mi-lib-starter_test PUBLIC zeda)
 target_link_libraries(mi-lib-starter_test PUBLIC LibXml2)
