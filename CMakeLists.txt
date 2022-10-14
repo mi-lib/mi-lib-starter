@@ -288,3 +288,15 @@ target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
 target_include_directories(zm PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
 target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(zm zeda LibXml2)
+
+
+# test include & link ------------------------------------------------------------------
+add_executable(mi-lib-starter_test
+  test/mi-lib-starter_test.c
+)
+target_include_directories(mi-lib-starter_test PUBLIC zm/include)
+target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
+target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
+target_link_libraries(mi-lib-starter_test PUBLIC zm)
+target_link_libraries(mi-lib-starter_test PUBLIC zeda)
+target_link_libraries(mi-lib-starter_test PUBLIC LibXml2)
