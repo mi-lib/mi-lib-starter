@@ -2,6 +2,7 @@
 
 #include "zeda/zeda.h"
 #include "zm/zm.h"
+#include "neuz/neuz.h"
 #include "zeo/zeo.h"
 #include "roki/roki.h"
 #include "roki-fd/roki-fd.h"

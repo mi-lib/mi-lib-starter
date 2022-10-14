@@ -297,6 +297,37 @@ target_include_directories(zm PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
 target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(zm zeda LibXml2)
 
+# neuz ----------------------------------------------------------------------
+
+set(NEUZ_SOURCES
+  neuz/src/neuz_activator.c
+  neuz/src/neuz_neuron.c
+)
+
+set(NEUZ_HEADERS
+  neuz/include/neuz/neuz.h
+  neuz/include/neuz/neuz_activator.h
+  neuz/include/neuz/neuz_errmsg.h
+  neuz/include/neuz/neuz_neuron.h
+)
+
+add_library(neuz STATIC 
+  ${NEUZ_SOURCES}
+  ${NEUZ_HEADERS}
+)
+
+if (MSVC)
+  target_compile_options(neuz PUBLIC /std:c17)
+  target_compile_definitions(neuz PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/neuz/include)
+target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
+target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
+target_include_directories(neuz PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
+target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+add_dependencies(neuz zm zeda LibXml2)
+
 
 # zeo ----------------------------------------------------------------------
 
@@ -589,12 +620,14 @@ add_executable(mi-lib-starter_test
 target_include_directories(mi-lib-starter_test PUBLIC roki-fd/include)
 target_include_directories(mi-lib-starter_test PUBLIC roki/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
+target_include_directories(mi-lib-starter_test PUBLIC neuz/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
 target_link_libraries(mi-lib-starter_test PUBLIC roki-fd)
 target_link_libraries(mi-lib-starter_test PUBLIC roki)
 target_link_libraries(mi-lib-starter_test PUBLIC zeo)
+target_link_libraries(mi-lib-starter_test PUBLIC neuz)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
 target_link_libraries(mi-lib-starter_test PUBLIC zeda)
 target_link_libraries(mi-lib-starter_test PUBLIC LibXml2)
