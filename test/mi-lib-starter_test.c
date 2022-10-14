@@ -4,6 +4,7 @@
 #include "zm/zm.h"
 #include "zeo/zeo.h"
 #include "roki/roki.h"
+#include "roki-fd/roki-fd.h"
 
 int main(void)
 {

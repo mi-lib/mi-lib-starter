@@ -531,16 +531,68 @@ target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
 add_dependencies(roki zeo zm zeda LibXml2)
 
 
+# roki-fd ------------------------------------------------------------------
+
+set(ROKI-FD_SOURCES
+  roki-fd/src/rkfd_cd.c
+  roki-fd/src/rkfd_mlcp.c
+  roki-fd/src/rkfd_penalty.c
+  roki-fd/src/rkfd_property.c
+  roki-fd/src/rkfd_sim.c
+  roki-fd/src/rkfd_solver.c
+  roki-fd/src/rkfd_util.c
+  roki-fd/src/rkfd_vert.c
+  roki-fd/src/rkfd_volume.c
+)
+
+set(ROKI-FD_HEADERS
+  roki-fd/include/roki-fd/rkfd_array.h
+  roki-fd/include/roki-fd/rkfd_cd.h
+  roki-fd/include/roki-fd/rkfd_chain.h
+  roki-fd/include/roki-fd/rkfd_defs.h
+  roki-fd/include/roki-fd/rkfd_mlcp.h
+  roki-fd/include/roki-fd/rkfd_penalty.h
+  roki-fd/include/roki-fd/rkfd_property.h
+  roki-fd/include/roki-fd/rkfd_sim.h
+  roki-fd/include/roki-fd/rkfd_solver.h
+  roki-fd/include/roki-fd/rkfd_util.h
+  roki-fd/include/roki-fd/rkfd_vert.h
+  roki-fd/include/roki-fd/rkfd_volume.h
+  roki-fd/include/roki-fd/roki-fd.h
+)
+
+# TODO change from STATIC for DLL
+add_library(roki-fd STATIC 
+  ${ROKI-FD_SOURCES}
+  ${ROKI-FD_HEADERS}
+)
+
+if (MSVC)
+  target_compile_options(roki-fd PUBLIC /std:c17)
+endif()
+
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/roki-fd/include)
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/roki/include)
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
+target_include_directories(roki-fd PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
+target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+add_dependencies(roki-fd roki zeo zm zeda LibXml2)
+
+
 # test include & link ------------------------------------------------------------------
 
 add_executable(mi-lib-starter_test
   test/mi-lib-starter_test.c
 )
+target_include_directories(mi-lib-starter_test PUBLIC roki-fd/include)
 target_include_directories(mi-lib-starter_test PUBLIC roki/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
+target_link_libraries(mi-lib-starter_test PUBLIC roki-fd)
 target_link_libraries(mi-lib-starter_test PUBLIC roki)
 target_link_libraries(mi-lib-starter_test PUBLIC zeo)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
