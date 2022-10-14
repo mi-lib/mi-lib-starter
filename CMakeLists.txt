@@ -381,7 +381,7 @@ target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
 target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
 target_include_directories(dzco PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
 target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
-add_dependencies(dzco neuz zm zeda LibXml2)
+add_dependencies(dzco zm zeda LibXml2)
 
 
 # zeo ----------------------------------------------------------------------
