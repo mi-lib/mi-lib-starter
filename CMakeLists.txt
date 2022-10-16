@@ -88,17 +88,151 @@ add_library(zeda STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(zeda PUBLIC /std:c17)
   target_compile_definitions(zeda PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(zeda PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(zeda PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(ZEDA_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(zeda PUBLIC ${ZEDA_INCLUDE_DIR})
 
 add_dependencies(zeda LibXml2)
 
 add_compile_definitions(__ZEDA_USE_LIBXML true)
+
+
+# zeda test ----------------------------------------------------------------------
+
+set(ZEDA_TEST_LINK_LIB
+  zeda
+  LibXml2
+)
+
+set(ZEDA_TEST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/test"
+)
+
+add_executable( array_test
+  zeda/test/array_test.c
+)
+target_include_directories( array_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( array_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( binfile_test
+  zeda/test/binfile_test.c
+)
+target_include_directories( binfile_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( binfile_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( binfile_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( bit_test
+  zeda/test/bit_test.c
+)
+target_include_directories( bit_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( bit_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( bit_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( defs_test
+  zeda/test/defs_test.c
+)
+target_include_directories( defs_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( defs_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( defs_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( heap_test
+  zeda/test/heap_test.c
+)
+target_include_directories( heap_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( heap_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( heap_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( index_test
+ zeda/test/index_test.c
+)
+target_include_directories( index_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( index_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( index_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( misc_test
+  zeda/test/misc_test.c
+)
+target_include_directories( misc_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( misc_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( misc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( name_test
+  zeda/test/name_test.c
+)
+target_include_directories( name_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( name_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( name_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( option_test
+  zeda/test/option_test.c
+)
+target_include_directories( option_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( option_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( option_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( ring_test
+  zeda/test/ring_test.c
+)
+target_include_directories( ring_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ring_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( ring_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( rrtab_test
+  zeda/test/rrtab_test.c
+)
+target_include_directories( rrtab_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( rrtab_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( rrtab_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( string_test
+  zeda/test/string_test.c
+)
+target_include_directories( string_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( string_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( string_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_executable( strlist_test
+  zeda/test/strlist_test.c
+)
+target_include_directories( strlist_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( strlist_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( strlist_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
 
 
 # zm ----------------------------------------------------------------------
@@ -287,6 +421,7 @@ add_library(zm STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(zm PUBLIC /std:c17)
   target_compile_definitions(zm PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -317,6 +452,7 @@ add_library(neuz STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(neuz PUBLIC /std:c17)
   target_compile_definitions(neuz PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -371,6 +507,7 @@ add_library(dzco STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(dzco PUBLIC /std:c17)
   target_compile_definitions(dzco PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -517,6 +654,7 @@ add_library(zeo STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(zeo PUBLIC /std:c17)
   target_compile_definitions(zeo PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -603,6 +741,7 @@ add_library(roki STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(roki PUBLIC /std:c17)
   target_compile_definitions(roki PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -653,6 +792,7 @@ add_library(roki-fd STATIC
 )
 
 if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
   target_compile_options(roki-fd PUBLIC /std:c17)
 endif()
 
@@ -668,7 +808,7 @@ add_dependencies(roki-fd roki zeo zm zeda LibXml2)
 
 # test include & link ------------------------------------------------------------------
 
-add_executable(mi-lib-starter_test
+add_executable( mi-lib-starter_test
   test/mi-lib-starter_test.c
 )
 target_include_directories(mi-lib-starter_test PUBLIC roki-fd/include)
