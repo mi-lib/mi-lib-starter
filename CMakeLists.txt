@@ -429,6 +429,76 @@ set_target_properties( vec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+
+# zm app ----------------------------------------------------------------------
+
+set(ZM_APP_LINK_LIB
+  zm
+  zeda
+  LibXml2
+)
+
+set(ZM_APP_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zm/app"
+)
+
+add_executable( deg2rad
+  zm/app/deg2rad.c
+)
+target_link_libraries( deg2rad PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( deg2rad PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( rad2deg
+  zm/app/rad2deg.c
+)
+target_link_libraries( rad2deg PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( rad2deg PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_ave
+  zm/app/zm_ave.c
+)
+target_link_libraries( zm_ave PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_ave PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_le
+  zm/app/zm_le.c
+)
+target_link_libraries( zm_le PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_le PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_pexp
+  zm/app/zm_pexp.c
+)
+target_link_libraries( zm_pexp PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_pexp PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_psolve
+  zm/app/zm_psolve.c
+)
+target_link_libraries( zm_psolve PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_psolve PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_seqmod
+  zm/app/zm_seqmod.c
+)
+target_link_libraries( zm_seqmod PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_seqmod PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+
 # neuz ----------------------------------------------------------------------
 
 set(NEUZ_SOURCES
@@ -546,6 +616,69 @@ target_link_libraries( tf_test PUBLIC ${DZCO_TEST_LINK_LIB} )
 set_target_properties( tf_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_TEST_OUTPUT_DIR}
 )
+
+
+# dzco app ----------------------------------------------------------------------
+
+set(DZCO_APP_LINK_LIB
+  dzco
+  zm
+  zeda
+  LibXml2
+)
+
+set(DZCO_APP_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/dzco/app"
+)
+
+add_executable( dz_bode
+  dzco/app/dz_bode.c
+)
+target_link_libraries( dz_bode PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_bode PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
+add_executable( dz_fr2tf
+  dzco/app/dz_fr2tf.c
+)
+target_link_libraries( dz_fr2tf PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_fr2tf PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
+add_executable( dz_frconv
+  dzco/app/dz_frconv.c
+)
+target_link_libraries( dz_frconv PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_frconv PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
+add_executable( dz_nyquist
+  dzco/app/dz_nyquist.c
+)
+target_link_libraries( dz_nyquist PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_nyquist PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
+add_executable( dz_sim
+  dzco/app/dz_sim.c
+)
+target_link_libraries( dz_sim PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_sim PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
+add_executable( dz_tf2zeropole
+  dzco/app/dz_tf2zeropole.c
+)
+target_link_libraries( dz_tf2zeropole PUBLIC ${DZCO_APP_LINK_LIB} )
+set_target_properties( dz_tf2zeropole PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
+)
+
 
 
 # zeo ----------------------------------------------------------------------
@@ -808,6 +941,60 @@ set_target_properties( vec6d_test PROPERTIES
 )
 
 
+# zeo app ------------------------------------------------------------------
+
+set(ZEO_APP_LINK_LIB
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ZEO_APP_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeo/app"
+)
+
+add_executable( mshape2gp
+  zeo/app/mshape2gp.c
+)
+target_link_libraries( mshape2gp PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( mshape2gp PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
+add_executable( zeo_gjk
+  zeo/app/zeo_gjk.c
+)
+target_link_libraries( zeo_gjk PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_gjk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
+add_executable( zeo_phconv
+  zeo/app/zeo_phconv.c
+)
+target_link_libraries( zeo_phconv PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_phconv PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
+add_executable( zeo_qhull
+  zeo/app/zeo_qhull.c
+)
+target_link_libraries( zeo_qhull PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_qhull PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
+add_executable( zeo_stl2ztk
+  zeo/app/zeo_stl2ztk.c
+)
+target_link_libraries( zeo_stl2ztk PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_stl2ztk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
+
 # roki ------------------------------------------------------------------
 
 set(ROKI_SOURCES 
@@ -984,6 +1171,125 @@ set_target_properties( scara_fk_test PROPERTIES
 )
 
 
+# roki app ------------------------------------------------------------------
+
+set(ROKI_APP_LINK_LIB
+  roki
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ROKI_APP_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki/app"
+)
+
+add_executable( cad2ztk
+  roki/app/cad2ztk.c
+)
+target_link_libraries( cad2ztk PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( cad2ztk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( chain2gp
+  roki/app/chain2gp.c
+)
+target_link_libraries( chain2gp PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( chain2gp PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( chain2mshape
+  roki/app/chain2mshape.c
+)
+target_link_libraries( chain2mshape PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( chain2mshape PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( mshape2chain
+  roki/app/mshape2chain.c
+)
+target_link_libraries( mshape2chain PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( mshape2chain PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_fk
+  roki/app/rk_fk.c
+)
+target_link_libraries( rk_fk PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_fk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_ground
+  roki/app/rk_ground.c
+)
+target_link_libraries( rk_ground PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_ground PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_id
+  roki/app/rk_id.c
+)
+target_link_libraries( rk_id PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_id PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_ik
+  roki/app/rk_ik.c
+)
+target_link_libraries( rk_ik PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_ik PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_ikcell_merge
+  roki/app/rk_ikcell_merge.c
+)
+target_link_libraries( rk_ikcell_merge PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_ikcell_merge PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_mp
+  roki/app/rk_mp.c
+)
+target_link_libraries( rk_mp PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_mp PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( urdf2ztk
+  roki/app/urdf2ztk.c
+)
+target_link_libraries( urdf2ztk PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( urdf2ztk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( zvs2zkci
+  roki/app/zvs2zkci.c
+)
+target_link_libraries( zvs2zkci PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( zvs2zkci PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( zvs2zkcs
+  roki/app/zvs2zkcs.c
+)
+target_link_libraries( zvs2zkcs PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( zvs2zkcs PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+
 # roki-fd ------------------------------------------------------------------
 
 set(ROKI-FD_SOURCES
@@ -1018,7 +1324,7 @@ set(ROKI-FD_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/libxml2/include
 )
 
-target_include_directories(roki-fd PUBLIC ${ROKI_INCLUDE_DIR})
+target_include_directories(roki-fd PUBLIC ${ROKI-FD_INCLUDE_DIR})
 
 add_dependencies(roki-fd roki zeo zm zeda LibXml2)
 
