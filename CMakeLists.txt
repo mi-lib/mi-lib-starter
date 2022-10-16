@@ -38,31 +38,6 @@ add_compile_definitions("__STATIC_BUILD")
 
 # zeda ----------------------------------------------------------------------
 
-set(ZEDA_HEADERS
-  zeda/include/zeda/zeda.h
-  zeda/include/zeda/zeda_array.h
-  zeda/include/zeda/zeda_binfile.h
-  zeda/include/zeda/zeda_bit.h
-  zeda/include/zeda/zeda_compat.h
-  zeda/include/zeda/zeda_csv.h
-  zeda/include/zeda/zeda_defs.h
-  zeda/include/zeda/zeda_errmsg.h
-  zeda/include/zeda/zeda_index.h
-  zeda/include/zeda/zeda_list.h
-  zeda/include/zeda/zeda_misc.h
-  zeda/include/zeda/zeda_name.h
-  zeda/include/zeda/zeda_option.h
-  zeda/include/zeda/zeda_rand.h
-  zeda/include/zeda/zeda_ring.h
-  zeda/include/zeda/zeda_rrtab.h
-  zeda/include/zeda/zeda_stream.h
-  zeda/include/zeda/zeda_string.h
-  zeda/include/zeda/zeda_strlist.h
-  zeda/include/zeda/zeda_tree.h
-  zeda/include/zeda/zeda_xml.h
-  zeda/include/zeda/zeda_ztk.h
-)
-
 set(ZEDA_SOURCES
   zeda/src/zeda_array.c
   zeda/src/zeda_binfile.c
@@ -84,7 +59,6 @@ set(ZEDA_SOURCES
 # TODO change from STATIC for DLL
 add_library(zeda STATIC
   ${ZEDA_SOURCES}
-  ${ZEDA_HEADERS}
 )
 
 if (MSVC)
@@ -171,12 +145,12 @@ set_target_properties( index_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
 )
 
-add_executable( misc_test
+add_executable( zm_misc_test
   zeda/test/misc_test.c
 )
-target_include_directories( misc_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( misc_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
-set_target_properties( misc_test PROPERTIES
+target_include_directories( zm_misc_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( zm_misc_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( zm_misc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
 )
 
@@ -324,100 +298,9 @@ set(ZM_SOURCES
   zm/src/zm_vec_tree.c
 )
 
-set(ZM_HEADERS
-  zm/include/zm/zm.h
-  zm/include/zm/zm_cmat.h
-  zm/include/zm/zm_complex.h
-  zm/include/zm/zm_complex_arith.h
-  zm/include/zm/zm_complex_pe.h
-  zm/include/zm/zm_cvec.h
-  zm/include/zm/zm_data.h
-  zm/include/zm/zm_data_fft.h
-  zm/include/zm/zm_data_ransac.h
-  zm/include/zm/zm_eig.h
-  zm/include/zm/zm_errmsg.h
-  zm/include/zm/zm_fourier.h
-  zm/include/zm/zm_graph.h
-  zm/include/zm/zm_graph_search.h
-  zm/include/zm/zm_ieee.h
-  zm/include/zm/zm_intg.h
-  zm/include/zm/zm_ip.h
-  zm/include/zm/zm_ip_akima.h
-  zm/include/zm/zm_ip_clothoid.h
-  zm/include/zm/zm_ip_lagrange.h
-  zm/include/zm/zm_ip_lin.h
-  zm/include/zm/zm_ip_pchip.h
-  zm/include/zm/zm_ip_pex.h
-  zm/include/zm/zm_ip_spline.h
-  zm/include/zm/zm_le.h
-  zm/include/zm/zm_le_gen.h
-  zm/include/zm/zm_le_lq.h
-  zm/include/zm/zm_le_lu.h
-  zm/include/zm/zm_le_lyapnov.h
-  zm/include/zm/zm_le_minv.h
-  zm/include/zm/zm_le_mpinv.h
-  zm/include/zm/zm_le_pivot.h
-  zm/include/zm/zm_le_tridiag.h
-  zm/include/zm/zm_mat.h
-  zm/include/zm/zm_mca.h
-  zm/include/zm/zm_mca_cluster.h
-  zm/include/zm/zm_mca_gmm.h
-  zm/include/zm/zm_misc.h
-  zm/include/zm/zm_nle.h
-  zm/include/zm/zm_nle_dm.h
-  zm/include/zm/zm_nle_se.h
-  zm/include/zm/zm_nle_ss.h
-  zm/include/zm/zm_nurbs.h
-  zm/include/zm/zm_ode.h
-  zm/include/zm/zm_ode2.h
-  zm/include/zm/zm_ode_adams.h
-  zm/include/zm/zm_ode_beuler.h
-  zm/include/zm/zm_ode_bk4.h
-  zm/include/zm/zm_ode_dc.h
-  zm/include/zm/zm_ode_erk.h
-  zm/include/zm/zm_ode_euler.h
-  zm/include/zm/zm_ode_gear.h
-  zm/include/zm/zm_ode_heun.h
-  zm/include/zm/zm_ode_rk4.h
-  zm/include/zm/zm_ode_rkg.h
-  zm/include/zm/zm_opt.h
-  zm/include/zm/zm_opt_direct.h
-  zm/include/zm/zm_opt_dm.h
-  zm/include/zm/zm_opt_ga.h
-  zm/include/zm/zm_opt_lcp.h
-  zm/include/zm/zm_opt_line.h
-  zm/include/zm/zm_opt_lp.h
-  zm/include/zm/zm_opt_nm.h
-  zm/include/zm/zm_opt_pso.h
-  zm/include/zm/zm_opt_qp.h
-  zm/include/zm/zm_oscil.h
-  zm/include/zm/zm_parse.h
-  zm/include/zm/zm_pex.h
-  zm/include/zm/zm_pex_eq.h
-  zm/include/zm/zm_pi.h
-  zm/include/zm/zm_rand.h
-  zm/include/zm/zm_raw.h
-  zm/include/zm/zm_raw_mat.h
-  zm/include/zm/zm_raw_vec.h
-  zm/include/zm/zm_rrt.h
-  zm/include/zm/zm_seq.h
-  zm/include/zm/zm_sf.h
-  zm/include/zm/zm_sf_bessel.h
-  zm/include/zm/zm_sf_erf.h
-  zm/include/zm/zm_sf_fresnel.h
-  zm/include/zm/zm_sf_gamma.h
-  zm/include/zm/zm_stat.h
-  zm/include/zm/zm_vec.h
-  zm/include/zm/zm_vec_array.h
-  zm/include/zm/zm_vec_list.h
-  zm/include/zm/zm_vec_ring.h
-  zm/include/zm/zm_vec_tree.h
-)
-
 # TODO change from STATIC for DLL
 add_library(zm STATIC 
   ${ZM_SOURCES}
-  ${ZM_HEADERS}
 )
 
 if (MSVC)
@@ -426,11 +309,125 @@ if (MSVC)
   target_compile_definitions(zm PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(zm PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(zm PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(ZM_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(zm PUBLIC ${ZM_INCLUDE_DIR})
+
 add_dependencies(zm zeda LibXml2)
+
+
+# zm test ----------------------------------------------------------------------
+
+set(ZM_TEST_LINK_LIB
+  zm
+  zeda
+  LibXml2
+)
+
+set(ZM_TEST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zm/test"
+)
+
+add_executable( complex_test
+  zm/test/complex_test.c
+)
+target_link_libraries( complex_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( complex_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( cvec_test
+  zm/test/cvec_test.c
+)
+target_link_libraries( cvec_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( cvec_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( data_test
+  zm/test/data_test.c
+)
+target_link_libraries( data_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( data_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( ieee_test
+  zm/test/ieee_test.c
+)
+target_link_libraries( ieee_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( ieee_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( le_test
+  zm/test/le_test.c
+)
+target_link_libraries( le_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( le_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( mat_test
+  zm/test/mat_test.c
+)
+target_link_libraries( mat_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( mat_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( zeda_misc_test
+  zm/test/misc_test.c
+)
+target_link_libraries( zeda_misc_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( zeda_misc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( pex_test
+  zm/test/pex_test.c
+)
+target_link_libraries( pex_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( pex_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( raw_mat_test
+  zm/test/raw_mat_test.c
+)
+target_link_libraries( raw_mat_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( raw_mat_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( raw_vec_test
+  zm/test/raw_vec_test.c
+)
+target_link_libraries( raw_vec_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( raw_vec_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( stat_test
+  zm/test/stat_test.c
+)
+target_link_libraries( stat_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( stat_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec_test
+  zm/test/vec_test.c
+)
+target_link_libraries( vec_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( vec_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
 
 # neuz ----------------------------------------------------------------------
 
@@ -439,16 +436,9 @@ set(NEUZ_SOURCES
   neuz/src/neuz_neuron.c
 )
 
-set(NEUZ_HEADERS
-  neuz/include/neuz/neuz.h
-  neuz/include/neuz/neuz_activator.h
-  neuz/include/neuz/neuz_errmsg.h
-  neuz/include/neuz/neuz_neuron.h
-)
-
+# TODO change from STATIC for DLL
 add_library(neuz STATIC 
   ${NEUZ_SOURCES}
-  ${NEUZ_HEADERS}
 )
 
 if (MSVC)
@@ -457,11 +447,16 @@ if (MSVC)
   target_compile_definitions(neuz PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/neuz/include)
-target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(neuz PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(neuz PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(NEUZ_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/neuz/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(neuz PUBLIC ${NEUZ_INCLUDE_DIR})
+
 add_dependencies(neuz zm zeda LibXml2)
 
 
@@ -483,27 +478,9 @@ set(DZCO_SOURCES
   dzco/src/dz_tf_fr.c
 )
 
-set(DZCO_HEADERS
-  dzco/include/dzco/dzco.h
-  dzco/include/dzco/dz_errmsg.h
-  dzco/include/dzco/dz_ident_lag.h
-  dzco/include/dzco/dz_lin.h
-  dzco/include/dzco/dz_sys.h
-  dzco/include/dzco/dz_sys_fg.h
-  dzco/include/dzco/dz_sys_filt_bw.h
-  dzco/include/dzco/dz_sys_filt_maf.h
-  dzco/include/dzco/dz_sys_lag.h
-  dzco/include/dzco/dz_sys_lin.h
-  dzco/include/dzco/dz_sys_misc.h
-  dzco/include/dzco/dz_sys_pid.h
-  dzco/include/dzco/dz_sys_tf.h
-  dzco/include/dzco/dz_tf.h
-  dzco/include/dzco/dz_tf_fr.h
-)
-
+# TODO change from STATIC for DLL
 add_library(dzco STATIC 
   ${DZCO_SOURCES}
-  ${DZCO_HEADERS}
 )
 
 if (MSVC)
@@ -512,13 +489,63 @@ if (MSVC)
   target_compile_definitions(dzco PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/dzco/include)
-target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/neuz/include)
-target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(dzco PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(dzco PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(DZCO_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/dzco/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(dzco PUBLIC ${DZCO_INCLUDE_DIR})
+
 add_dependencies(dzco zm zeda LibXml2)
+
+
+# dzco test ----------------------------------------------------------------------
+
+set(DZCO_TEST_LINK_LIB
+  dzco
+  zm
+  zeda
+  LibXml2
+)
+
+set(DZCO_TEST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/dzco/test"
+)
+
+add_executable( lin_test
+  dzco/test/lin_test.c
+)
+target_link_libraries( lin_test PUBLIC ${DZCO_TEST_LINK_LIB} )
+set_target_properties( lin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_TEST_OUTPUT_DIR}
+)
+
+add_executable( sys_misc_test
+  dzco/test/sys_misc_test.c
+)
+target_link_libraries( sys_misc_test PUBLIC ${DZCO_TEST_LINK_LIB} )
+set_target_properties( sys_misc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_TEST_OUTPUT_DIR}
+)
+
+add_executable( sys_pid_test
+  dzco/test/sys_pid_test.c
+)
+target_link_libraries( sys_pid_test PUBLIC ${DZCO_TEST_LINK_LIB} )
+set_target_properties( sys_pid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_TEST_OUTPUT_DIR}
+)
+
+add_executable( tf_test
+  dzco/test/tf_test.c
+)
+target_link_libraries( tf_test PUBLIC ${DZCO_TEST_LINK_LIB} )
+set_target_properties( tf_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_TEST_OUTPUT_DIR}
+)
 
 
 # zeo ----------------------------------------------------------------------
@@ -583,74 +610,9 @@ set(ZEO_SOURCES
   zeo/src/zeo_voronoi2d.c
 )
 
-set(ZEO_HEADERS
-  zeo/include/zeo/zeo.h
-  zeo/include/zeo/zeo_brep.h
-  zeo/include/zeo/zeo_brep_bool.h
-  zeo/include/zeo/zeo_brep_trunc.h
-  zeo/include/zeo/zeo_bv2d.h
-  zeo/include/zeo/zeo_bv2d_aabb.h
-  zeo/include/zeo/zeo_bv2d_bdisk.h
-  zeo/include/zeo/zeo_bv2d_ch.h
-  zeo/include/zeo/zeo_bv3d.h
-  zeo/include/zeo/zeo_bv3d_aabb.h
-  zeo/include/zeo/zeo_bv3d_bball.h
-  zeo/include/zeo/zeo_bv3d_ch.h
-  zeo/include/zeo/zeo_bv3d_obb.h
-  zeo/include/zeo/zeo_col.h
-  zeo/include/zeo/zeo_col_box.h
-  zeo/include/zeo/zeo_col_gjk.h
-  zeo/include/zeo/zeo_col_minkowski.h
-  zeo/include/zeo/zeo_col_mpr.h
-  zeo/include/zeo/zeo_col_ph.h
-  zeo/include/zeo/zeo_elem2d.h
-  zeo/include/zeo/zeo_elem3d.h
-  zeo/include/zeo/zeo_elem3d_list.h
-  zeo/include/zeo/zeo_ep.h
-  zeo/include/zeo/zeo_errmsg.h
-  zeo/include/zeo/zeo_frame3d.h
-  zeo/include/zeo/zeo_map.h
-  zeo/include/zeo/zeo_mapnet.h
-  zeo/include/zeo/zeo_map_terra.h
-  zeo/include/zeo/zeo_mat2d.h
-  zeo/include/zeo/zeo_mat3d.h
-  zeo/include/zeo/zeo_mat6d.h
-  zeo/include/zeo/zeo_misc.h
-  zeo/include/zeo/zeo_mshape3d.h
-  zeo/include/zeo/zeo_nurbs.h
-  zeo/include/zeo/zeo_ph.h
-  zeo/include/zeo/zeo_ph_dae.h
-  zeo/include/zeo/zeo_ph_obj.h
-  zeo/include/zeo/zeo_ph_ply.h
-  zeo/include/zeo/zeo_ph_stl.h
-  zeo/include/zeo/zeo_pointcloud.h
-  zeo/include/zeo/zeo_render_color.h
-  zeo/include/zeo/zeo_render_optic.h
-  zeo/include/zeo/zeo_render_texture.h
-  zeo/include/zeo/zeo_shape3d.h
-  zeo/include/zeo/zeo_shape3d_box.h
-  zeo/include/zeo/zeo_shape3d_cone.h
-  zeo/include/zeo/zeo_shape3d_cyl.h
-  zeo/include/zeo/zeo_shape3d_ecyl.h
-  zeo/include/zeo/zeo_shape3d_ellips.h
-  zeo/include/zeo/zeo_shape3d_list.h
-  zeo/include/zeo/zeo_shape3d_nurbs.h
-  zeo/include/zeo/zeo_shape3d_ph.h
-  zeo/include/zeo/zeo_shape3d_sphere.h
-  zeo/include/zeo/zeo_vec2d.h
-  zeo/include/zeo/zeo_vec2d_list.h
-  zeo/include/zeo/zeo_vec3d.h
-  zeo/include/zeo/zeo_vec3d_list.h
-  zeo/include/zeo/zeo_vec3d_pca.h
-  zeo/include/zeo/zeo_vec3d_tree.h
-  zeo/include/zeo/zeo_vec6d.h
-  zeo/include/zeo/zeo_voronoi2d.h
-)
-
 # TODO change from STATIC for DLL
 add_library(zeo STATIC 
   ${ZEO_SOURCES}
-  ${ZEO_HEADERS}
 )
 
 if (MSVC)
@@ -659,12 +621,191 @@ if (MSVC)
   target_compile_definitions(zeo PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
-target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(zeo PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(zeo PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(ZEO_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/zeo/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(zeo PUBLIC ${ZEO_INCLUDE_DIR})
+
 add_dependencies(zeo zm zeda LibXml2)
+
+
+# zeo test ------------------------------------------------------------------
+
+set(ZEO_TEST_LINK_LIB
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ZEO_TEST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeo/test"
+)
+
+add_executable( bball_test
+  zeo/test/bball_test.c
+)
+target_link_libraries( bball_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( bball_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( box_test
+  zeo/test/box_test.c
+)
+target_link_libraries( box_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( box_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( color_test
+  zeo/test/color_test.c
+)
+target_link_libraries( color_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( color_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( cone_test
+  zeo/test/cone_test.c
+)
+target_link_libraries( cone_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( cone_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( cyl_test
+  zeo/test/cyl_test.c
+)
+target_link_libraries( cyl_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( cyl_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( ecyl_test
+  zeo/test/ecyl_test.c
+)
+target_link_libraries( ecyl_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( ecyl_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( elem2d_test
+  zeo/test/elem2d_test.c
+)
+target_link_libraries( elem2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( elem2d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( elem3d_test
+  zeo/test/elem3d_test.c
+)
+target_link_libraries( elem3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( elem3d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( ellipsoid_test
+  zeo/test/ellipsoid_test.c
+)
+target_link_libraries( ellipsoid_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( ellipsoid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( ep_test
+  zeo/test/ep_test.c
+)
+target_link_libraries( ep_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( ep_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( frame_test
+  zeo/test/frame_test.c
+)
+target_link_libraries( frame_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( frame_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( mat2d_test
+  zeo/test/mat2d_test.c
+)
+target_link_libraries( mat2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( mat2d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( mat3d_test
+  zeo/test/mat3d_test.c
+)
+target_link_libraries( mat3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( mat3d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( mat6d_test
+  zeo/test/mat6d_test.c
+)
+target_link_libraries( mat6d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( mat6d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( shape_test
+  zeo/test/shape_test.c
+)
+target_link_libraries( shape_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( shape_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( sphere_test
+  zeo/test/sphere_test.c
+)
+target_link_libraries( sphere_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( sphere_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec2d_test
+  zeo/test/vec2d_test.c
+)
+target_link_libraries( vec2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec2d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec3d_test
+  zeo/test/vec3d_test.c
+)
+target_link_libraries( vec3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec3d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec3d_tree_test
+  zeo/test/vec3d_tree_test.c
+)
+target_link_libraries( vec3d_tree_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec3d_tree_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec6d_test
+  zeo/test/vec6d_test.c
+)
+target_link_libraries( vec6d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec6d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
 
 
 # roki ------------------------------------------------------------------
@@ -700,44 +841,9 @@ set(ROKI_SOURCES
   roki/src/rk_motor_trq.c
 )
 
-set(ROKI_HEADERS
-  roki/include/roki/rk_abi.h
-  roki/include/roki/rk_body.h
-  roki/include/roki/rk_cd.h
-  roki/include/roki/rk_cd_brep.h
-  roki/include/roki/rk_cd_brep_trunc.h
-  roki/include/roki/rk_chain.h
-  roki/include/roki/rk_contact.h
-  roki/include/roki/rk_errmsg.h
-  roki/include/roki/rk_force.h
-  roki/include/roki/rk_g.h
-  roki/include/roki/rk_g3d.h
-  roki/include/roki/rk_ik.h
-  roki/include/roki/rk_ik_cell.h
-  roki/include/roki/rk_ik_imp.h
-  roki/include/roki/rk_ik_seq.h
-  roki/include/roki/rk_jacobi.h
-  roki/include/roki/rk_joint.h
-  roki/include/roki/rk_joint_brfloat.h
-  roki/include/roki/rk_joint_cylin.h
-  roki/include/roki/rk_joint_fixed.h
-  roki/include/roki/rk_joint_float.h
-  roki/include/roki/rk_joint_hooke.h
-  roki/include/roki/rk_joint_prism.h
-  roki/include/roki/rk_joint_revol.h
-  roki/include/roki/rk_joint_spher.h
-  roki/include/roki/rk_link.h
-  roki/include/roki/rk_motor.h
-  roki/include/roki/rk_motor_dc.h
-  roki/include/roki/rk_motor_none.h
-  roki/include/roki/rk_motor_trq.h
-  roki/include/roki/roki.h
-)
-
 # TODO change from STATIC for DLL
 add_library(roki STATIC 
   ${ROKI_SOURCES}
-  ${ROKI_HEADERS}
 )
 
 if (MSVC)
@@ -746,13 +852,136 @@ if (MSVC)
   target_compile_definitions(roki PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/roki/include)
-target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
-target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(roki PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(roki PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(ROKI_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/roki/include
+  ${PROJECT_SOURCE_DIR}/zeo/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(roki PUBLIC ${ROKI_INCLUDE_DIR})
+
 add_dependencies(roki zeo zm zeda LibXml2)
+
+
+# roki test ------------------------------------------------------------------
+
+set(ROKI_TEST_LINK_LIB
+  roki
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ROKI_TEST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki/test"
+)
+
+add_executable( body_test
+  roki/test/body_test.c
+)
+target_link_libraries( body_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( body_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( chain_test
+  roki/test/chain_test.c
+)
+target_link_libraries( chain_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( chain_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( contact_test
+  roki/test/contact_test.c
+)
+target_link_libraries( contact_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( contact_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+add_custom_command(TARGET contact_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/test/contact.ztk
+  $<TARGET_FILE_DIR:contact_test>/
+)
+
+add_executable( force_test
+  roki/test/force_test.c
+)
+target_link_libraries( force_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( force_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( ik_test
+  roki/test/ik_test.c
+)
+target_link_libraries( ik_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( invpend_test
+  roki/test/invpend_test.c
+)
+target_link_libraries( invpend_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( invpend_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+add_custom_command(TARGET invpend_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/test/invpend.ztk
+  $<TARGET_FILE_DIR:invpend_test>/
+)
+
+add_executable( jacobi_test
+  roki/test/jacobi_test.c
+)
+target_link_libraries( jacobi_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( jacobi_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_test
+  roki/test/joint_test.c
+)
+target_link_libraries( joint_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( link_test
+  roki/test/link_test.c
+)
+target_link_libraries( link_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( link_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( pend_abi_test
+  roki/test/pend_abi_test.c
+)
+target_link_libraries( pend_abi_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( pend_abi_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+add_custom_command(TARGET pend_abi_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/test/simple_pend.ztk
+  $<TARGET_FILE_DIR:pend_abi_test>/
+)
+
+add_executable( scara_fk_test
+  roki/test/scara_fk_test.c
+)
+target_link_libraries( scara_fk_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( scara_fk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
 
 
 # roki-fd ------------------------------------------------------------------
@@ -769,26 +998,9 @@ set(ROKI-FD_SOURCES
   roki-fd/src/rkfd_volume.c
 )
 
-set(ROKI-FD_HEADERS
-  roki-fd/include/roki-fd/rkfd_array.h
-  roki-fd/include/roki-fd/rkfd_cd.h
-  roki-fd/include/roki-fd/rkfd_chain.h
-  roki-fd/include/roki-fd/rkfd_defs.h
-  roki-fd/include/roki-fd/rkfd_mlcp.h
-  roki-fd/include/roki-fd/rkfd_penalty.h
-  roki-fd/include/roki-fd/rkfd_property.h
-  roki-fd/include/roki-fd/rkfd_sim.h
-  roki-fd/include/roki-fd/rkfd_solver.h
-  roki-fd/include/roki-fd/rkfd_util.h
-  roki-fd/include/roki-fd/rkfd_vert.h
-  roki-fd/include/roki-fd/rkfd_volume.h
-  roki-fd/include/roki-fd/roki-fd.h
-)
-
 # TODO change from STATIC for DLL
 add_library(roki-fd STATIC 
   ${ROKI-FD_SOURCES}
-  ${ROKI-FD_HEADERS}
 )
 
 if (MSVC)
@@ -796,13 +1008,18 @@ if (MSVC)
   target_compile_options(roki-fd PUBLIC /std:c17)
 endif()
 
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/roki-fd/include)
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/roki/include)
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zeo/include)
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zm/include)
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/zeda/include)
-target_include_directories(roki-fd PUBLIC ${LIBXML2_XMLCONF_WORKING_DIR})
-target_include_directories(roki-fd PUBLIC ${PROJECT_SOURCE_DIR}/libxml2/include)
+set(ROKI-FD_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/roki-fd/include
+  ${PROJECT_SOURCE_DIR}/roki/include
+  ${PROJECT_SOURCE_DIR}/zeo/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${PROJECT_SOURCE_DIR}/libxml2/include
+)
+
+target_include_directories(roki-fd PUBLIC ${ROKI_INCLUDE_DIR})
+
 add_dependencies(roki-fd roki zeo zm zeda LibXml2)
 
 
