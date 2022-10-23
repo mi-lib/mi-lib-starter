@@ -209,6 +209,255 @@ set_target_properties( strlist_test PROPERTIES
 )
 
 
+# zeda example ----------------------------------------------------------------------
+
+set(ZEDA_EXAMPLE_LINK_LIB
+  zeda
+  LibXml2
+)
+
+set(ZEDA_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example"
+)
+
+
+set(ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/array"
+)
+
+add_executable( array_append_test
+  zeda/example/array/array_append_test.c
+)
+target_include_directories( array_append_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_append_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array_append_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
+)
+
+add_executable( array_delete_test
+  zeda/example/array/array_delete_test.c
+)
+target_include_directories( array_delete_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_delete_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array_delete_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
+)
+
+add_executable( array_insert_test
+  zeda/example/array/array_insert_test.c
+)
+target_include_directories( array_insert_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_insert_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array_insert_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
+)
+
+add_executable( array_quicksort_test
+  zeda/example/array/array_quicksort_test.c
+)
+target_include_directories( array_quicksort_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_quicksort_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array_quicksort_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_LIST_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/list"
+)
+
+add_executable( list_append_test
+  zeda/example/list/list_append_test.c
+)
+target_include_directories( list_append_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_append_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_append_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
+)
+
+add_executable( list_purge_test
+  zeda/example/list/list_purge_test.c
+)
+target_include_directories( list_purge_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_purge_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_purge_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
+)
+
+add_executable( list_quicksort_test
+  zeda/example/list/list_quicksort_test.c
+)
+target_include_directories( list_quicksort_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_quicksort_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_quicksort_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
+)
+
+add_executable( list_swap_test
+  zeda/example/list/list_swap_test.c
+)
+target_include_directories( list_swap_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_swap_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_swap_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_MISC_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/misc"
+)
+
+add_executable( alloc_test
+  zeda/example/misc/alloc_test.c
+)
+target_include_directories( alloc_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( alloc_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( alloc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( ordinal_str_test
+  zeda/example/misc/ordinal_str_test.c
+)
+target_include_directories( ordinal_str_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ordinal_str_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ordinal_str_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_OPTION_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/option"
+)
+
+add_executable( option_test_example
+  zeda/example/option/option_test.c
+)
+target_include_directories( option_test_example PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( option_test_example PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( option_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_OPTION_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_RAND_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/rand"
+)
+
+add_executable( randf_test
+  zeda/example/rand/randf_test.c
+)
+target_include_directories( randf_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( randf_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( randf_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( randi_test
+  zeda/example/rand/randi_test.c
+)
+target_include_directories( randi_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( randi_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( randi_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_STREAM_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/stream"
+)
+
+add_executable( csv_test
+  zeda/example/stream/csv_test.c
+)
+target_include_directories( csv_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( csv_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( csv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STREAM_OUTPUT_DIR}
+)
+
+add_executable( stream_test
+  zeda/example/stream/stream_test.c
+)
+target_include_directories( stream_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( stream_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( stream_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STREAM_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_STRING_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/string"
+)
+
+add_executable( read_int_test
+  zeda/example/string/read_int_test.c
+)
+target_include_directories( read_int_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( read_int_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( read_int_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STRING_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET read_int_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeda/example/string/tag.txt
+  ${PROJECT_SOURCE_DIR}/zeda/example/string/test.txt
+  $<TARGET_FILE_DIR:read_int_test>/
+)
+
+add_executable( token_test
+  zeda/example/string/token_test.c
+)
+target_include_directories( token_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( token_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( token_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STRING_OUTPUT_DIR}
+)
+
+
+set(ZEDA_EXAMPLE_ZTK_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/ztk"
+)
+
+add_executable( ztk_count_test
+  zeda/example/ztk/ztk_count_test.c
+)
+target_include_directories( ztk_count_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztk_count_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ztk_count_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET ztk_count_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/calcurator.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/counttest.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test1.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test2.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test3.ztk
+  $<TARGET_FILE_DIR:ztk_count_test>/
+)
+
+add_executable( ztk_eval_test
+  zeda/example/ztk/ztk_eval_test.c
+)
+target_include_directories( ztk_eval_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztk_eval_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ztk_eval_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
+)
+
+add_executable( ztk_parse_test
+  zeda/example/ztk/ztk_parse_test.c
+)
+target_include_directories( ztk_parse_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztk_parse_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ztk_parse_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
+)
+
+
 # zm ----------------------------------------------------------------------
 
 set(ZM_SOURCES
