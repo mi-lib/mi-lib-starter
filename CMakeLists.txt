@@ -814,7 +814,6 @@ set_target_properties( realpow_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_COMPLEX_OUTPUT_DIR}
 )
 
-
 set(ZM_EXAMPLE_DATA_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/data"
 )
@@ -2309,6 +2308,83 @@ set(NEUZ_INCLUDE_DIR
 target_include_directories(neuz PUBLIC ${NEUZ_INCLUDE_DIR})
 
 add_dependencies(neuz zm zeda LibXml2)
+
+
+# neus example ----------------------------------------------------------------------
+set(NEUZ_EXAMPLE_LINK_LIB
+  neuz
+  zm
+  zeda
+  LibXml2
+)
+
+set(NEUZ_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/neuz/example"
+)
+
+add_executable( activator_test
+  neuz/example/activator_test.c
+)
+target_include_directories( activator_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( activator_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( activator_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( autoencoder_test
+  neuz/example/autoencoder_test.c
+)
+target_include_directories( autoencoder_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( autoencoder_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( autoencoder_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( connect_test
+  neuz/example/connect_test.c
+)
+target_include_directories( connect_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( connect_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( connect_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( read_ztk_test
+  neuz/example/read_ztk_test
+)
+target_include_directories( read_ztk_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( read_ztk_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( read_ztk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( sin_test
+  neuz/example/sin_test.c
+)
+target_include_directories( sin_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( sin_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( sin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET sin_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/neuz/example/sin.ztk
+  $<TARGET_FILE_DIR:sin_test>/
+)
+
+add_executable( xor_test
+  neuz/example/xor_test.c
+)
+target_include_directories( xor_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( xor_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( xor_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET xor_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/neuz/example/xor.ztk
+  $<TARGET_FILE_DIR:xor_test>/
+)
 
 
 # dzco ----------------------------------------------------------------------
