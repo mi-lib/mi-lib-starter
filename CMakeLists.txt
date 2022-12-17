@@ -222,7 +222,7 @@ set(ZEDA_EXAMPLE_OUTPUT_DIR
 
 
 set(ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/array"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/array"
 )
 
 add_executable( array_append_test
@@ -263,7 +263,7 @@ set_target_properties( array_quicksort_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_LIST_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/list"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/list"
 )
 
 add_executable( list_append_test
@@ -304,7 +304,7 @@ set_target_properties( list_swap_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_MISC_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/misc"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/misc"
 )
 
 add_executable( alloc_test
@@ -327,7 +327,7 @@ set_target_properties( ordinal_str_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_OPTION_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/option"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/option"
 )
 
 add_executable( option_test_example
@@ -341,7 +341,7 @@ set_target_properties( option_test_example PROPERTIES
 
 
 set(ZEDA_EXAMPLE_RAND_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/rand"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/rand"
 )
 
 add_executable( randf_test
@@ -364,7 +364,7 @@ set_target_properties( randi_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_STREAM_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/stream"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/stream"
 )
 
 add_executable( csv_test
@@ -387,7 +387,7 @@ set_target_properties( stream_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_STRING_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/string"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/string"
 )
 
 add_executable( read_int_test
@@ -417,7 +417,7 @@ set_target_properties( token_test PROPERTIES
 
 
 set(ZEDA_EXAMPLE_ZTK_OUTPUT_DIR
-  "${PROJECT_SOURCE_DIR}/build/bin/zeda/example/ztk"
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/ztk"
 )
 
 add_executable( ztk_count_test
@@ -477,6 +477,7 @@ set(ZM_SOURCES
   zm/src/zm_intg.c
   zm/src/zm_ip.c
   zm/src/zm_ip_akima.c
+  zm/src/zm_ip_chebyshev.c
   zm/src/zm_ip_clothoid.c
   zm/src/zm_ip_lagrange.c
   zm/src/zm_ip_lin.c
@@ -585,6 +586,7 @@ set(ZM_TEST_OUTPUT_DIR
 add_executable( complex_test
   zm/test/complex_test.c
 )
+target_include_directories( complex_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( complex_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( complex_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -593,6 +595,7 @@ set_target_properties( complex_test PROPERTIES
 add_executable( cvec_test
   zm/test/cvec_test.c
 )
+target_include_directories( cvec_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( cvec_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( cvec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -601,6 +604,7 @@ set_target_properties( cvec_test PROPERTIES
 add_executable( data_test
   zm/test/data_test.c
 )
+target_include_directories( data_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( data_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( data_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -609,6 +613,7 @@ set_target_properties( data_test PROPERTIES
 add_executable( ieee_test
   zm/test/ieee_test.c
 )
+target_include_directories( ieee_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( ieee_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( ieee_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -617,6 +622,7 @@ set_target_properties( ieee_test PROPERTIES
 add_executable( le_test
   zm/test/le_test.c
 )
+target_include_directories( le_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( le_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( le_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -625,6 +631,7 @@ set_target_properties( le_test PROPERTIES
 add_executable( mat_test
   zm/test/mat_test.c
 )
+target_include_directories( mat_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( mat_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( mat_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -633,6 +640,7 @@ set_target_properties( mat_test PROPERTIES
 add_executable( zeda_misc_test
   zm/test/misc_test.c
 )
+target_include_directories( zeda_misc_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zeda_misc_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( zeda_misc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -641,6 +649,7 @@ set_target_properties( zeda_misc_test PROPERTIES
 add_executable( pex_test
   zm/test/pex_test.c
 )
+target_include_directories( pex_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( pex_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( pex_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -649,6 +658,7 @@ set_target_properties( pex_test PROPERTIES
 add_executable( raw_mat_test
   zm/test/raw_mat_test.c
 )
+target_include_directories( raw_mat_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( raw_mat_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( raw_mat_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -657,6 +667,7 @@ set_target_properties( raw_mat_test PROPERTIES
 add_executable( raw_vec_test
   zm/test/raw_vec_test.c
 )
+target_include_directories( raw_vec_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( raw_vec_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( raw_vec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -665,6 +676,7 @@ set_target_properties( raw_vec_test PROPERTIES
 add_executable( stat_test
   zm/test/stat_test.c
 )
+target_include_directories( stat_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( stat_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( stat_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -673,6 +685,7 @@ set_target_properties( stat_test PROPERTIES
 add_executable( vec_test
   zm/test/vec_test.c
 )
+target_include_directories( vec_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( vec_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( vec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
@@ -694,6 +707,7 @@ set(ZM_APP_OUTPUT_DIR
 add_executable( deg2rad
   zm/app/deg2rad.c
 )
+target_include_directories( deg2rad PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( deg2rad PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( deg2rad PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -702,6 +716,7 @@ set_target_properties( deg2rad PROPERTIES
 add_executable( rad2deg
   zm/app/rad2deg.c
 )
+target_include_directories( rad2deg PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( rad2deg PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( rad2deg PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -710,6 +725,7 @@ set_target_properties( rad2deg PROPERTIES
 add_executable( zm_ave
   zm/app/zm_ave.c
 )
+target_include_directories( zm_ave PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_ave PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_ave PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -718,6 +734,7 @@ set_target_properties( zm_ave PROPERTIES
 add_executable( zm_le
   zm/app/zm_le.c
 )
+target_include_directories( zm_le PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_le PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_le PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -726,6 +743,7 @@ set_target_properties( zm_le PROPERTIES
 add_executable( zm_pexp
   zm/app/zm_pexp.c
 )
+target_include_directories( zm_pexp PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_pexp PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_pexp PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -734,6 +752,7 @@ set_target_properties( zm_pexp PROPERTIES
 add_executable( zm_psolve
   zm/app/zm_psolve.c
 )
+target_include_directories( zm_psolve PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_psolve PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_psolve PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
@@ -742,9 +761,1522 @@ set_target_properties( zm_psolve PROPERTIES
 add_executable( zm_seqmod
   zm/app/zm_seqmod.c
 )
+target_include_directories( zm_seqmod PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_seqmod PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_seqmod PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+# zm example ----------------------------------------------------------------------
+set(ZM_EXAMPLE_LINK_LIB
+  zm
+  zeda
+  LibXml2
+)
+
+set(ZM_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zm/example"
+)
+
+set(ZM_EXAMPLE_COMPLEX_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/complex"
+)
+
+add_executable( complex_test_example
+  zm/example/complex/complex_test.c
+)
+target_include_directories( complex_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( complex_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( complex_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_COMPLEX_OUTPUT_DIR}
+)
+
+add_executable( complex_ztk_test
+  zm/example/complex/complex_ztk_test.c
+)
+target_include_directories( complex_ztk_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( complex_ztk_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( complex_ztk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_COMPLEX_OUTPUT_DIR}
+)
+add_custom_command(TARGET complex_ztk_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zm/example/complex/complex.ztk
+  $<TARGET_FILE_DIR:complex_ztk_test>/
+)
+
+add_executable( realpow_test
+  zm/example/complex/realpow_test.c
+)
+target_include_directories( realpow_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( realpow_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( realpow_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_COMPLEX_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_DATA_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/data"
+)
+
+add_executable( peak_test
+  zm/example/data/peak_test.c
+)
+target_include_directories( peak_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( peak_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( peak_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_DATA_OUTPUT_DIR}
+)
+
+add_executable( ransac_test
+  zm/example/data/ransac_test.c
+)
+target_include_directories( ransac_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ransac_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ransac_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_DATA_OUTPUT_DIR}
+)
+
+add_executable( sg_test
+  zm/example/data/sg_test.c
+)
+target_include_directories( sg_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sg_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_DATA_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_EIG_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/eig"
+)
+
+add_executable( condnum_test
+  zm/example/eig/condnum_test.c
+)
+target_include_directories( condnum_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( condnum_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( condnum_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( dqr_test
+  zm/example/eig/dqr_test.c
+)
+target_include_directories( dqr_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( dqr_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( dqr_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( eigsys_test
+  zm/example/eig/eigsys_test.c
+)
+target_include_directories( eigsys_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( eigsys_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( eigsys_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( eigsys_large_test
+  zm/example/eig/eigsys_large_test.c
+)
+target_include_directories( eigsys_large_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( eigsys_large_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( eigsys_large_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( hessenberg_test
+  zm/example/eig/hessenberg_test.c
+)
+target_include_directories( hessenberg_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( hessenberg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( hessenberg_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( jacobi_test_example
+  zm/example/eig/jacobi_test.c
+)
+target_include_directories( jacobi_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( jacobi_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( jacobi_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( power_test
+  zm/example/eig/power_test.c
+)
+target_include_directories( power_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( power_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( power_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( svd_large_test
+  zm/example/eig/svd_large_test.c
+)
+target_include_directories( svd_large_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( svd_large_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( svd_large_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( svd_maxmin_test
+  zm/example/eig/svd_maxmin_test.c
+)
+target_include_directories( svd_maxmin_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( svd_maxmin_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( svd_maxmin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( svd_test
+  zm/example/eig/svd_test.c
+)
+target_include_directories( svd_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( svd_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( svd_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+add_executable( sym_eig_test
+  zm/example/eig/sym_eig_test.c
+)
+target_include_directories( sym_eig_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sym_eig_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sym_eig_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_FOURIER_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/fourier"
+)
+
+add_executable( fourier_test
+  zm/example/fourier/fourier_test.c
+)
+target_include_directories( fourier_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( fourier_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( fourier_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_FOURIER_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_GRAPH_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/graph"
+)
+
+add_executable( astar_test
+  zm/example/graph/astar_test.c
+)
+target_include_directories( astar_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( astar_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( astar_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( astar_inc_test
+  zm/example/graph/astar_inc_test.c
+)
+target_include_directories( astar_inc_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( astar_inc_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( astar_inc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( dijkstra_test
+  zm/example/graph/dijkstra_test.c
+)
+target_include_directories( dijkstra_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( dijkstra_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( dijkstra_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( graph_test
+  zm/example/graph/graph_test.c
+)
+target_include_directories( graph_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( graph_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( graph_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( rrt_esc_test
+  zm/example/graph/rrt_esc_test.c
+)
+target_include_directories( rrt_esc_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rrt_esc_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rrt_esc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( rrt_test
+  zm/example/graph/rrt_test.c
+)
+target_include_directories( rrt_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rrt_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rrt_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+set(ZM_EXAMPLE_INTG_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/intg"
+)
+add_executable( cmp_test
+  zm/example/intg/cmp_test.c
+)
+target_include_directories( cmp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cmp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cmp_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_INTG_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_IP_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/ip"
+)
+
+add_executable( clothoid_test
+  zm/example/ip/clothoid_test.c
+)
+target_include_directories( clothoid_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( clothoid_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( clothoid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( ip_benchmark_test
+  zm/example/ip/ip_benchmark_test.c
+)
+target_include_directories( ip_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ip_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ip_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( pex_test_example
+  zm/example/ip/pex_test.c
+)
+target_include_directories( pex_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( pex_lsm_test
+  zm/example/ip/pex_lsm_test.c
+)
+target_include_directories( pex_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_lsm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( pex_boundary_test
+  zm/example/ip/pex_boundary_test.c
+)
+target_include_directories( pex_boundary_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_boundary_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_boundary_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( pex_boundary_lsm_test
+  zm/example/ip/pex_boundary_lsm_test.c
+)
+target_include_directories( pex_boundary_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_boundary_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_boundary_lsm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+add_executable( seg_test
+  zm/example/ip/seg_test.c
+)
+target_include_directories( seg_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( seg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( seg_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_LE_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/le"
+)
+
+add_executable( hotelling_test
+  zm/example/le/hotelling_test.c
+)
+target_include_directories( hotelling_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( hotelling_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( hotelling_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_benchmark_test
+  zm/example/le/le_benchmark_test.c
+)
+target_include_directories( le_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_gen_benchmark_test
+  zm/example/le/le_gen_benchmark_test.c
+)
+target_include_directories( le_gen_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_gen_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_gen_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_mpnull_test
+  zm/example/le/le_mpnull_test.c
+)
+target_include_directories( le_mpnull_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_mpnull_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_mpnull_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_nullspace_test
+  zm/example/le/le_nullspace_test.c
+)
+target_include_directories( le_nullspace_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_nullspace_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_nullspace_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_ref_test
+  zm/example/le/le_ref_test.c
+)
+target_include_directories( le_ref_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_ref_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_ref_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( le_sr_nullspace_test
+  zm/example/le/le_sr_nullspace_test.c
+)
+target_include_directories( le_sr_nullspace_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( le_sr_nullspace_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( le_sr_nullspace_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( lyapnov_test
+  zm/example/le/lyapnov_test.c
+)
+target_include_directories( lyapnov_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lyapnov_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lyapnov_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( mat_inv_test
+  zm/example/le/mat_inv_test.c
+)
+target_include_directories( mat_inv_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mat_inv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mat_inv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( matdecomp_benchmark_test
+  zm/example/le/matdecomp_benchmark_test.c
+)
+target_include_directories( matdecomp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( matdecomp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( matdecomp_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( mpinv_mul_test
+  zm/example/le/mpinv_mul_test.c
+)
+target_include_directories( mpinv_mul_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mpinv_mul_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mpinv_mul_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( mpinv_test
+  zm/example/le/mpinv_test.c
+)
+target_include_directories( mpinv_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mpinv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mpinv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( mul_inv_test
+  zm/example/le/mul_inv_test.c
+)
+target_include_directories( mul_inv_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mul_inv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mul_inv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( sweep_out_test
+  zm/example/le/sweep_out_test.c
+)
+target_include_directories( sweep_out_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sweep_out_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sweep_out_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+add_executable( tridiagonal_test
+  zm/example/le/tridiagonal_test.c
+)
+target_include_directories( tridiagonal_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( tridiagonal_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( tridiagonal_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_MAT_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/mat"
+)
+
+add_executable( mat_img_test
+  zm/example/mat/mat_img_test.c
+)
+target_include_directories( mat_img_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mat_img_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mat_img_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MAT_OUTPUT_DIR}
+)
+
+add_executable( mat_norm_test
+  zm/example/mat/mat_norm_test.c
+)
+target_include_directories( mat_norm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mat_norm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mat_norm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MAT_OUTPUT_DIR}
+)
+
+add_executable( mat_reg_test
+  zm/example/mat/mat_reg_test.c
+)
+target_include_directories( mat_reg_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mat_reg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mat_reg_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MAT_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_MCA_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/mca"
+)
+
+add_executable( gmm_lsm_test
+  zm/example/mca/gmm_lsm_test.c
+)
+target_include_directories( gmm_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gmm_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gmm_lsm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( gmm_test
+  zm/example/mca/gmm_test.c
+)
+target_include_directories( gmm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gmm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gmm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( kmeans_test
+  zm/example/mca/kmeans_test.c
+)
+target_include_directories( kmeans_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( kmeans_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( kmeans_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( pca_test
+  zm/example/mca/pca_test.c
+)
+target_include_directories( pca_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pca_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pca_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( rand_test
+  zm/example/mca/rand_test.c
+)
+target_include_directories( rand_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rand_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rand_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( xmeans_bic_test
+  zm/example/mca/xmeans_bic_test.c
+)
+target_include_directories( xmeans_bic_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( xmeans_bic_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( xmeans_bic_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( xmeans_test
+  zm/example/mca/xmeans_test.c
+)
+target_include_directories( xmeans_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( xmeans_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( xmeans_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_MISC_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/misc"
+)
+
+add_executable( ceil_test
+  zm/example/misc/ceil_test.c
+)
+target_include_directories( ceil_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ceil_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ceil_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( cycloid_test
+  zm/example/misc/cycloid_test.c
+)
+target_include_directories( cycloid_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cycloid_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cycloid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( line_test
+  zm/example/misc/line_test.c
+)
+target_include_directories( line_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( line_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( line_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( sigmoid_test
+  zm/example/misc/sigmoid_test.c
+)
+target_include_directories( sigmoid_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sigmoid_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sigmoid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_NLE_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/nle"
+)
+
+add_executable( dm_test
+  zm/example/nle/dm_test.c
+)
+target_include_directories( dm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( dm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( dm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+)
+
+add_executable( lm_test
+  zm/example/nle/lm_test.c
+)
+target_include_directories( lm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+)
+
+add_executable( single_test
+  zm/example/nle/single_test.c
+)
+target_include_directories( single_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( single_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( single_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+)
+
+add_executable( ss_test
+  zm/example/nle/ss_test.c
+)
+target_include_directories( ss_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ss_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ss_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+)
+
+add_executable( steffensen_test
+  zm/example/nle/steffensen_test.c
+)
+target_include_directories( steffensen_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( steffensen_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( steffensen_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_NURBS_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/nurbs"
+)
+
+add_executable( nurbs_circle_test
+  zm/example/nurbs/nurbs_circle_test.c
+)
+target_include_directories( nurbs_circle_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_circle_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_circle_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+
+add_executable( nurbs_diff_test
+  zm/example/nurbs/nurbs_diff_test.c
+)
+target_include_directories( nurbs_diff_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_diff_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_diff_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+
+add_executable( nurbs_nn_test
+  zm/example/nurbs/nurbs_nn_test.c
+)
+target_include_directories( nurbs_nn_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_nn_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_nn_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+
+add_executable( nurbs_test
+  zm/example/nurbs/nurbs_test.c
+)
+target_include_directories( nurbs_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_ODE_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/ode"
+)
+
+add_executable( adams_test
+  zm/example/ode/adams_test.c
+)
+target_include_directories( adams_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( adams_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( adams_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( beuler_test
+  zm/example/ode/beuler_test.c
+)
+target_include_directories( beuler_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( beuler_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( beuler_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( cmp_test_example
+  zm/example/ode/cmp_test.c
+)
+target_include_directories( cmp_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cmp_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cmp_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( cmp2_test
+  zm/example/ode/cmp2_test.c
+)
+target_include_directories( cmp2_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cmp2_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cmp2_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( cmp_dc_test
+  zm/example/ode/cmp_dc_test.c
+)
+target_include_directories( cmp_dc_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cmp_dc_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cmp_dc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( deferred_correction_test
+  zm/example/ode/deferred_correction_test.c
+)
+target_include_directories( deferred_correction_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( deferred_correction_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( deferred_correction_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( dualpend_test
+  zm/example/ode/dualpend_test.c
+)
+target_include_directories( dualpend_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( dualpend_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( dualpend_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+add_custom_command(TARGET dualpend_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zm/example/ode/dualpend.conf
+  $<TARGET_FILE_DIR:dualpend_test>/
+)
+
+add_executable( euler_test
+  zm/example/ode/euler_test.c
+)
+target_include_directories( euler_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( euler_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( euler_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( gauss_test
+  zm/example/ode/gauss_test.c
+)
+target_include_directories( gauss_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gauss_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gauss_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( gear_test
+  zm/example/ode/gear_test.c
+)
+target_include_directories( gear_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gear_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gear_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( heun_test
+  zm/example/ode/heun_test.c
+)
+target_include_directories( heun_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( heun_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( heun_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( ode2_leapfrog_test
+  zm/example/ode/ode2_leapfrog_test.c
+)
+target_include_directories( ode2_leapfrog_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode2_leapfrog_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode2_leapfrog_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( ode2_regular_test
+  zm/example/ode/ode2_regular_test.c
+)
+target_include_directories( ode2_regular_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode2_regular_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode2_regular_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( ode2_sympl_test
+  zm/example/ode/ode2_sympl_test.c
+)
+target_include_directories( ode2_sympl_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode2_sympl_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode2_sympl_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( radau_test
+  zm/example/ode/radau_test.c
+)
+target_include_directories( radau_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( radau_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( radau_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( rk4_test
+  zm/example/ode/rk4_test.c
+)
+target_include_directories( rk4_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rk4_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rk4_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( rk5_test
+  zm/example/ode/rk5_test.c
+)
+target_include_directories( rk5_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rk5_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rk5_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( rkf45_test
+  zm/example/ode/rkf45_test.c
+)
+target_include_directories( rkf45_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rkf45_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rkf45_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( rkg_test
+  zm/example/ode/rkg_test.c
+)
+target_include_directories( rkg_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rkg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rkg_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+add_executable( tr_test
+  zm/example/ode/tr_test.c
+)
+target_include_directories( tr_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( tr_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( tr_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_OPT_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/opt"
+)
+
+add_executable( dm_test_example
+  zm/example/opt/dm_test.c
+)
+target_include_directories( dm_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( dm_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( dm_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( lcp_benchmark_test
+  zm/example/opt/lcp_benchmark_test.c
+)
+target_include_directories( lcp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lcp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lcp_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( line_search_test
+  zm/example/opt/line_search_test.c
+)
+target_include_directories( line_search_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( line_search_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( line_search_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( lp_benchmark_test
+  zm/example/opt/lp_benchmark_test.c
+)
+target_include_directories( lp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lp_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( lp_stdcnv_solve_test
+  zm/example/opt/lp_stdcnv_solve_test.c
+)
+target_include_directories( lp_stdcnv_solve_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lp_stdcnv_solve_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lp_stdcnv_solve_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( lp_stdcnv_test
+  zm/example/opt/lp_stdcnv_test.c
+)
+target_include_directories( lp_stdcnv_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lp_stdcnv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lp_stdcnv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( opt_benchmark_test
+  zm/example/opt/opt_benchmark_test.c
+)
+target_include_directories( opt_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( opt_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( opt_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( qp_asm_test
+  zm/example/opt/qp_asm_test.c
+)
+target_include_directories( qp_asm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( qp_asm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( qp_asm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( qp_benchmark_test
+  zm/example/opt/qp_benchmark_test.c
+)
+target_include_directories( qp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( qp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( qp_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+add_executable( qp_test
+  zm/example/opt/qp_test.c
+)
+target_include_directories( qp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( qp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( qp_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_OSCILLATOR_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/oscillator"
+)
+
+add_executable( kuramoto_test
+  zm/example/oscillator/kuramoto_test.c
+)
+target_include_directories( kuramoto_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( kuramoto_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( kuramoto_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OSCILLATOR_OUTPUT_DIR}
+)
+
+add_executable( matsuoka_test
+  zm/example/oscillator/matsuoka_test.c
+)
+target_include_directories( matsuoka_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( matsuoka_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( matsuoka_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OSCILLATOR_OUTPUT_DIR}
+)
+
+add_executable( vandelpol_test
+  zm/example/oscillator/vandelpol_test.c
+)
+target_include_directories( vandelpol_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( vandelpol_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( vandelpol_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OSCILLATOR_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_PARSE_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/parse"
+)
+
+add_executable( parse_test
+  zm/example/parse/parse_test.c
+)
+target_include_directories( parse_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( parse_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( parse_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PARSE_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_PEX_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/pex"
+)
+
+add_executable( pex_cval_test
+  zm/example/pex/pex_cval_test.c
+)
+target_include_directories( pex_cval_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_cval_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_cval_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+
+add_executable( pex_diff_test
+  zm/example/pex/pex_diff_test.c
+)
+target_include_directories( pex_diff_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_diff_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_diff_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+
+add_executable( pex_div_test
+  zm/example/pex/pex_div_test.c
+)
+target_include_directories( pex_div_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_div_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_div_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+
+add_executable( pex_io_test
+  zm/example/pex/pex_io_test.c
+)
+target_include_directories( pex_io_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_io_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_io_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+add_custom_command(TARGET pex_io_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zm/example/pex/pex_test.dat
+  $<TARGET_FILE_DIR:pex_io_test>/
+)
+
+add_executable( pex_modulo_test
+  zm/example/pex/pex_modulo_test.c
+)
+target_include_directories( pex_modulo_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_modulo_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_modulo_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+
+add_executable( pex_out_test
+  zm/example/pex/pex_out_test.c
+)
+target_include_directories( pex_out_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pex_out_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pex_out_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_RAND_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/rand"
+)
+
+add_executable( rand_beta_test
+  zm/example/rand/beta_test.c
+)
+target_include_directories( rand_beta_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rand_beta_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rand_beta_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( binom2_test
+  zm/example/rand/binom2_test.c
+)
+target_include_directories( binom2_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( binom2_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( binom2_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( binom_test
+  zm/example/rand/binom_test.c
+)
+target_include_directories( binom_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( binom_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( binom_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( cauchy_test
+  zm/example/rand/cauchy_test.c
+)
+target_include_directories( cauchy_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cauchy_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cauchy_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( chisqr_test
+  zm/example/rand/chisqr_test.c
+)
+target_include_directories( chisqr_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( chisqr_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( chisqr_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( exp_test
+  zm/example/rand/exp_test.c
+)
+target_include_directories( exp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( exp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( exp_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( f_test
+  zm/example/rand/f_test.c
+)
+target_include_directories( f_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( f_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( f_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( gamma_test
+  zm/example/rand/gamma_test.c
+)
+target_include_directories( gamma_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gamma_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gamma_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( geo_test
+  zm/example/rand/geo_test.c
+)
+target_include_directories( geo_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( geo_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( geo_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( logistic_test
+  zm/example/rand/logistic_test.c
+)
+target_include_directories( logistic_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( logistic_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( logistic_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( montecarlo_test
+  zm/example/rand/montecarlo_test.c
+)
+target_include_directories( montecarlo_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( montecarlo_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( montecarlo_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( mt_test
+  zm/example/rand/mt_test.c
+)
+target_include_directories( mt_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( mt_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( mt_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( nd_test
+  zm/example/rand/nd_test.c
+)
+target_include_directories( nd_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nd_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nd_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( normal_test
+  zm/example/rand/normal_test.c
+)
+target_include_directories( normal_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( normal_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( normal_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( poisson_test
+  zm/example/rand/poisson_test.c
+)
+target_include_directories( poisson_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( poisson_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( poisson_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( power_test_example
+  zm/example/rand/power_test.c
+)
+target_include_directories( power_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( power_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( power_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( t_test
+  zm/example/rand/t_test.c
+)
+target_include_directories( t_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( t_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( t_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( tri_test
+  zm/example/rand/tri_test.c
+)
+target_include_directories( tri_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( tri_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( tri_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+add_executable( weibull_test
+  zm/example/rand/weibull_test.c
+)
+target_include_directories( weibull_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( weibull_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( weibull_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_RAND_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_SEQ_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/seq"
+)
+
+
+add_executable( seq_add_test
+  zm/example/seq/seq_add_test.c
+)
+target_include_directories( seq_add_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( seq_add_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( seq_add_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SEQ_OUTPUT_DIR}
+)
+
+add_executable( seq_del_test
+  zm/example/seq/seq_del_test.c
+)
+target_include_directories( seq_del_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( seq_del_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( seq_del_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SEQ_OUTPUT_DIR}
+)
+
+add_executable( seq_jump_test
+  zm/example/seq/seq_jump_test.c
+)
+target_include_directories( seq_jump_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( seq_jump_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( seq_jump_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SEQ_OUTPUT_DIR}
+)
+add_custom_command(TARGET seq_jump_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zm/example/seq/test.zvs
+  $<TARGET_FILE_DIR:seq_jump_test>/
+)
+
+
+set(ZM_EXAMPLE_SF_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/sf"
+)
+
+add_executable( bessel_i_test
+  zm/example/sf/bessel_i_test.c
+)
+target_include_directories( bessel_i_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( bessel_i_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( bessel_i_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( bessel_j_test
+  zm/example/sf/bessel_j_test.c
+)
+target_include_directories( bessel_j_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( bessel_j_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( bessel_j_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( bessel_k_test
+  zm/example/sf/bessel_k_test.c
+)
+target_include_directories( bessel_k_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( bessel_k_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( bessel_k_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( bessel_y_test_example
+  zm/example/sf/bessel_y_test.c
+)
+target_include_directories( bessel_y_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( bessel_y_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( bessel_y_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( sf_beta_test
+  zm/example/sf/beta_test.c
+)
+target_include_directories( sf_beta_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sf_beta_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sf_beta_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( erf_test
+  zm/example/sf/erf_test.c
+)
+target_include_directories( erf_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( erf_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( erf_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( fresnel_gen_test
+  zm/example/sf/fresnel_gen_test.c
+)
+target_include_directories( fresnel_gen_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( fresnel_gen_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( fresnel_gen_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( fresnel_test
+  zm/example/sf/fresnel_test.c
+)
+target_include_directories( fresnel_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( fresnel_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( fresnel_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( gamma_test_example
+  zm/example/sf/gamma_test.c
+)
+target_include_directories( gamma_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gamma_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gamma_test_example PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_STAT_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/stat"
+)
+
+add_executable( combi_measure_test
+  zm/example/stat/combi_measure_test.c
+)
+target_include_directories( combi_measure_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( combi_measure_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( combi_measure_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( distrib_test
+  zm/example/stat/distrib_test.c
+)
+target_include_directories( distrib_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( distrib_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( distrib_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( max_min_test
+  zm/example/stat/max_min_test.c
+)
+target_include_directories( max_min_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( max_min_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( max_min_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( normaldistrib_test
+  zm/example/stat/normaldistrib_test.c
+)
+target_include_directories( normaldistrib_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( normaldistrib_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( normaldistrib_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( pascal_test
+  zm/example/stat/pascal_test.c
+)
+target_include_directories( pascal_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( pascal_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( pascal_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( perm_test
+  zm/example/stat/perm_test.c
+)
+target_include_directories( perm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( perm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( perm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+add_executable( sum_test
+  zm/example/stat/sum_test.c
+)
+target_include_directories( sum_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( sum_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( sum_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+
+set(ZM_EXAMPLE_VEC_OUTPUT_DIR
+  "${ZM_EXAMPLE_OUTPUT_DIR}/vec"
+)
+
+add_executable( tree_test
+  zm/example/vec/tree_test.c
+)
+target_include_directories( tree_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( tree_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( tree_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
+)
+
+add_executable( vec_norm_test
+  zm/example/vec/vec_norm_test.c
+)
+target_include_directories( vec_norm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( vec_norm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( vec_norm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
+)
+
+add_executable( vec_ring_cat_test
+  zm/example/vec/vec_ring_cat_test.c
+)
+target_include_directories( vec_ring_cat_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( vec_ring_cat_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( vec_ring_cat_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
+)
+
+add_executable( vec_sort_test
+  zm/example/vec/vec_sort_test.c
+)
+target_include_directories( vec_sort_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( vec_sort_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( vec_sort_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
 )
 
 
