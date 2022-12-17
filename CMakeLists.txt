@@ -2311,6 +2311,7 @@ add_dependencies(neuz zm zeda LibXml2)
 
 
 # neus example ----------------------------------------------------------------------
+
 set(NEUZ_EXAMPLE_LINK_LIB
   neuz
   zm
@@ -2350,7 +2351,7 @@ set_target_properties( connect_test PROPERTIES
 )
 
 add_executable( read_ztk_test
-  neuz/example/read_ztk_test
+  neuz/example/read_ztk_test.c
 )
 target_include_directories( read_ztk_test PUBLIC ${NEUZ_INCLUDE_DIR} )
 target_link_libraries( read_ztk_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
@@ -2536,6 +2537,336 @@ set_target_properties( dz_tf2zeropole PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_APP_OUTPUT_DIR}
 )
 
+# dzco example ----------------------------------------------------------------------
+
+set(DZCO_EXAMPLE_LINK_LIB
+  zm
+  zeda
+  LibXml2
+)
+
+set(DZCO_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/dzco/example"
+)
+
+set(DZCO_EXAMPLE_IDENT_OUTPUT_DIR
+  "${DZCO_EXAMPLE_OUTPUT_DIR}/ident"
+)
+
+# add_executable( fol_ident_test
+#   dzco/example/ident/fol_ident_test.c
+# )
+# target_include_directories( fol_ident_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( fol_ident_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( fol_ident_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_IDENT_OUTPUT_DIR}
+# )
+
+# add_executable( sol_ident_test
+#   dzco/example/ident/sol_ident_test.c
+# )
+# target_include_directories( sol_ident_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( sol_ident_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( sol_ident_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_IDENT_OUTPUT_DIR}
+# )
+
+
+set(DZCO_EXAMPLE_LIN_OUTPUT_DIR
+  "${DZCO_EXAMPLE_OUTPUT_DIR}/lin"
+)
+
+# add_executable( co_check_test
+#   dzco/example/lin/co_check_test.c
+# )
+# target_include_directories( co_check_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( co_check_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( co_check_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( invpend_test_dzco
+#   dzco/example/lin/invpend_test.c
+# )
+# target_include_directories( invpend_test_dzco PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( invpend_test_dzco PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( invpend_test_dzco PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+# add_custom_command(TARGET invpend_test_dzco
+#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+#   ${PROJECT_SOURCE_DIR}/dzco/example/lin/invpend.conf
+#   $<TARGET_FILE_DIR:invpend_test_dzco>/
+# )
+
+# add_executable( kleinman_test
+#   dzco/example/lin/kleinman_test.c
+# )
+# target_include_directories( kleinman_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( kleinman_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( kleinman_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( lqr_test
+#   dzco/example/lin/lqr_test.c
+# )
+# target_include_directories( lqr_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( lqr_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( lqr_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( obs_test
+#   dzco/example/lin/obs_test.c
+# )
+# target_include_directories( obs_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( obs_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( obs_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( pex2lin_test
+#   dzco/example/lin/pex2lin_test.c
+# )
+# target_include_directories( pex2lin_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( pex2lin_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( pex2lin_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( pole_assign_test
+#   dzco/example/lin/pole_assign_test.c
+# )
+# target_include_directories( pole_assign_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( pole_assign_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( pole_assign_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( riccati_test
+#   dzco/example/lin/riccati_test.c
+# )
+# target_include_directories( riccati_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( riccati_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( riccati_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+# add_executable( statefeedback_test
+#   dzco/example/lin/statefeedback_test.c
+# )
+# target_include_directories( statefeedback_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( statefeedback_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( statefeedback_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+# )
+
+
+set(DZCO_EXAMPLE_SYS_OUTPUT_DIR
+  "${DZCO_EXAMPLE_OUTPUT_DIR}/sys"
+)
+
+# add_executable( adapt_test
+#   dzco/example/sys/adapt_test.c
+# )
+# target_include_directories( adapt_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( adapt_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( adapt_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( butterworth_test
+#   dzco/example/sys/butterworth_test.c
+# )
+# target_include_directories( butterworth_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( butterworth_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( butterworth_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( chain_test_dzco
+#   dzco/example/sys/chain_test.c
+# )
+# target_include_directories( chain_test_dzco PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( chain_test_dzco PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( chain_test_dzco PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( connect_test_dzco
+#   dzco/example/sys/connect_test.c
+# )
+# target_include_directories( connect_test_dzco PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( connect_test_dzco PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( connect_test_dzco PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+# add_custom_command(TARGET connect_test_dzco
+#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+#   ${PROJECT_SOURCE_DIR}/dzco/example/sys/connect_test.ztk
+#   $<TARGET_FILE_DIR:connect_test_dzco>/
+# )
+
+# add_executable( fg_test
+#   dzco/example/sys/fg_test.c
+# )
+# target_include_directories( fg_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( fg_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( fg_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( fol_test
+#   dzco/example/sys/fol_test.c
+# )
+# target_include_directories( fol_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( fol_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( fol_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( maf_test
+#   dzco/example/sys/maf_test.c
+# )
+# target_include_directories( maf_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( maf_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( maf_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( pc_test
+#   dzco/example/sys/pc_test.c
+# )
+# target_include_directories( pc_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( pc_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( pc_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( qpd_test
+#   dzco/example/sys/qpd_test.c
+# )
+# target_include_directories( qpd_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( qpd_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( qpd_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( sol_test
+#   dzco/example/sys/sol_test.c
+# )
+# target_include_directories( sol_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( sol_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( sol_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+
+# add_executable( ztk_read_test
+#   dzco/example/sys/ztk_read_test.c
+# )
+# target_include_directories( ztk_read_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( ztk_read_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( ztk_read_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_SYS_OUTPUT_DIR}
+# )
+# add_custom_command(TARGET ztk_read_test
+#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+#   ${PROJECT_SOURCE_DIR}/dzco/example/sys/read_test.ztk
+#   $<TARGET_FILE_DIR:ztk_read_test>/
+# )
+
+
+set(DZCO_EXAMPLE_TF_OUTPUT_DIR
+  "${DZCO_EXAMPLE_OUTPUT_DIR}/tf"
+)
+
+# add_executable( bandpass_bode_test
+#   dzco/example/tf/bandpass_bode_test.c
+# )
+# target_include_directories( bandpass_bode_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( bandpass_bode_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( bandpass_bode_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( bode_nyquist_test
+#   dzco/example/tf/bode_nyquist_test.c
+# )
+# target_include_directories( bode_nyquist_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( bode_nyquist_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( bode_nyquist_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( fol_tf_test
+#   dzco/example/tf/fol_tf_test.c
+# )
+# target_include_directories( fol_tf_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( fol_tf_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( fol_tf_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( freqres_test
+#   dzco/example/tf/freqres_test.c
+# )
+# target_include_directories( freqres_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( freqres_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( freqres_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( pc_bode_test
+#   dzco/example/tf/pc_bode_test.c
+# )
+# target_include_directories( pc_bode_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( pc_bode_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( pc_bode_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( pid_tf_test
+#   dzco/example/tf/pid_tf_test.c
+# )
+# target_include_directories( pid_tf_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( pid_tf_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( pid_tf_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( sol_tf_test
+#   dzco/example/tf/sol_tf_test.c
+# )
+# target_include_directories( sol_tf_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( sol_tf_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( sol_tf_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( tf_io_test
+#   dzco/example/tf/tf_io_test.c
+# )
+# target_include_directories( tf_io_test PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( tf_io_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( tf_io_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+
+# add_executable( tf_test_example
+#   dzco/example/tf/tf_test.c
+# )
+# target_include_directories( tf_test_example PUBLIC ${DZCO_INCLUDE_DIR} )
+# target_link_libraries( tf_test_example PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+# set_target_properties( tf_test_example PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_TF_OUTPUT_DIR}
+# )
+# add_custom_command(TARGET tf_test_example
+#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+#   ${PROJECT_SOURCE_DIR}/dzco/example/tf/tf_test.ztk
+#   ${PROJECT_SOURCE_DIR}/dzco/example/tf/tf_zeropole_test.ztk
+#   $<TARGET_FILE_DIR:tf_test_example>/
+# )
 
 
 # zeo ----------------------------------------------------------------------
@@ -2969,18 +3300,18 @@ set_target_properties( ik_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
 )
 
-add_executable( invpend_test
-  roki/test/invpend_test.c
-)
-target_link_libraries( invpend_test PUBLIC ${ROKI_TEST_LINK_LIB} )
-set_target_properties( invpend_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
-)
-add_custom_command(TARGET invpend_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/test/invpend.ztk
-  $<TARGET_FILE_DIR:invpend_test>/
-)
+# add_executable( invpend_test
+#   roki/test/invpend_test.c
+# )
+# target_link_libraries( invpend_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+# set_target_properties( invpend_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+# )
+# add_custom_command(TARGET invpend_test
+#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+#   ${PROJECT_SOURCE_DIR}/roki/test/invpend.ztk
+#   $<TARGET_FILE_DIR:invpend_test>/
+# )
 
 add_executable( jacobi_test
   roki/test/jacobi_test.c
