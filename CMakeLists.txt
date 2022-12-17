@@ -3218,6 +3218,12 @@ target_link_libraries( merge_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( merge_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BREP_OUTPUT_DIR}
 )
+make_directory(${ZEO_EXAMPLE_OUTPUT_DIR}/model)
+add_custom_command(TARGET merge_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/octahedron.ztk
+  ${ZEO_EXAMPLE_OUTPUT_DIR}/model/
+)
 
 add_executable( ph2brep_test
   zeo/example/brep/ph2brep_test.c
@@ -3398,20 +3404,12 @@ target_link_libraries( aabb_intersect_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( aabb_intersect_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
 )
-set(ZEO_EXAMPLE_MODEL_OUTPUT_DIR
-  "${ZEO_EXAMPLE_OUTPUT_DIR}/"
-)
 add_custom_command(TARGET aabb_intersect_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
   ${PROJECT_SOURCE_DIR}/zeo/example/model/box.ztk
-  ${PROJECT_SOURCE_DIR}/zeo/example/model/cone.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/cube.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/cyl.ztk
-  ${PROJECT_SOURCE_DIR}/zeo/example/model/ellips.ztk
-  ${PROJECT_SOURCE_DIR}/zeo/example/model/mirror.ztk
-  ${PROJECT_SOURCE_DIR}/zeo/example/model/nurbs.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/octahedron.ztk
-  ${PROJECT_SOURCE_DIR}/zeo/example/model/scc.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/sphere.ztk
   $<TARGET_FILE_DIR:aabb_intersect_test>/
 )
@@ -3801,6 +3799,15 @@ target_link_libraries( bball_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( bball_test_example PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
 )
+add_custom_command(TARGET bball_test_example
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/box.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/mirror.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/octahedron.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/scc.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/sphere.ztk
+  $<TARGET_FILE_DIR:bball_test_example>/
+)
 
 add_executable( clone_test
   zeo/example/mshape/clone_test.c
@@ -3859,6 +3866,11 @@ target_include_directories( nurbs_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( nurbs_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( nurbs_closest_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+add_custom_command(TARGET nurbs_closest_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/nurbs.ztk
+  $<TARGET_FILE_DIR:nurbs_closest_test>/
 )
 
 add_executable( nurbs_curve_test
@@ -3988,6 +4000,21 @@ target_link_libraries( box_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( box_closest_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_SHAPE_OUTPUT_DIR}
 )
+add_custom_command(TARGET box_closest_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/box.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/cone.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/cube.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/cyl.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/ellips.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/mirror.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/nurbs.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/octahedron.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/scc.ztk
+  ${PROJECT_SOURCE_DIR}/zeo/example/model/sphere.ztk
+  $<TARGET_FILE_DIR:box_closest_test>/
+)
+
 
 add_executable( cone_closest_test
   zeo/example/shape/cone_closest_test.c
