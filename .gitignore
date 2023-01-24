@@ -6,5 +6,4 @@
 !deb
 !deb/*
 !deb/.gitkeep
-!tutorial
 !.gitignore
