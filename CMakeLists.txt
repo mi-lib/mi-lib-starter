@@ -4438,6 +4438,404 @@ set_target_properties( zvs2zkcs PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
 
+# roki example ------------------------------------------------------------------
+
+set(ROKI_EXAMPLE_LINK_LIB
+  roki
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ROKI_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki/example"
+)
+
+add_executable( body_am_test
+  roki/example/body/body_am_test.c
+)
+target_link_libraries( body_am_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_am_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET body_am_test
+  PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${PROJECT_SOURCE_DIR}/roki/example/model
+  ${ROKI_EXAMPLE_OUTPUT_DIR}/
+)
+
+
+add_executable( body_com_test
+  roki/example/body/body_com_test.c
+)
+target_link_libraries( body_com_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_com_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( body_wrench_test
+  roki/example/body/body_wrench_test.c
+)
+target_link_libraries( body_wrench_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_wrench_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( combine_test
+  roki/example/body/combine_test.c
+)
+target_link_libraries( combine_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( combine_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( body_contig_test
+  roki/example/body/contig_test.c
+)
+target_link_libraries( body_contig_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_contig_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( body_gravity_test
+  roki/example/body/gravity_test.c
+)
+target_link_libraries( body_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_gravity_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( inertialellipsoid_test
+  roki/example/body/inertialellipsoid_test.c
+)
+target_link_libraries( inertialellipsoid_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( inertialellipsoid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( mp_xform_test
+  roki/example/body/mp_xform_test.c
+)
+target_link_libraries( mp_xform_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( mp_xform_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( org_inertia_test
+  roki/example/body/org_inertia_test.c
+)
+target_link_libraries( org_inertia_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( org_inertia_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( cd_test
+  roki/example/cd/cd_test.c
+)
+target_link_libraries( cd_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( cd_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( chain_bball_test
+  roki/example/chain/bball_test.c
+)
+target_link_libraries( chain_bball_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( chain_bball_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( chain2vert_test
+  roki/example/chain/chain2vert_test.c
+)
+target_link_libraries( chain2vert_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( chain2vert_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( com_vel_spher_test
+  roki/example/chain/com_vel_spher_test.c
+)
+target_link_libraries( com_vel_spher_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( com_vel_spher_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( com_vel_test
+  roki/example/chain/com_vel_test.c
+)
+target_link_libraries( com_vel_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( com_vel_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( conf2joint_test
+  roki/example/chain/conf2joint_test.c
+)
+target_link_libraries( conf2joint_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( conf2joint_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( copy_state_test
+  roki/example/chain/copy_state_test.c
+)
+target_link_libraries( copy_state_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( copy_state_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( fd_id_test
+  roki/example/chain/fd_id_test.c
+)
+target_link_libraries( fd_id_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( fd_id_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( fk_cylin_test
+  roki/example/chain/fk_cylin_test.c
+)
+target_link_libraries( fk_cylin_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( fk_cylin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( fk_float_test
+  roki/example/chain/fk_float_test.c
+)
+target_link_libraries( fk_float_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( fk_float_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( fk_hooke_test
+  roki/example/chain/fk_hooke_test.c
+)
+target_link_libraries( fk_hooke_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( fk_hooke_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( fk_spher_test
+  roki/example/chain/fk_spher_test.c
+)
+target_link_libraries( fk_spher_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( fk_spher_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( chain_gravity_test
+  roki/example/chain/gravity_test.c
+)
+target_link_libraries( chain_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( chain_gravity_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( id_cylin_test
+  roki/example/chain/id_cylin_test.c
+)
+target_link_libraries( id_cylin_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( id_cylin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( id_hooke_test
+  roki/example/chain/id_hooke_test.c
+)
+target_link_libraries( id_hooke_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( id_hooke_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( joint_index_size_test
+  roki/example/chain/joint_index_size_test.c
+)
+target_link_libraries( joint_index_size_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( joint_index_size_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( joint_index_test
+  roki/example/chain/joint_index_test.c
+)
+target_link_libraries( joint_index_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( joint_index_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( joint_vec_test
+  roki/example/chain/joint_vec_test.c
+)
+target_link_libraries( joint_vec_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( joint_vec_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( scanshape_test
+  roki/example/chain/scanshape_test.c
+)
+target_link_libraries( scanshape_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( scanshape_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( zmp_test
+  roki/example/chain/zmp_test.c
+)
+target_link_libraries( zmp_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( zmp_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( chain_ztk_test
+  roki/example/chain/ztk_test.c
+)
+target_link_libraries( chain_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( chain_ztk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( contact_ztk_test
+  roki/example/contact/ztk_test.c
+)
+target_link_libraries( contact_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( contact_ztk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET contact_ztk_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/example/contact/contact.ztk
+  $<TARGET_FILE_DIR:contact_ztk_test>/
+)
+
+
+add_executable( force_ik_test
+  roki/example/ik/force_ik_test.c
+)
+target_link_libraries( force_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( force_ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( humanoid_ik_test
+  roki/example/ik/humanoid_ik_test.c
+)
+target_link_libraries( humanoid_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( humanoid_ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( ik_seq_test
+  roki/example/ik/ik_seq_test.c
+)
+target_link_libraries( ik_seq_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( ik_seq_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( puma_acc_track_test
+  roki/example/ik/puma_acc_track_test.c
+)
+target_link_libraries( puma_acc_track_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( puma_acc_track_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( puma_ik_test
+  roki/example/ik/puma_ik_test.c
+)
+target_link_libraries( puma_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( puma_ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( puma_imp_test
+  roki/example/ik/puma_imp_test.c
+)
+target_link_libraries( puma_imp_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( puma_imp_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( puma_vel_track_test
+  roki/example/ik/puma_vel_track_test.c
+)
+target_link_libraries( puma_vel_track_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( puma_vel_track_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( scan_conf_test
+  roki/example/ik/scan_conf_test.c
+)
+target_link_libraries( scan_conf_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( scan_conf_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET scan_conf_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
+  $<TARGET_FILE_DIR:scan_conf_test>/
+)
+
+add_executable( ik_ztk_test
+  roki/example/ik/ztk_test.c
+)
+target_link_libraries( ik_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( ik_ztk_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET ik_ztk_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
+  $<TARGET_FILE_DIR:ik_ztk_test>/
+)
+
+add_executable( manip_test
+  roki/example/jacobi/manip_test.c
+)
+target_link_libraries( manip_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( manip_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( sv_test
+  roki/example/jacobi/sv_test.c
+)
+target_link_libraries( sv_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( sv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+
+add_executable( resttorque_test
+  roki/example/joint/resttorque_test.c
+)
+target_link_libraries( resttorque_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( resttorque_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( revol_dyn_test
+  roki/example/joint/revol_dyn_test.c
+)
+target_link_libraries( revol_dyn_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( revol_dyn_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
 
 # roki-fd ------------------------------------------------------------------
 
@@ -4476,6 +4874,66 @@ set(ROKI-FD_INCLUDE_DIR
 target_include_directories(roki-fd PUBLIC ${ROKI-FD_INCLUDE_DIR})
 
 add_dependencies(roki-fd roki zeo zm zeda LibXml2)
+
+# roki-fd example ------------------------------------------------------------------
+
+set(ROKI_FD_EXAMPLE_LINK_LIB
+  roki-fd
+  roki
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+set(ROKI_FD_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki-fd/example"
+)
+
+add_executable( arm_box_test
+  roki-fd/example/chain/arm_box_test.c
+)
+target_link_libraries( arm_box_test PUBLIC ${ROKI_FD_EXAMPLE_LINK_LIB} )
+set_target_properties( arm_box_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET arm_box_test
+  PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
+  ${PROJECT_SOURCE_DIR}/roki-fd/example/model
+  ${ROKI_FD_EXAMPLE_OUTPUT_DIR}/
+)
+
+add_executable( arm_box_trq_test
+  roki-fd/example/chain/arm_box_trq_test.c
+)
+target_link_libraries( arm_box_trq_test PUBLIC ${ROKI_FD_EXAMPLE_LINK_LIB} )
+set_target_properties( arm_box_trq_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( arm_wall_test
+  roki-fd/example/chain/arm_wall_test.c
+)
+target_link_libraries( arm_wall_test PUBLIC ${ROKI_FD_EXAMPLE_LINK_LIB} )
+set_target_properties( arm_wall_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( boxdrop_hardsoft_test
+  roki-fd/example/chain/boxdrop_hardsoft_test.c
+)
+target_link_libraries( boxdrop_hardsoft_test PUBLIC ${ROKI_FD_EXAMPLE_LINK_LIB} )
+set_target_properties( boxdrop_hardsoft_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( boxdrop_test
+  roki-fd/example/chain/boxdrop_test.c
+)
+target_link_libraries( boxdrop_test PUBLIC ${ROKI_FD_EXAMPLE_LINK_LIB} )
+set_target_properties( boxdrop_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
+)
 
 
 # test include & link ------------------------------------------------------------------
