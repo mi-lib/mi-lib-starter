@@ -40,6 +40,18 @@ makeclean(){
   fi
 }
 
+# git pull
+dopull(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    git pull
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
 case $1 in
   install)
     for lib in ${LIBS}
@@ -58,6 +70,12 @@ case $1 in
     for lib in ${LIBS}
     do
       makeclean
+    done
+    ;;
+  pull)
+    for lib in ${LIBS}
+    do
+      dopull
     done
     ;;
   *)
