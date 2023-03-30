@@ -3,12 +3,15 @@
 # read variables in config file.
 . ./config
 
+cc=
+std=
+
 # compile
 compile(){
   if [ -d ${lib} ]; then
     cd ${lib}
     make clean
-    make && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    make CC=${cc} STD=${std} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
     cd -
   else
     echo "cannot find directory" ${lib}
@@ -53,12 +56,6 @@ dopull(){
 }
 
 case $1 in
-  install)
-    for lib in ${LIBS}
-    do
-      compile
-    done
-    ;;
   deb)
     rm deb/*.deb
     for lib in ${LIBS}
@@ -78,7 +75,17 @@ case $1 in
       dopull
     done
     ;;
+  cpplib)
+    cc=g++
+    std=c++17
+    for lib in ${LIBS}
+    do
+      compile
+    done
+    ;;
   *)
+    cc=gcc
+    std=c89
     for lib in ${LIBS}
     do
       compile
