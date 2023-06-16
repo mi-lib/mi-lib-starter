@@ -5,13 +5,14 @@
 
 cc=
 std=
+debug=
 
 # compile
 compile(){
   if [ -d ${lib} ]; then
     cd ${lib}
     make clean
-    make CC=${cc} STD=${std} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    make CC=${cc} STD=${std} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
     cd -
   else
     echo "cannot find directory" ${lib}
@@ -78,6 +79,15 @@ case $1 in
   cpplib)
     cc=g++
     std=c++17
+    for lib in ${LIBS}
+    do
+      compile
+    done
+    ;;
+  debug)
+    cc=gcc
+    std=c89
+    debug=y
     for lib in ${LIBS}
     do
       compile
