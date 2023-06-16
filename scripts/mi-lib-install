@@ -1,23 +1,90 @@
 #!/bin/sh
 
+# subroutines
+
+## download zip files from GitHub repositories and unzip them.
+download_and_unzip(){
+  echo "downloading" ${lib} "..."
+  wget https://github.com/mi-lib/${lib}/archive/refs/heads/main.zip || exit 1
+  echo "unarchiving" ${lib} "..."
+  unzip main.zip
+  rm main.zip
+  rename 's/-main//' *-main
+}
+
+## git clone repositories
+git_clone(){
+  echo "cloning" ${lib} "..."
+  git clone git@github.com:mi-lib/${lib}.git
+}
+
+## make directories to install
+make_directories(){
+    BINDIR=${PREFIX}/bin
+    INCDIR=${PREFIX}/include
+    LIBDIR=${PREFIX}/lib
+    for dir in ${BINDIR} ${INCDIR} ${LIBDIR}
+    do
+	if [ ! -d ${dir} ]; then
+	    echo "making directory" ${dir} "..."
+	    ${SUDO} mkdir -m 755 -p ${dir}
+	fi
+    done
+}
+
+## compile a libary
+compile_lib(){
+  if [ -n "${PREFIX}" ]; then
+      rm config;
+      cat config.org | sed -e "/^PREFIX/c\PREFIX=${PREFIX}" > config;
+  fi
+  if [ ! -f config ]; then
+      cp config.org config;
+  fi
+  make clean
+  make && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
+}
+
+# main process
+
 echo "installing required packages..."
 
-# get apt packages
-# (for download & compilation)
+## get apt packages
+### (for download & compilation)
 sudo apt install git wget unzip rename make gcc fakeroot
-# (for ZEDA & X11 & GL)
+### (for ZEDA & X11 & GL)
 sudo apt install libxml2-dev xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
 
-# read variables in config file.
+## read variables in config file.
 . ./config
 
-# install libraries from Debian packages
+## install libraries from Debian packages
 if [ "$1" = "deb" ]; then
+    PREFIX=`pwd`/sandbox
+    make_directories
+    export PATH=${BINDIR}:${PATH}
+    export LD_LIBRARY_PATH=${LIBDIR}:${LD_LIBRARY_PATH}
+    echo "removing old .deb packages..."
+    rm -f deb/*.deb
+    for lib in ${LIBS}
+    do
+	echo "compiling ${lib} and creating .deb package..."
+	if [ ! -d ${lib} ]; then
+	    download_and_unzip
+	fi
+	cd ${lib}
+	compile_lib
+	make deb
+	cd -
+	mv ${lib}/*.deb deb/
+    done
     echo "installing libraries from .deb packages..."
     for lib in ${LIBS}
     do
-	sudo dpkg -i deb/${lib}_*.*.*.deb
+	sudo dpkg -i deb/${lib}-dev_*.*.*.deb
     done
+    echo "removinig tentative working directories..."
+    rm -r ${PREFIX}
     echo "completed."
     exit 0
 fi
@@ -26,30 +93,21 @@ if [ -z ${PREFIX} ]; then
   PREFIX=${HOME}/usr
 fi
 
-# check if installer has to be run by the superuser
+## check if installer has to be run by the superuser
 SUDO=
 if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
   SUDO="sudo"
 fi
 
+## make directories
+
 echo "installing libraries and tools under" ${PREFIX} "..."
 
-BINDIR=${PREFIX}/bin
-INCDIR=${PREFIX}/include
-LIBDIR=${PREFIX}/lib
+make_directories
 
-# make directories
+## check if environmental variables are valid
 
-for dir in ${BINDIR} ${INCDIR} ${LIBDIR}
-do
-  if [ ! -d ${dir} ]; then
-    echo "making directory" ${dir} "..."
-    ${SUDO} mkdir -m 755 -p ${dir}
-  fi
-done
-
-# check if path is valid
-
+### path
 if [ -z `echo ${PATH} | grep ${BINDIR}` ]; then
   echo "Add ${BINDIR} into your PATH by"
   echo "  export PATH=${BINDIR}:\$PATH"
@@ -60,8 +118,7 @@ if [ -z `echo ${PATH} | grep ${BINDIR}` ]; then
 fi
 echo ${BINDIR} "... valid path."
 
-# check if libraries are visible from linker
-
+### LD_LIBRARY_PATH
 if [ -z `echo $LD_LIBRARY_PATH | grep $LIBDIR` ]; then
   echo "Add ${LIBDIR} into your LD_LIBRARY_PATH by"
   echo "  export LD_LIBRARY_PATH=${LIBDIR}:\$LD_LIBRARY_PATH"
@@ -72,26 +129,10 @@ if [ -z `echo $LD_LIBRARY_PATH | grep $LIBDIR` ]; then
 fi
 echo ${LIBDIR} "in LD_LIBRARY_PATH."
 
-# download zip files from GitHub repositories and unzip them.
-download_and_unzip(){
-  echo "downloading" ${lib} "..."
-  wget https://github.com/mi-lib/${lib}/archive/refs/heads/main.zip
-  echo "unarchiving" ${lib} "..."
-  unzip main.zip
-  rm main.zip
-  rename 's/-main//' *-main
-}
-
-# git clone repositories
-git_clone(){
-  echo "cloning" ${lib} "..."
-  git clone git@github.com:mi-lib/${lib}.git
-}
-
-# download archive files from GitHub, compile, and install libraries
+## download archive files from GitHub, compile, and install libraries
 for lib in ${LIBS}
 do
-  # download & unarchive
+  ### download & unarchive
   if [ ! -d ${lib} ]; then
     if [ "$1" = "clone" ]; then
       git_clone
@@ -99,19 +140,15 @@ do
       download_and_unzip
     fi
   fi
-  # compile & install
+done
+
+for lib in ${LIBS}
+do
+  ### compile & install
   echo "compiling" ${lib} "..."
   if [ -d ${lib} ]; then
     cd ${lib}
-    if [ -n "${PREFIX}" ]; then
-	rm config;
-	cat config.org | sed -e "/^PREFIX/c\PREFIX=${PREFIX}" > config;
-    fi
-    if [ ! -f config ]; then
-	cp config.org config;
-    fi
-    make clean
-    make && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    compile_lib
     cd -
   else
     echo "cannot find directory" ${lib}
