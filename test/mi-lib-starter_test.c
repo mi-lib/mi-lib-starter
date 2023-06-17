@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 
 #include "zeda/zeda.h"
 #include "zm/zm.h"
@@ -6,10 +6,10 @@
 #include "dzco/dzco.h"
 #include "zeo/zeo.h"
 #include "roki/roki.h"
-#include "roki-fd/roki-fd.h"
+#include "roki_fd/roki_fd.h"
 
 int main(void)
 {
-	printf("Hello CMake.");
+	printf("Hello CMake.\n");
 	return EXIT_SUCCESS;
 }
