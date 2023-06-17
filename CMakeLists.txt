@@ -17,18 +17,21 @@ if(NOT CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "" FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
+# add cmakes path
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmakes)
 
 # libxml2 ----------------------------------------------------------------------
 
-# libxml2 setting
-set(LIBXML2_WITH_ICONV OFF)
-set(LIBXML2_WITH_LZMA OFF)
-set(LIBXML2_WITH_PYTHON OFF)
-set(LIBXML2_WITH_ZLIB OFF)
-set(BUILD_SHARED_LIBS OFF)
+find_package(LibXml2 REQUIRED)
+# include(cmakes/FindLibXml2.cmake)
 
-add_subdirectory("libxml2")
 
+if(TARGET LibXml2)
+  message(STATUS "target LibXml2 is found.")
+else()
+  message(FATAL_ERROR "target LibXml2 is not found.")
+  return()
+endif()
 
 # mi-lib ----------------------------------------------------------------------
 
@@ -49,7 +52,6 @@ set(ZEDA_SOURCES
   zeda/src/zeda_option.c
   zeda/src/zeda_rand.c
   zeda/src/zeda_rrtab.c
-  zeda/src/zeda_stream.c
   zeda/src/zeda_string.c
   zeda/src/zeda_strlist.c
   zeda/src/zeda_xml.c
@@ -70,12 +72,14 @@ endif()
 set(ZEDA_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(zeda PUBLIC ${ZEDA_INCLUDE_DIR})
 
 add_dependencies(zeda LibXml2)
+find_library(MATH_LIBRARY m)
+target_link_libraries(zeda LibXml2 ${MATH_LIBRARY})
 
 add_compile_definitions(__ZEDA_USE_LIBXML true)
 
@@ -316,15 +320,6 @@ set_target_properties( alloc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
 )
 
-add_executable( ordinal_str_test
-  zeda/example/misc/ordinal_str_test.c
-)
-target_include_directories( ordinal_str_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( ordinal_str_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( ordinal_str_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
-)
-
 
 set(ZEDA_EXAMPLE_OPTION_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/option"
@@ -360,29 +355,6 @@ target_include_directories( randi_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( randi_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
 set_target_properties( randi_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_RAND_OUTPUT_DIR}
-)
-
-
-set(ZEDA_EXAMPLE_STREAM_OUTPUT_DIR
-  "${ZEDA_EXAMPLE_OUTPUT_DIR}/stream"
-)
-
-add_executable( csv_test
-  zeda/example/stream/csv_test.c
-)
-target_include_directories( csv_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( csv_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( csv_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STREAM_OUTPUT_DIR}
-)
-
-add_executable( stream_test
-  zeda/example/stream/stream_test.c
-)
-target_include_directories( stream_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( stream_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( stream_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STREAM_OUTPUT_DIR}
 )
 
 
@@ -445,15 +417,6 @@ add_executable( ztk_eval_test
 target_include_directories( ztk_eval_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( ztk_eval_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
 set_target_properties( ztk_eval_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
-)
-
-add_executable( ztk_parse_test
-  zeda/example/ztk/ztk_parse_test.c
-)
-target_include_directories( ztk_parse_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( ztk_parse_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( ztk_parse_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
 )
 
@@ -549,7 +512,7 @@ set(ZM_SOURCES
 )
 
 # TODO change from STATIC for DLL
-add_library(zm STATIC 
+add_library(zm STATIC
   ${ZM_SOURCES}
 )
 
@@ -563,7 +526,7 @@ set(ZM_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(zm PUBLIC ${ZM_INCLUDE_DIR})
@@ -1004,15 +967,6 @@ set_target_properties( graph_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
 )
 
-add_executable( rrt_esc_test
-  zm/example/graph/rrt_esc_test.c
-)
-target_include_directories( rrt_esc_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( rrt_esc_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( rrt_esc_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
-)
-
 add_executable( rrt_test
   zm/example/graph/rrt_test.c
 )
@@ -1288,14 +1242,6 @@ set_target_properties( gmm_lsm_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
 )
 
-add_executable( gmm_test
-  zm/example/mca/gmm_test.c
-)
-target_include_directories( gmm_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( gmm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( gmm_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
-)
 
 add_executable( kmeans_test
   zm/example/mca/kmeans_test.c
@@ -2302,7 +2248,7 @@ set(NEUZ_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(neuz PUBLIC ${NEUZ_INCLUDE_DIR})
@@ -2422,7 +2368,7 @@ set(DZCO_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(dzco PUBLIC ${DZCO_INCLUDE_DIR})
@@ -2914,6 +2860,7 @@ set(ZEO_SOURCES
   zeo/src/zeo_render_texture.c
   zeo/src/zeo_shape3d.c
   zeo/src/zeo_shape3d_box.c
+  zeo/src/zeo_shape3d_capsule.c
   zeo/src/zeo_shape3d_cone.c
   zeo/src/zeo_shape3d_cyl.c
   zeo/src/zeo_shape3d_ecyl.c
@@ -2948,7 +2895,7 @@ set(ZEO_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(zeo PUBLIC ${ZEO_INCLUDE_DIR})
@@ -4146,7 +4093,7 @@ set_target_properties( voronoi2d_test PROPERTIES
 
 # roki ------------------------------------------------------------------
 
-set(ROKI_SOURCES 
+set(ROKI_SOURCES
   roki/src/rk_abi.c
   roki/src/rk_body.c
   roki/src/rk_cd.c
@@ -4194,7 +4141,7 @@ set(ROKI_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(roki PUBLIC ${ROKI_INCLUDE_DIR})
@@ -4465,7 +4412,6 @@ add_custom_command(TARGET body_am_test
   ${ROKI_EXAMPLE_OUTPUT_DIR}/
 )
 
-
 add_executable( body_com_test
   roki/example/body/body_com_test.c
 )
@@ -4482,7 +4428,6 @@ set_target_properties( body_wrench_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-
 add_executable( combine_test
   roki/example/body/combine_test.c
 )
@@ -4490,7 +4435,6 @@ target_link_libraries( combine_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( combine_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
-
 
 add_executable( body_contig_test
   roki/example/body/contig_test.c
@@ -4532,7 +4476,6 @@ set_target_properties( org_inertia_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-
 add_executable( cd_test
   roki/example/cd/cd_test.c
 )
@@ -4540,7 +4483,6 @@ target_link_libraries( cd_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( cd_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
-
 
 add_executable( chain_bball_test
   roki/example/chain/bball_test.c
@@ -4557,7 +4499,6 @@ target_link_libraries( chain2vert_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( chain2vert_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
-
 
 add_executable( com_vel_spher_test
   roki/example/chain/com_vel_spher_test.c
@@ -4599,14 +4540,6 @@ set_target_properties( fd_id_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( fk_cylin_test
-  roki/example/chain/fk_cylin_test.c
-)
-target_link_libraries( fk_cylin_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( fk_cylin_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( fk_float_test
   roki/example/chain/fk_float_test.c
 )
@@ -4615,43 +4548,11 @@ set_target_properties( fk_float_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( fk_hooke_test
-  roki/example/chain/fk_hooke_test.c
-)
-target_link_libraries( fk_hooke_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( fk_hooke_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( fk_spher_test
-  roki/example/chain/fk_spher_test.c
-)
-target_link_libraries( fk_spher_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( fk_spher_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( chain_gravity_test
   roki/example/chain/gravity_test.c
 )
 target_link_libraries( chain_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( chain_gravity_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( id_cylin_test
-  roki/example/chain/id_cylin_test.c
-)
-target_link_libraries( id_cylin_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( id_cylin_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( id_hooke_test
-  roki/example/chain/id_hooke_test.c
-)
-target_link_libraries( id_hooke_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( id_hooke_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
@@ -4703,7 +4604,6 @@ set_target_properties( chain_ztk_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-
 add_executable( contact_ztk_test
   roki/example/contact/ztk_test.c
 )
@@ -4717,7 +4617,6 @@ add_custom_command(TARGET contact_ztk_test
   $<TARGET_FILE_DIR:contact_ztk_test>/
 )
 
-
 add_executable( force_ik_test
   roki/example/ik/force_ik_test.c
 )
@@ -4726,22 +4625,11 @@ set_target_properties( force_ik_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( humanoid_ik_test
-  roki/example/ik/humanoid_ik_test.c
+add_custom_command(TARGET force_ik_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
+  $<TARGET_FILE_DIR:force_ik_test>/
 )
-target_link_libraries( humanoid_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( humanoid_ik_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( ik_seq_test
-  roki/example/ik/ik_seq_test.c
-)
-target_link_libraries( ik_seq_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( ik_seq_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 
 add_executable( puma_acc_track_test
   roki/example/ik/puma_acc_track_test.c
@@ -4775,34 +4663,6 @@ set_target_properties( puma_vel_track_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-
-add_executable( scan_conf_test
-  roki/example/ik/scan_conf_test.c
-)
-target_link_libraries( scan_conf_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( scan_conf_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-add_custom_command(TARGET scan_conf_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
-  $<TARGET_FILE_DIR:scan_conf_test>/
-)
-
-add_executable( ik_ztk_test
-  roki/example/ik/ztk_test.c
-)
-target_link_libraries( ik_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( ik_ztk_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_custom_command(TARGET ik_ztk_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
-  $<TARGET_FILE_DIR:ik_ztk_test>/
-)
-
 add_executable( manip_test
   roki/example/jacobi/manip_test.c
 )
@@ -4818,7 +4678,6 @@ target_link_libraries( sv_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( sv_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
-
 
 add_executable( resttorque_test
   roki/example/joint/resttorque_test.c
@@ -4849,6 +4708,7 @@ set(ROKI-FD_SOURCES
   roki-fd/src/rkfd_util.c
   roki-fd/src/rkfd_vert.c
   roki-fd/src/rkfd_volume.c
+  roki-fd/src/rkfd_opt_qp.c
 )
 
 # TODO change from STATIC for DLL
@@ -4868,7 +4728,7 @@ set(ROKI-FD_INCLUDE_DIR
   ${PROJECT_SOURCE_DIR}/zm/include
   ${PROJECT_SOURCE_DIR}/zeda/include
   ${LIBXML2_XMLCONF_WORKING_DIR}
-  ${PROJECT_SOURCE_DIR}/libxml2/include
+  ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
 target_include_directories(roki-fd PUBLIC ${ROKI-FD_INCLUDE_DIR})
