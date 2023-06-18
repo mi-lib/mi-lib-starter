@@ -1,16 +1,22 @@
 #
 cmake_minimum_required (VERSION 3.16)
 
-project ("mi-lib-starter" LANGUAGES CXX C)
+project ("mi-lib-starter" LANGUAGES C)
 
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+if (MSVC)
+  #set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+  unset(CMAKE_C_FLAGS)
+  unset(CMAKE_C_FLAGS_DEBUG)
+  unset(CMAKE_C_FLAGS_RELEASE)
+  unset(CMAKE_CXX_FLAGS)
+  unset(CMAKE_CXX_FLAGS_DEBUG)
+  unset(CMAKE_CXX_FLAGS_RELEASE)
+endif()
 
 set(EXECUTABLE_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/bin")
 set(LIBRARY_OUTPUT_PATH "${PROJECT_SOURCE_DIR}/build/lib")
 set(PROJECT_BINARY_DIR "${PROJECT_SOURCE_DIR}/build/bin")
 set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build/bin")
-set(CMAKE_CXX_STANDARD 17)
-
 
 # Switch build type
 if(NOT CMAKE_BUILD_TYPE)
@@ -38,7 +44,7 @@ endif()
 # mi-lib ----------------------------------------------------------------------
 
 # TODO remove for DLL
-add_compile_definitions("__STATIC_BUILD")
+#add_compile_definitions("__STATIC_BUILD")
 
 
 # zeda ----------------------------------------------------------------------
@@ -51,14 +57,22 @@ file(GLOB ZEDA_HEADERS
   zeda/include/zeda/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${ZEDA_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(zeda STATIC
+add_library(zeda SHARED
   ${ZEDA_SOURCES}
   ${ZEDA_HEADERS}
 )
+target_compile_definitions(zeda PUBLIC __BUILD_DLL__)
+target_compile_definitions(zeda PRIVATE __ZEDA_BUILD_DLL__)
+
+# set_target_properties(zeda PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(zeda PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(zeda PUBLIC /std:c++17)
   target_compile_options(zeda PUBLIC /std:c17)
   target_compile_definitions(zeda PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -429,14 +443,22 @@ file(GLOB ZM_HEADERS
   zm/include/zm/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${ZM_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(zm STATIC
+add_library(zm SHARED
   ${ZM_SOURCES}
   ${ZM_HEADERS}
 )
+target_compile_definitions(zm PUBLIC __BUILD_DLL__)
+target_compile_definitions(zm PRIVATE __ZM_BUILD_DLL__)
+
+# set_target_properties(zm PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(zm PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(zm PUBLIC /std:c++17)
   target_compile_options(zm PUBLIC /std:c17)
   target_compile_definitions(zm PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -2155,14 +2177,20 @@ file(GLOB NEUZ_HEADERS
   neuz/include/neuz/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${NEUZ_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(neuz STATIC 
+add_library(neuz SHARED 
   ${NEUZ_SOURCES}
   ${NEUZ_HEADERS}
 )
 
+# set_target_properties(neuz PROPERTIES CXX_STANDARD 17)
+
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(neuz PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(neuz PUBLIC /std:c++17)
   target_compile_options(neuz PUBLIC /std:c17)
   target_compile_definitions(neuz PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -2196,6 +2224,9 @@ set(NEUZ_EXAMPLE_OUTPUT_DIR
 add_executable( activator_test
   neuz/example/activator_test.c
 )
+target_compile_definitions(neuz PUBLIC __BUILD_DLL__)
+target_compile_definitions(neuz PRIVATE __NEUZ_BUILD_DLL__)
+
 target_include_directories( activator_test PUBLIC ${NEUZ_INCLUDE_DIR} )
 target_link_libraries( activator_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
 set_target_properties( activator_test PROPERTIES
@@ -2267,14 +2298,22 @@ file(GLOB DZCO_HEADERS
   dzco/include/dzco/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${DZCO_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(dzco STATIC 
+add_library(dzco SHARED 
   ${DZCO_SOURCES}
   ${DZCO_HEADERS}
 )
+target_compile_definitions(dzco PUBLIC __BUILD_DLL__)
+target_compile_definitions(dzco PRIVATE __DZCO_BUILD_DLL__)
+
+# set_target_properties(dzco PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(dzco PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(dzco PUBLIC /std:c++17)
   target_compile_options(dzco PUBLIC /std:c17)
   target_compile_definitions(dzco PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -2742,14 +2781,22 @@ file(GLOB ZEO_HEADERS
   zeo/include/zeo/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${ZEO_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(zeo STATIC 
+add_library(zeo SHARED 
   ${ZEO_SOURCES}
   ${ZEO_HEADERS}
 )
+target_compile_definitions(zeo PUBLIC __BUILD_DLL__)
+target_compile_definitions(zeo PRIVATE __ZEO_BUILD_DLL__)
+
+# set_target_properties(zeo PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(zeo PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(zeo PUBLIC /std:c++17)
   target_compile_options(zeo PUBLIC /std:c17)
   target_compile_definitions(zeo PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -3965,16 +4012,22 @@ file(GLOB ROKI_HEADERS
   roki/include/roki/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${ROKI_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(roki STATIC 
+add_library(roki SHARED 
   ${ROKI_SOURCES}
   ${ROKI_HEADERS}
 )
-target_compile_definitions(roki PUBLIC __BUILD_DLL_)
-target_compile_definitions(roki PUBLIC __ROKI_BUILD_DLL_)
+target_compile_definitions(roki PUBLIC __BUILD_DLL__)
+target_compile_definitions(roki PRIVATE __ROKI_BUILD_DLL__)
+
+# set_target_properties(roki PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(roki PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(roki PUBLIC /std:c++17)
   target_compile_options(roki PUBLIC /std:c17)
   target_compile_definitions(roki PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
@@ -4510,23 +4563,32 @@ set_target_properties( revol_dyn_test PROPERTIES
 
 # roki-fd ------------------------------------------------------------------
 
-file(GLOB ROKI-FD_SOURCES
+file(GLOB ROKI_FD_SOURCES
   roki-fd/src/?*.c
 )
 
-file(GLOB ROKI-FD_HEADERS
+file(GLOB ROKI_FD_HEADERS
   roki-fd/include/roki_fd/?*.h
 )
 
+# SET_SOURCE_FILES_PROPERTIES(${ROKI_FD_SOURCES} PROPERTIES LANGUAGE CXX)
+
 # TODO change from STATIC for DLL
-add_library(roki-fd STATIC 
-  ${ROKI-FD_SOURCES}
-  ${ROKI-FD_HEADERS}
+add_library(roki-fd SHARED 
+  ${ROKI_FD_SOURCES}
+  ${ROKI_FD_HEADERS}
 )
+target_compile_definitions(roki-fd PUBLIC __BUILD_DLL__)
+target_compile_definitions(roki-fd PRIVATE __ROKI_FD_BUILD_DLL__)
+
+# set_target_properties(roki-fd PROPERTIES CXX_STANDARD 17)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
+  # target_compile_options(roki-fd PUBLIC "/Zc:__cplusplus")
+  # target_compile_options(roki-fd PUBLIC /std:c++17)
   target_compile_options(roki-fd PUBLIC /std:c17)
+  target_compile_definitions(roki-fd PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
 set(ROKI-FD_INCLUDE_DIR
