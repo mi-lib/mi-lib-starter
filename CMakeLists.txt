@@ -4296,14 +4296,6 @@ set_target_properties( body_gravity_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( inertialellipsoid_test
-  roki/example/body/inertialellipsoid_test.c
-)
-target_link_libraries( inertialellipsoid_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( inertialellipsoid_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( mp_xform_test
   roki/example/body/mp_xform_test.c
 )
@@ -4357,14 +4349,6 @@ add_executable( com_vel_test
 )
 target_link_libraries( com_vel_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( com_vel_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( conf2joint_test
-  roki/example/chain/conf2joint_test.c
-)
-target_link_libraries( conf2joint_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( conf2joint_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
@@ -4424,27 +4408,11 @@ set_target_properties( joint_vec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( scanshape_test
-  roki/example/chain/scanshape_test.c
-)
-target_link_libraries( scanshape_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( scanshape_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( zmp_test
   roki/example/chain/zmp_test.c
 )
 target_link_libraries( zmp_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( zmp_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( chain_ztk_test
-  roki/example/chain/ztk_test.c
-)
-target_link_libraries( chain_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( chain_ztk_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
