@@ -77,7 +77,7 @@ else()
   add_subdirectory(${PROJECT_SOURCE_DIR}/libxml2)
 
   set(LIBXML2_INCLUDE_DIRECTORY
-    ${XML2_INCLUDE_DIR}/libxml2/include
+    ${PROJECT_SOURCE_DIR}/libxml2/include
   )
 
 endif()

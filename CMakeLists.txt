@@ -1,4 +1,4 @@
-﻿#
+#
 cmake_minimum_required (VERSION 3.16)
 
 project ("mi-lib-starter" LANGUAGES CXX C)
@@ -28,8 +28,10 @@ find_package(LibXml2 REQUIRED)
 
 if(TARGET LibXml2)
   message(STATUS "target LibXml2 is found.")
+  message(STATUS "LIBXML2_INCLUDE_DIRECTORY = ${LIBXML2_INCLUDE_DIRECTORY}")
 else()
   message(FATAL_ERROR "target LibXml2 is not found.")
+  message(STATUS "LIBXML2_INCLUDE_DIRECTORY = ${LIBXML2_INCLUDE_DIRECTORY}")
   return()
 endif()
 
@@ -41,26 +43,18 @@ add_compile_definitions("__STATIC_BUILD")
 
 # zeda ----------------------------------------------------------------------
 
-set(ZEDA_SOURCES
-  zeda/src/zeda_array.c
-  zeda/src/zeda_binfile.c
-  zeda/src/zeda_bit.c
-  zeda/src/zeda_csv.c
-  zeda/src/zeda_index.c
-  zeda/src/zeda_list.c
-  zeda/src/zeda_misc.c
-  zeda/src/zeda_option.c
-  zeda/src/zeda_rand.c
-  zeda/src/zeda_rrtab.c
-  zeda/src/zeda_string.c
-  zeda/src/zeda_strlist.c
-  zeda/src/zeda_xml.c
-  zeda/src/zeda_ztk.c
+file(GLOB ZEDA_SOURCES
+  zeda/src/?*.c
+)
+
+file(GLOB ZEDA_HEADERS
+  zeda/include/zeda/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(zeda STATIC
   ${ZEDA_SOURCES}
+  ${ZEDA_HEADERS}
 )
 
 if (MSVC)
@@ -78,8 +72,12 @@ set(ZEDA_INCLUDE_DIR
 target_include_directories(zeda PUBLIC ${ZEDA_INCLUDE_DIR})
 
 add_dependencies(zeda LibXml2)
-find_library(MATH_LIBRARY m)
-target_link_libraries(zeda LibXml2 ${MATH_LIBRARY})
+target_link_libraries(zeda LibXml2)
+
+if (NOT MSVC)
+  find_library(MATH_LIBRARY m)
+  target_link_libraries(zeda ${MATH_LIBRARY})
+endif()
 
 add_compile_definitions(__ZEDA_USE_LIBXML true)
 
@@ -423,97 +421,18 @@ set_target_properties( ztk_eval_test PROPERTIES
 
 # zm ----------------------------------------------------------------------
 
-set(ZM_SOURCES
-  zm/src/zm_cmat.c
-  zm/src/zm_complex.c
-  zm/src/zm_complex_arith.c
-  zm/src/zm_complex_pe.c
-  zm/src/zm_cvec.c
-  zm/src/zm_data.c
-  zm/src/zm_data_fft.c
-  zm/src/zm_data_ransac.c
-  zm/src/zm_eig.c
-  zm/src/zm_fourier.c
-  zm/src/zm_graph.c
-  zm/src/zm_graph_search.c
-  zm/src/zm_ieee.c
-  zm/src/zm_intg.c
-  zm/src/zm_ip.c
-  zm/src/zm_ip_akima.c
-  zm/src/zm_ip_chebyshev.c
-  zm/src/zm_ip_clothoid.c
-  zm/src/zm_ip_lagrange.c
-  zm/src/zm_ip_lin.c
-  zm/src/zm_ip_pchip.c
-  zm/src/zm_ip_pex.c
-  zm/src/zm_ip_spline.c
-  zm/src/zm_le.c
-  zm/src/zm_le_gen.c
-  zm/src/zm_le_lq.c
-  zm/src/zm_le_lu.c
-  zm/src/zm_le_lyapnov.c
-  zm/src/zm_le_minv.c
-  zm/src/zm_le_mpinv.c
-  zm/src/zm_le_pivot.c
-  zm/src/zm_le_tridiag.c
-  zm/src/zm_mat.c
-  zm/src/zm_mca.c
-  zm/src/zm_mca_cluster.c
-  zm/src/zm_mca_gmm.c
-  zm/src/zm_misc.c
-  zm/src/zm_nle_dm.c
-  zm/src/zm_nle_se.c
-  zm/src/zm_nle_ss.c
-  zm/src/zm_nurbs.c
-  zm/src/zm_ode.c
-  zm/src/zm_ode2.c
-  zm/src/zm_ode_adams.c
-  zm/src/zm_ode_beuler.c
-  zm/src/zm_ode_bk4.c
-  zm/src/zm_ode_dc.c
-  zm/src/zm_ode_erk.c
-  zm/src/zm_ode_euler.c
-  zm/src/zm_ode_gear.c
-  zm/src/zm_ode_heun.c
-  zm/src/zm_ode_rk4.c
-  zm/src/zm_ode_rkg.c
-  zm/src/zm_opt_direct.c
-  zm/src/zm_opt_dm.c
-  zm/src/zm_opt_ga.c
-  zm/src/zm_opt_lcp_ip.c
-  zm/src/zm_opt_lcp_lemke.c
-  zm/src/zm_opt_line.c
-  zm/src/zm_opt_lp_pdip.c
-  zm/src/zm_opt_lp_simplex.c
-  zm/src/zm_opt_lp_stdcnv.c
-  zm/src/zm_opt_nm.c
-  zm/src/zm_opt_pso.c
-  zm/src/zm_opt_qp.c
-  zm/src/zm_oscil_kura.c
-  zm/src/zm_oscil_vdp.c
-  zm/src/zm_parse.c
-  zm/src/zm_pex.c
-  zm/src/zm_pex_eq.c
-  zm/src/zm_rand.c
-  zm/src/zm_raw_mat.c
-  zm/src/zm_raw_vec.c
-  zm/src/zm_rrt.c
-  zm/src/zm_seq.c
-  zm/src/zm_sf_bessel.c
-  zm/src/zm_sf_erf.c
-  zm/src/zm_sf_fresnel.c
-  zm/src/zm_sf_gamma.c
-  zm/src/zm_stat.c
-  zm/src/zm_vec.c
-  zm/src/zm_vec_array.c
-  zm/src/zm_vec_list.c
-  zm/src/zm_vec_ring.c
-  zm/src/zm_vec_tree.c
+file(GLOB ZM_SOURCES 
+  zm/src/?*.c
+)
+
+file(GLOB ZM_HEADERS
+  zm/include/zm/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(zm STATIC
   ${ZM_SOURCES}
+  ${ZM_HEADERS}
 )
 
 if (MSVC)
@@ -2227,14 +2146,19 @@ set_target_properties( vec_sort_test PROPERTIES
 
 # neuz ----------------------------------------------------------------------
 
-set(NEUZ_SOURCES
+file(GLOB NEUZ_SOURCES
   neuz/src/neuz_activator.c
   neuz/src/neuz_neuron.c
+)
+
+file(GLOB NEUZ_HEADERS
+  neuz/include/neuz/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(neuz STATIC 
   ${NEUZ_SOURCES}
+  ${NEUZ_HEADERS}
 )
 
 if (MSVC)
@@ -2333,28 +2257,20 @@ add_custom_command(TARGET xor_test
   $<TARGET_FILE_DIR:xor_test>/
 )
 
-
 # dzco ----------------------------------------------------------------------
 
-set(DZCO_SOURCES
-  dzco/src/dz_ident_lag.c
-  dzco/src/dz_lin.c
-  dzco/src/dz_sys.c
-  dzco/src/dz_sys_fg.c
-  dzco/src/dz_sys_filt_bw.c
-  dzco/src/dz_sys_filt_maf.c
-  dzco/src/dz_sys_lag.c
-  dzco/src/dz_sys_lin.c
-  dzco/src/dz_sys_misc.c
-  dzco/src/dz_sys_pid.c
-  dzco/src/dz_sys_tf.c
-  dzco/src/dz_tf.c
-  dzco/src/dz_tf_fr.c
+file(GLOB DZCO_SOURCES
+  dzco/src/?*.c
+)
+
+file(GLOB DZCO_HEADERS
+  dzco/include/dzco/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(dzco STATIC 
   ${DZCO_SOURCES}
+  ${DZCO_HEADERS}
 )
 
 if (MSVC)
@@ -2818,70 +2734,18 @@ add_custom_command(TARGET tf_test_example
 
 # zeo ----------------------------------------------------------------------
 
-set(ZEO_SOURCES 
-  zeo/src/zeo_brep.c
-  zeo/src/zeo_brep_bool.c
-  zeo/src/zeo_brep_trunc.c
-  zeo/src/zeo_bv2d_aabb.c
-  zeo/src/zeo_bv2d_bdisk.c
-  zeo/src/zeo_bv2d_ch.c
-  zeo/src/zeo_bv3d_aabb.c
-  zeo/src/zeo_bv3d_bball.c
-  zeo/src/zeo_bv3d_ch.c
-  zeo/src/zeo_bv3d_obb.c
-  zeo/src/zeo_col.c
-  zeo/src/zeo_col_box.c
-  zeo/src/zeo_col_gjk.c
-  zeo/src/zeo_col_minkowski.c
-  zeo/src/zeo_col_mpr.c
-  zeo/src/zeo_col_ph.c
-  zeo/src/zeo_elem2d.c
-  zeo/src/zeo_elem3d.c
-  zeo/src/zeo_elem3d_list.c
-  zeo/src/zeo_ep.c
-  zeo/src/zeo_frame3d.c
-  zeo/src/zeo_map.c
-  zeo/src/zeo_mapnet.c
-  zeo/src/zeo_map_terra.c
-  zeo/src/zeo_mat2d.c
-  zeo/src/zeo_mat3d.c
-  zeo/src/zeo_mat6d.c
-  zeo/src/zeo_misc.c
-  zeo/src/zeo_mshape3d.c
-  zeo/src/zeo_nurbs.c
-  zeo/src/zeo_ph.c
-  zeo/src/zeo_ph_dae.c
-  zeo/src/zeo_ph_obj.c
-  zeo/src/zeo_ph_ply.c
-  zeo/src/zeo_ph_stl.c
-  zeo/src/zeo_pointcloud.c
-  zeo/src/zeo_render_color.c
-  zeo/src/zeo_render_optic.c
-  zeo/src/zeo_render_texture.c
-  zeo/src/zeo_shape3d.c
-  zeo/src/zeo_shape3d_box.c
-  zeo/src/zeo_shape3d_capsule.c
-  zeo/src/zeo_shape3d_cone.c
-  zeo/src/zeo_shape3d_cyl.c
-  zeo/src/zeo_shape3d_ecyl.c
-  zeo/src/zeo_shape3d_ellips.c
-  zeo/src/zeo_shape3d_list.c
-  zeo/src/zeo_shape3d_nurbs.c
-  zeo/src/zeo_shape3d_ph.c
-  zeo/src/zeo_shape3d_sphere.c
-  zeo/src/zeo_vec2d.c
-  zeo/src/zeo_vec2d_list.c
-  zeo/src/zeo_vec3d.c
-  zeo/src/zeo_vec3d_list.c
-  zeo/src/zeo_vec3d_pca.c
-  zeo/src/zeo_vec3d_tree.c
-  zeo/src/zeo_vec6d.c
-  zeo/src/zeo_voronoi2d.c
+file(GLOB ZEO_SOURCES
+  zeo/src/?*.c
+)
+
+file(GLOB ZEO_HEADERS
+  zeo/include/zeo/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(zeo STATIC 
   ${ZEO_SOURCES}
+  ${ZEO_HEADERS}
 )
 
 if (MSVC)
@@ -4093,41 +3957,21 @@ set_target_properties( voronoi2d_test PROPERTIES
 
 # roki ------------------------------------------------------------------
 
-set(ROKI_SOURCES
-  roki/src/rk_abi.c
-  roki/src/rk_body.c
-  roki/src/rk_cd.c
-  roki/src/rk_cd_brep.c
-  roki/src/rk_cd_brep_trunc.c
-  roki/src/rk_chain.c
-  roki/src/rk_contact.c
-  roki/src/rk_force.c
-  roki/src/rk_g3d.c
-  roki/src/rk_ik.c
-  roki/src/rk_ik_cell.c
-  roki/src/rk_ik_imp.c
-  roki/src/rk_ik_seq.c
-  roki/src/rk_jacobi.c
-  roki/src/rk_joint.c
-  roki/src/rk_joint_brfloat.c
-  roki/src/rk_joint_cylin.c
-  roki/src/rk_joint_fixed.c
-  roki/src/rk_joint_float.c
-  roki/src/rk_joint_hooke.c
-  roki/src/rk_joint_prism.c
-  roki/src/rk_joint_revol.c
-  roki/src/rk_joint_spher.c
-  roki/src/rk_link.c
-  roki/src/rk_motor.c
-  roki/src/rk_motor_dc.c
-  roki/src/rk_motor_none.c
-  roki/src/rk_motor_trq.c
+file(GLOB ROKI_SOURCES
+  roki/src/?*.c
+)
+
+file(GLOB ROKI_HEADERS
+  roki/include/roki/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(roki STATIC 
   ${ROKI_SOURCES}
+  ${ROKI_HEADERS}
 )
+target_compile_definitions(roki PUBLIC __BUILD_DLL_)
+target_compile_definitions(roki PUBLIC __ROKI_BUILD_DLL_)
 
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
@@ -4698,22 +4542,18 @@ set_target_properties( revol_dyn_test PROPERTIES
 
 # roki-fd ------------------------------------------------------------------
 
-set(ROKI-FD_SOURCES
-  roki-fd/src/rkfd_cd.c
-  roki-fd/src/rkfd_mlcp.c
-  roki-fd/src/rkfd_penalty.c
-  roki-fd/src/rkfd_property.c
-  roki-fd/src/rkfd_sim.c
-  roki-fd/src/rkfd_solver.c
-  roki-fd/src/rkfd_util.c
-  roki-fd/src/rkfd_vert.c
-  roki-fd/src/rkfd_volume.c
-  roki-fd/src/rkfd_opt_qp.c
+file(GLOB ROKI-FD_SOURCES
+  roki-fd/src/?*.c
+)
+
+file(GLOB ROKI-FD_HEADERS
+  roki-fd/include/roki_fd/?*.h
 )
 
 # TODO change from STATIC for DLL
 add_library(roki-fd STATIC 
   ${ROKI-FD_SOURCES}
+  ${ROKI-FD_HEADERS}
 )
 
 if (MSVC)
@@ -4817,3 +4657,4 @@ target_link_libraries(mi-lib-starter_test PUBLIC dzco)
 target_link_libraries(mi-lib-starter_test PUBLIC zm)
 target_link_libraries(mi-lib-starter_test PUBLIC zeda)
 target_link_libraries(mi-lib-starter_test PUBLIC LibXml2)
+
