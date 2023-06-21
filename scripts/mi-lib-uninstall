@@ -4,6 +4,8 @@ echo "uninstall libraries..."
 
 # read variables in config file.
 . ./config
+## read a list of libraries to uninstall.
+. ./liblist
 
 # uninstall Debian packages
 if [ "$1" = "deb" ]; then
