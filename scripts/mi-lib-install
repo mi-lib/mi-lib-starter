@@ -49,6 +49,8 @@ compile_lib(){
 
 ## read variables in config file.
 . ./config
+## read a list of libraries to build.
+. ./liblist
 
 if [ "$1" = "install-only" ]; then
     for lib in ${LIBS}
