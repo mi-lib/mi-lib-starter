@@ -100,6 +100,10 @@ If your code test.c uses RoKi, for example, it will be compiled into a.out by
 % gcc `roki-config --cflags` test.c `roki-config -l`
 ```
 
+## others
+
+If you want to use CMake build tool, Try ["How to cmake build mi-lib"](cmakes/README_cmake.md) which is under testing.
+
 --------------------------------------------------------------------------------
 ## Contact
 
