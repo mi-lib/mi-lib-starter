@@ -33,11 +33,11 @@ find_library(XML2_LIBRARY
 mark_as_advanced(XML2_INCLUDE_DIR XML2_LIBRARY)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(xml2
+find_package_handle_standard_args(XML2
   REQUIRED_VARS
     XML2_INCLUDE_DIR
     XML2_LIBRARY
-  )
+)
 
 # if Found xml2 And if name "LibXml2" is not defined
 if(XML2_FOUND AND NOT TARGET LibXml2)
@@ -70,11 +70,17 @@ else()
   set(LIBXML2_WITH_LZMA OFF)
   set(LIBXML2_WITH_PYTHON OFF)
   set(LIBXML2_WITH_ZLIB OFF)
-  set(BUILD_SHARED_LIBS OFF)
+  set(BUILD_SHARED_LIBS ON)
 
   # source package
   # (LibXml2 is Defined at the libxml2/CMakeLists.txt)
   add_subdirectory(${PROJECT_SOURCE_DIR}/libxml2)
+
+  # target_compile_options(
+  #   LibXml2 PUBLIC
+  #    -Wno-deprecated-declarations
+  #    -Wno-format-extra-args
+  # )
 
   set(LIBXML2_INCLUDE_DIRECTORY
     ${PROJECT_SOURCE_DIR}/libxml2/include

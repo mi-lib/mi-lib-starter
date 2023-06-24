@@ -4,12 +4,24 @@
       "name": "x64-Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "inheritEnvironments": [ "clang_cl_x64_x64" ],
       "buildRoot": "${projectDir}\\build\\${name}",
       "installRoot": "${projectDir}\\install\\${name}",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "memo_MSVC_default_compiler",
+          "value": "\"inheritEnvironments\": [ \"msvc_x64_x64\" ]",
+          "type": "STRING"
+        },
+        {
+          "name": "memo_llvm_clang_compiler",
+          "value": "\"inheritEnvironments\": [ \"clang_cl_x64_x64\" ]",
+          "type": "STRING"
+        }
+      ]
     }
   ]
 }
