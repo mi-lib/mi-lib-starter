@@ -2,6 +2,8 @@
 
 # read variables in config file.
 . ./config
+## read a list of libraries to build.
+. ./liblist
 
 cc=
 std=

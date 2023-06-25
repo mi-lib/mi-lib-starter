@@ -47,6 +47,20 @@ compile_lib(){
 
 # main process
 
+## read variables in config file.
+. ./config
+## read a list of libraries to build.
+. ./liblist
+
+if [ "$1" = "install-only" ]; then
+    for lib in ${LIBS}
+    do
+	cd ${lib}; ${SUDO} make install; cd -
+    done
+    echo "completed."
+    exit 0
+fi
+
 echo "installing required packages..."
 
 ## get apt packages
@@ -54,9 +68,6 @@ echo "installing required packages..."
 sudo apt install git wget unzip rename make gcc fakeroot
 ### (for ZEDA & X11 & GL)
 sudo apt install libxml2-dev xorg-dev libtiff-dev libjpeg-dev freeglut3-dev
-
-## read variables in config file.
-. ./config
 
 ## install libraries from Debian packages
 if [ "$1" = "deb" ]; then
