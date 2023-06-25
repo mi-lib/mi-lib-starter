@@ -1090,15 +1090,6 @@ set_target_properties( matdecomp_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
 
-add_executable( mpinv_mul_test
-  zm/example/le/mpinv_mul_test.c
-)
-target_include_directories( mpinv_mul_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( mpinv_mul_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( mpinv_mul_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
 add_executable( mpinv_test
   zm/example/le/mpinv_test.c
 )
@@ -1695,30 +1686,12 @@ set(ZM_EXAMPLE_PEX_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/pex"
 )
 
-add_executable( pex_cval_test
-  zm/example/pex/pex_cval_test.c
-)
-target_include_directories( pex_cval_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( pex_cval_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( pex_cval_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
-)
-
 add_executable( pex_diff_test
   zm/example/pex/pex_diff_test.c
 )
 target_include_directories( pex_diff_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( pex_diff_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( pex_diff_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
-)
-
-add_executable( pex_div_test
-  zm/example/pex/pex_div_test.c
-)
-target_include_directories( pex_div_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( pex_div_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( pex_div_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_PEX_OUTPUT_DIR}
 )
 
