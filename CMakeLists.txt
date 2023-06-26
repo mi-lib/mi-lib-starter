@@ -191,6 +191,16 @@ set_target_properties( option_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
 )
 
+add_executable( rand_test_zeda
+  zeda/test/rand_test.c
+)
+target_include_directories( rand_test_zeda PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( rand_test_zeda PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( rand_test_zeda PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+
 add_executable( ring_test
   zeda/test/ring_test.c
 )
@@ -1273,14 +1283,14 @@ set_target_properties( dm_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
 )
 
-add_executable( lm_test
-  zm/example/nle/lm_test.c
-)
-target_include_directories( lm_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( lm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( lm_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
-)
+# add_executable( lm_test
+#   zm/example/nle/lm_test.c
+# )
+# target_include_directories( lm_test PUBLIC ${ZM_INCLUDE_DIR} )
+# target_link_libraries( lm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+# set_target_properties( lm_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
+# )
 
 add_executable( single_test
   zm/example/nle/single_test.c
@@ -1608,14 +1618,14 @@ set_target_properties( opt_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
 )
 
-add_executable( qp_asm_test
-  zm/example/opt/qp_asm_test.c
-)
-target_include_directories( qp_asm_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( qp_asm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( qp_asm_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
-)
+# add_executable( qp_asm_test
+#   zm/example/opt/qp_asm_test.c
+# )
+# target_include_directories( qp_asm_test PUBLIC ${ZM_INCLUDE_DIR} )
+# target_link_libraries( qp_asm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+# set_target_properties( qp_asm_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
+# )
 
 add_executable( qp_benchmark_test
   zm/example/opt/qp_benchmark_test.c
