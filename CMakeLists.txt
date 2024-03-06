@@ -4597,17 +4597,21 @@ set_target_properties( boxdrop_test PROPERTIES
 file(GLOB ROKI_GL_SOURCES
   roki-gl/src/?*.c
 )
+list(FILTER ROKI_GL_SOURCES EXCLUDE REGEX ".*roki_glx.c$")
+list(FILTER ROKI_GL_SOURCES EXCLUDE REGEX ".*roki_glut.c$")
 
 file(GLOB ROKI_GL_HEADERS
   roki-gl/include/roki_gl/?*.h
 )
+list(FILTER ROKI_GL_HEADERS EXCLUDE REGEX ".*roki_glx.h$")
+list(FILTER ROKI_GL_HEADERS EXCLUDE REGEX ".*roki_glut.h$")
 
 add_library(roki-gl SHARED 
   ${ROKI_GL_SOURCES}
   ${ROKI_GL_HEADERS}
 )
 
-target_compile_definitions(roki-gl PRIVATE __ROKI_BUILD_DLL__)
+target_compile_definitions(roki-gl PRIVATE __ROKI_GL_BUILD_DLL__)
 
 # set_target_properties(roki-gl PROPERTIES CXX_STANDARD 17)
 
@@ -4626,7 +4630,7 @@ set(ROKI_GL_INCLUDE_DIR
   ${LIBXML2_INCLUDE_DIRECTORY}
 )
 
-target_include_directories(roki-gl PUBLIC ${ROKI_INCLUDE_DIR})
+target_include_directories(roki-gl PUBLIC ${ROKI_GL_INCLUDE_DIR})
 
 add_dependencies(roki-gl roki zeo zm zeda LibXml2)
 
