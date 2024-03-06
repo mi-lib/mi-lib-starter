@@ -4619,12 +4619,53 @@ set_target_properties( boxdrop_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_FD_EXAMPLE_OUTPUT_DIR}
 )
 
+# roki-gl ------------------------------------------------------------------
+
+file(GLOB ROKI_GL_SOURCES
+  roki-gl/src/?*.c
+)
+
+file(GLOB ROKI_GL_HEADERS
+  roki-gl/include/roki_gl/?*.h
+)
+
+add_library(roki-gl SHARED 
+  ${ROKI_GL_SOURCES}
+  ${ROKI_GL_HEADERS}
+)
+
+target_compile_definitions(roki-gl PRIVATE __ROKI_BUILD_DLL__)
+
+# set_target_properties(roki-gl PROPERTIES CXX_STANDARD 17)
+
+if (MSVC)
+  # default C version is ANSI C89/90 at MSVC
+  target_compile_definitions(roki-gl PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
+
+set(ROKI_GL_INCLUDE_DIR
+  ${PROJECT_SOURCE_DIR}/roki-gl/include
+  ${PROJECT_SOURCE_DIR}/roki/include
+  ${PROJECT_SOURCE_DIR}/zeo/include
+  ${PROJECT_SOURCE_DIR}/zm/include
+  ${PROJECT_SOURCE_DIR}/zeda/include
+  ${LIBXML2_XMLCONF_WORKING_DIR}
+  ${LIBXML2_INCLUDE_DIRECTORY}
+)
+
+target_include_directories(roki-gl PUBLIC ${ROKI_INCLUDE_DIR})
+
+add_dependencies(roki-gl roki zeo zm zeda LibXml2)
+
+target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW )
+
 
 # test include & link ------------------------------------------------------------------
 
 add_executable( mi-lib-starter_test
   test/mi-lib-starter_test.c
 )
+target_include_directories(mi-lib-starter_test PUBLIC roki-gl/include)
 target_include_directories(mi-lib-starter_test PUBLIC roki-fd/include)
 target_include_directories(mi-lib-starter_test PUBLIC roki/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeo/include)
@@ -4633,6 +4674,7 @@ target_include_directories(mi-lib-starter_test PUBLIC dzco/include)
 target_include_directories(mi-lib-starter_test PUBLIC zm/include)
 target_include_directories(mi-lib-starter_test PUBLIC zeda/include)
 target_include_directories(mi-lib-starter_test PUBLIC libxml2/include)
+target_link_libraries(mi-lib-starter_test PUBLIC roki-gl)
 target_link_libraries(mi-lib-starter_test PUBLIC roki-fd)
 target_link_libraries(mi-lib-starter_test PUBLIC roki)
 target_link_libraries(mi-lib-starter_test PUBLIC zeo)

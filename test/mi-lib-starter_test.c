@@ -7,6 +7,7 @@
 #include "zeo/zeo.h"
 #include "roki/roki.h"
 #include "roki_fd/roki_fd.h"
+#include "roki_gl/roki_glfw.h"
 
 int main(void)
 {
