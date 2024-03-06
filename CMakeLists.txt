@@ -2468,15 +2468,6 @@ add_custom_command(TARGET invpend_test_dzco
   $<TARGET_FILE_DIR:invpend_test_dzco>/
 )
 
-add_executable( kleinman_test
-  dzco/example/lin/kleinman_test.c
-)
-target_include_directories( kleinman_test PUBLIC ${DZCO_INCLUDE_DIR} )
-target_link_libraries( kleinman_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
-set_target_properties( kleinman_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
-)
-
 add_executable( lqr_test
   dzco/example/lin/lqr_test.c
 )
@@ -2495,30 +2486,12 @@ set_target_properties( obs_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
 )
 
-# add_executable( pex2lin_test
-#   dzco/example/lin/pex2lin_test.c
-# )
-# target_include_directories( pex2lin_test PUBLIC ${DZCO_INCLUDE_DIR} )
-# target_link_libraries( pex2lin_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
-# set_target_properties( pex2lin_test PROPERTIES
-#   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
-# )
-
 add_executable( pole_assign_test
   dzco/example/lin/pole_assign_test.c
 )
 target_include_directories( pole_assign_test PUBLIC ${DZCO_INCLUDE_DIR} )
 target_link_libraries( pole_assign_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
 set_target_properties( pole_assign_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
-)
-
-add_executable( riccati_test
-  dzco/example/lin/riccati_test.c
-)
-target_include_directories( riccati_test PUBLIC ${DZCO_INCLUDE_DIR} )
-target_link_libraries( riccati_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
-set_target_properties( riccati_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
 )
 
