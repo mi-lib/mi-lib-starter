@@ -2216,23 +2216,23 @@ set_target_properties( autoencoder_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( connect_test
-  neuz/example/connect_test.c
-)
-target_include_directories( connect_test PUBLIC ${NEUZ_INCLUDE_DIR} )
-target_link_libraries( connect_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
-set_target_properties( connect_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
-)
+# add_executable( connect_test
+#   neuz/example/connect_test.c
+# )
+# target_include_directories( connect_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+# target_link_libraries( connect_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+# set_target_properties( connect_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+# )
 
-add_executable( read_ztk_test
-  neuz/example/read_ztk_test.c
-)
-target_include_directories( read_ztk_test PUBLIC ${NEUZ_INCLUDE_DIR} )
-target_link_libraries( read_ztk_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
-set_target_properties( read_ztk_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
-)
+# add_executable( read_ztk_test
+#   neuz/example/read_ztk_test.c
+# )
+# target_include_directories( read_ztk_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+# target_link_libraries( read_ztk_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+# set_target_properties( read_ztk_test PROPERTIES
+#   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+# )
 
 add_executable( sin_test
   neuz/example/sin_test.c
@@ -4340,22 +4340,6 @@ add_executable( copy_state_test
 )
 target_link_libraries( copy_state_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( copy_state_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( fd_id_test
-  roki/example/chain/fd_id_test.c
-)
-target_link_libraries( fd_id_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( fd_id_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( fk_float_test
-  roki/example/chain/fk_float_test.c
-)
-target_link_libraries( fk_float_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( fk_float_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
