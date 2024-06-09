@@ -164,6 +164,15 @@ set_target_properties( index_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
 )
 
+add_executable( list_test
+ zeda/test/list_test.c
+)
+target_include_directories( list_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
+set_target_properties( list_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
 add_executable( zm_misc_test
   zeda/test/misc_test.c
 )
@@ -200,7 +209,6 @@ set_target_properties( rand_test_zeda PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
 )
 
-
 add_executable( ring_test
   zeda/test/ring_test.c
 )
@@ -226,6 +234,14 @@ target_include_directories( string_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( string_test PUBLIC ${ZEDA_TEST_LINK_LIB} )
 set_target_properties( string_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_TEST_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET string_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/zeda/test/string_num_test.txt
+  ${PROJECT_SOURCE_DIR}/zeda/test/string_test.txt
+  ${PROJECT_SOURCE_DIR}/zeda/test/string_ws_test.txt
+  $<TARGET_FILE_DIR:string_test>/
 )
 
 add_executable( strlist_test
@@ -291,6 +307,20 @@ set_target_properties( array_quicksort_test PROPERTIES
 )
 
 
+set(ZEDA_EXAMPLE_CSV_OUTPUT_DIR
+  "${ZEDA_EXAMPLE_OUTPUT_DIR}/csv"
+)
+
+add_executable( csv_test
+  zeda/example/csv/csv_test.c
+)
+target_include_directories( csv_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( csv_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( csv_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_CSV_OUTPUT_DIR}
+)
+
+
 set(ZEDA_EXAMPLE_LIST_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/list"
 )
@@ -301,6 +331,15 @@ add_executable( list_append_test
 target_include_directories( list_append_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( list_append_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
 set_target_properties( list_append_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
+)
+
+add_executable( list_dup_test
+  zeda/example/list/list_dup_test.c
+)
+target_include_directories( list_dup_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_dup_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_dup_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
 )
 
@@ -342,6 +381,15 @@ add_executable( alloc_test
 target_include_directories( alloc_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( alloc_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
 set_target_properties( alloc_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( echo_test
+  zeda/example/misc/echo_test.c
+)
+target_include_directories( echo_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( echo_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( echo_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_MISC_OUTPUT_DIR}
 )
 
@@ -396,22 +444,6 @@ set_target_properties( read_int_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STRING_OUTPUT_DIR}
 )
 
-add_custom_command(TARGET read_int_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/zeda/example/string/tag.txt
-  ${PROJECT_SOURCE_DIR}/zeda/example/string/test.txt
-  $<TARGET_FILE_DIR:read_int_test>/
-)
-
-add_executable( token_test
-  zeda/example/string/token_test.c
-)
-target_include_directories( token_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( token_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( token_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_STRING_OUTPUT_DIR}
-)
-
 
 set(ZEDA_EXAMPLE_ZTK_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/ztk"
@@ -445,11 +477,40 @@ set_target_properties( ztk_eval_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
 )
 
+add_executable( ztk_keysize_test
+  zeda/example/ztk/ztk_keysize_test.c
+)
+target_include_directories( ztk_keysize_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztk_keysize_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ztk_keysize_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
+)
+
+# zeda app ----------------------------------------------------------------
+
+set(ZEDA_APP_LINK_LIB
+  zeda
+  LibXml2
+)
+
+set(ZEDA_APP_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/zeda/app"
+)
+
+add_executable( ztkdump
+  zeda/app/ztkdump.c
+)
+target_include_directories( ztkdump PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztkdump PUBLIC ${ZEDA_APP_LINK_LIB} )
+set_target_properties( ztkdump PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_APP_OUTPUT_DIR}
+)
+
 
 
 # zm ----------------------------------------------------------------------
 
-file(GLOB ZM_SOURCES 
+file(GLOB ZM_SOURCES
   zm/src/?*.c
 )
 
@@ -478,7 +539,7 @@ set(ZM_INCLUDE_DIR
 
 target_include_directories(zm PUBLIC ${ZM_INCLUDE_DIR})
 
-add_dependencies(zm  zeda LibXml2)
+add_dependencies(zm zeda LibXml2)
 
 target_link_libraries(zm PUBLIC zeda LibXml2)
 
@@ -519,6 +580,15 @@ add_executable( data_test
 target_include_directories( data_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( data_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( data_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( dijkstra_test
+  zm/test/dijkstra_test.c
+)
+target_include_directories( dijkstra_test PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( dijkstra_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( dijkstra_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
@@ -643,6 +713,15 @@ set_target_properties( zm_ave PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
 )
 
+add_executable( zm_kmeans
+  zm/app/zm_kmeans.c
+)
+target_include_directories( zm_kmeans PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( zm_kmeans PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_kmeans PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
 add_executable( zm_le
   zm/app/zm_le.c
 )
@@ -679,7 +758,9 @@ set_target_properties( zm_seqmod PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
 )
 
+
 # zm example ----------------------------------------------------------------------
+
 set(ZM_EXAMPLE_LINK_LIB
   zm
   zeda
@@ -725,6 +806,7 @@ target_link_libraries( realpow_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( realpow_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_COMPLEX_OUTPUT_DIR}
 )
+
 
 set(ZM_EXAMPLE_DATA_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/data"
@@ -880,15 +962,6 @@ set(ZM_EXAMPLE_GRAPH_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/graph"
 )
 
-add_executable( astar_test
-  zm/example/graph/astar_test.c
-)
-target_include_directories( astar_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( astar_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( astar_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
-)
-
 add_executable( astar_inc_test
   zm/example/graph/astar_inc_test.c
 )
@@ -898,12 +971,12 @@ set_target_properties( astar_inc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
 )
 
-add_executable( dijkstra_test
-  zm/example/graph/dijkstra_test.c
+add_executable( astar_dijkstra_test
+  zm/example/graph/astar_dijkstra_test.c
 )
-target_include_directories( dijkstra_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( dijkstra_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( dijkstra_test PROPERTIES
+target_include_directories( astar_dijkstra_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( astar_dijkstra_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( astar_dijkstra_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
 )
 
@@ -924,6 +997,34 @@ target_link_libraries( rrt_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( rrt_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
 )
+
+add_executable( rrt_connect_test
+  zm/example/graph/rrt_connect_test.c
+)
+target_include_directories( rrt_connect_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rrt_connect_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rrt_connect_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( rrt_escape_test
+  zm/example/graph/rrt_escape_test.c
+)
+target_include_directories( rrt_escape_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rrt_escape_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rrt_escape_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
+add_executable( rrt_star_test
+  zm/example/graph/rrt_star_test.c
+)
+target_include_directories( rrt_star_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rrt_star_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rrt_star_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
 
 set(ZM_EXAMPLE_INTG_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/intg"
@@ -1173,6 +1274,24 @@ set(ZM_EXAMPLE_MCA_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/mca"
 )
 
+add_executable( cluster_gen_test
+  zm/example/mca/cluster_gen_test.c
+)
+target_include_directories( cluster_gen_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cluster_gen_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cluster_gen_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( gmm_bic_test
+  zm/example/mca/gmm_bic_test.c
+)
+target_include_directories( gmm_bic_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gmm_bic_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gmm_bic_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
 add_executable( gmm_lsm_test
   zm/example/mca/gmm_lsm_test.c
 )
@@ -1182,6 +1301,23 @@ set_target_properties( gmm_lsm_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
 )
 
+add_executable( gng_test
+  zm/example/mca/gng_test.c
+)
+target_include_directories( gng_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gng_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gng_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( kmeans_lsm_test
+  zm/example/mca/kmeans_lsm_test.c
+)
+target_include_directories( kmeans_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( kmeans_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( kmeans_lsm_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
 
 add_executable( kmeans_test
   zm/example/mca/kmeans_test.c
@@ -1189,6 +1325,15 @@ add_executable( kmeans_test
 target_include_directories( kmeans_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( kmeans_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( kmeans_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
+)
+
+add_executable( kmedoids_test
+  zm/example/mca/kmedoids_test.c
+)
+target_include_directories( kmedoids_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( kmedoids_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( kmedoids_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
 )
 
@@ -1266,6 +1411,15 @@ add_executable( sigmoid_test
 target_include_directories( sigmoid_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( sigmoid_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( sigmoid_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
+add_executable( smoothstep_test
+  zm/example/misc/smoothstep_test.c
+)
+target_include_directories( smoothstep_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( smoothstep_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( smoothstep_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
 )
 
@@ -1618,15 +1772,6 @@ set_target_properties( opt_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
 )
 
-# add_executable( qp_asm_test
-#   zm/example/opt/qp_asm_test.c
-# )
-# target_include_directories( qp_asm_test PUBLIC ${ZM_INCLUDE_DIR} )
-# target_link_libraries( qp_asm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-# set_target_properties( qp_asm_test PROPERTIES
-#   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
-# )
-
 add_executable( qp_benchmark_test
   zm/example/opt/qp_benchmark_test.c
 )
@@ -1917,7 +2062,6 @@ set_target_properties( weibull_test PROPERTIES
 set(ZM_EXAMPLE_SEQ_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/seq"
 )
-
 
 add_executable( seq_add_test
   zm/example/seq/seq_add_test.c
@@ -2215,24 +2359,11 @@ target_link_libraries( autoencoder_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
 set_target_properties( autoencoder_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
 )
-
-# add_executable( connect_test
-#   neuz/example/connect_test.c
-# )
-# target_include_directories( connect_test PUBLIC ${NEUZ_INCLUDE_DIR} )
-# target_link_libraries( connect_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
-# set_target_properties( connect_test PROPERTIES
-#   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
-# )
-
-# add_executable( read_ztk_test
-#   neuz/example/read_ztk_test.c
-# )
-# target_include_directories( read_ztk_test PUBLIC ${NEUZ_INCLUDE_DIR} )
-# target_link_libraries( read_ztk_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
-# set_target_properties( read_ztk_test PROPERTIES
-#   RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
-# )
+add_custom_command(TARGET autoencoder_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/neuz/example/sin_ae.ztk
+  $<TARGET_FILE_DIR:autoencoder_test>/
+)
 
 add_executable( sin_test
   neuz/example/sin_test.c
@@ -2495,12 +2626,30 @@ set_target_properties( pole_assign_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
 )
 
+add_executable( riccati_benchmark_test
+  dzco/example/lin/riccati_benchmark_test.c
+)
+target_include_directories( riccati_benchmark_test PUBLIC ${DZCO_INCLUDE_DIR} )
+target_link_libraries( riccati_benchmark_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+set_target_properties( riccati_benchmark_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+)
+
 add_executable( statefeedback_test
   dzco/example/lin/statefeedback_test.c
 )
 target_include_directories( statefeedback_test PUBLIC ${DZCO_INCLUDE_DIR} )
 target_link_libraries( statefeedback_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
 set_target_properties( statefeedback_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
+)
+
+add_executable( tf2lin_test
+  dzco/example/lin/tf2lin_test.c
+)
+target_include_directories( tf2lin_test PUBLIC ${DZCO_INCLUDE_DIR} )
+target_link_libraries( tf2lin_test PUBLIC ${DZCO_EXAMPLE_LINK_LIB} )
+set_target_properties( tf2lin_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${DZCO_EXAMPLE_LIN_OUTPUT_DIR}
 )
 
@@ -2761,11 +2910,11 @@ set(ZEO_TEST_OUTPUT_DIR
   "${PROJECT_SOURCE_DIR}/build/bin/zeo/test"
 )
 
-add_executable( bball_test
-  zeo/test/bball_test.c
+add_executable( boundingball_test
+  zeo/test/boundingball_test.c
 )
-target_link_libraries( bball_test PUBLIC ${ZEO_TEST_LINK_LIB} )
-set_target_properties( bball_test PROPERTIES
+target_link_libraries( boundingball_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( boundingball_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
@@ -2790,6 +2939,14 @@ add_executable( cone_test
 )
 target_link_libraries( cone_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( cone_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( coord2d_test
+  zeo/test/coord2d_test.c
+)
+target_link_libraries( coord2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( coord2d_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
@@ -2841,11 +2998,27 @@ set_target_properties( ep_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
-add_executable( frame_test
-  zeo/test/frame_test.c
+add_executable( frame2d_test
+  zeo/test/frame2d_test.c
 )
-target_link_libraries( frame_test PUBLIC ${ZEO_TEST_LINK_LIB} )
-set_target_properties( frame_test PROPERTIES
+target_link_libraries( frame2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( frame2d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( frame3d_test
+  zeo/test/frame3d_test.c
+)
+target_link_libraries( frame3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( frame3d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( gjk_test
+  zeo/test/gjk_test.c
+)
+target_link_libraries( gjk_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( gjk_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
@@ -2870,6 +3043,14 @@ add_executable( mat6d_test
 )
 target_link_libraries( mat6d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( mat6d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( zeo_misc_test
+  zeo/test/misc_test.c
+)
+target_link_libraries( zeo_misc_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( zeo_misc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
@@ -2918,6 +3099,14 @@ add_executable( vec6d_test
 )
 target_link_libraries( vec6d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( vec6d_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec_list_test
+  zeo/test/vec_list_test.c
+)
+target_link_libraries( vec_list_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec_list_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
@@ -3075,84 +3264,39 @@ set_target_properties( aabb3d_xform_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
-add_executable( bdisk2d_test
-  zeo/example/bv/bdisk2d_test.c
+add_executable( boundingdisk2d_test
+  zeo/example/bv/boundingdisk2d_test.c
 )
-target_include_directories( bdisk2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( bdisk2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( bdisk2d_test PROPERTIES
+target_include_directories( boundingdisk2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( boundingdisk2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( boundingdisk2d_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
-add_executable( ch2d_ph_test
-  zeo/example/bv/ch2d_ph_test.c
+add_executable( convexhull2d_proximity_test
+  zeo/example/bv/convexhull2d_proximity_test.c
 )
-target_include_directories( ch2d_ph_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch2d_ph_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch2d_ph_test PROPERTIES
+target_include_directories( convexhull2d_proximity_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( convexhull2d_proximity_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( convexhull2d_proximity_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
-add_executable( ch2d_pl_test
-  zeo/example/bv/ch2d_pl_test.c
+add_executable( convexhull2d_test
+  zeo/example/bv/convexhull2d_test.c
 )
-target_include_directories( ch2d_pl_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch2d_pl_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch2d_pl_test PROPERTIES
+target_include_directories( convexhull2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( convexhull2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( convexhull2d_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
-add_executable( ch2d_proximity_test
-  zeo/example/bv/ch2d_proximity_test.c
+add_executable( convexhull3d_test
+  zeo/example/bv/convexhull3d_test.c
 )
-target_include_directories( ch2d_proximity_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch2d_proximity_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch2d_proximity_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
-add_executable( ch2d_test
-  zeo/example/bv/ch2d_test.c
-)
-target_include_directories( ch2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch2d_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
-add_executable( ch3d_deg_test
-  zeo/example/bv/ch3d_deg_test.c
-)
-target_include_directories( ch3d_deg_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch3d_deg_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch3d_deg_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
-add_executable( ch3d_ph_test
-  zeo/example/bv/ch3d_ph_test.c
-)
-target_include_directories( ch3d_ph_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch3d_ph_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch3d_ph_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
-add_executable( ch3d_pl_test
-  zeo/example/bv/ch3d_pl_test.c
-)
-target_include_directories( ch3d_pl_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch3d_pl_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch3d_pl_test PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
-add_executable( ch3d_test
-  zeo/example/bv/ch3d_test.c
-)
-target_include_directories( ch3d_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( ch3d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( ch3d_test PROPERTIES
+target_include_directories( convexhull3d_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( convexhull3d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( convexhull3d_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
@@ -3765,18 +3909,18 @@ set_target_properties( pca_test_example PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
 )
 
-add_executable( pcd_read_test
-  zeo/example/pointcloud/pcd_read_test.c
+add_executable( pcd_io_test
+  zeo/example/pointcloud/pcd_io_test.c
 )
-target_include_directories( pcd_read_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( pcd_read_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( pcd_read_test PROPERTIES
+target_include_directories( pcd_io_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( pcd_io_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( pcd_io_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
 )
-add_custom_command(TARGET pcd_read_test
+add_custom_command(TARGET pcd_io_test
  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
  ${PROJECT_SOURCE_DIR}/zeo/example/pointcloud/sample.pcd
- $<TARGET_FILE_DIR:pcd_read_test>/
+ $<TARGET_FILE_DIR:pcd_io_test>/
 )
 
 
@@ -4035,24 +4179,64 @@ set_target_properties( ik_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
 )
 
-# add_executable( invpend_test
-#   roki/test/invpend_test.c
-# )
-# target_link_libraries( invpend_test PUBLIC ${ROKI_TEST_LINK_LIB} )
-# set_target_properties( invpend_test PROPERTIES
-#   RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
-# )
-# add_custom_command(TARGET invpend_test
-#   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-#   ${PROJECT_SOURCE_DIR}/roki/test/invpend.ztk
-#   $<TARGET_FILE_DIR:invpend_test>/
-# )
+add_executable( invpend_test
+  roki/test/invpend_test.c
+)
+target_link_libraries( invpend_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( invpend_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+add_custom_command(TARGET invpend_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/test/invpend.ztk
+  $<TARGET_FILE_DIR:invpend_test>/
+)
 
 add_executable( jacobi_test
   roki/test/jacobi_test.c
 )
 target_link_libraries( jacobi_test PUBLIC ${ROKI_TEST_LINK_LIB} )
 set_target_properties( jacobi_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_clone_test
+  roki/test/joint_clone_test.c
+)
+target_link_libraries( joint_clone_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_clone_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_cylin_test
+  roki/test/joint_cylin_test.c
+)
+target_link_libraries( joint_cylin_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_cylin_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_float_test
+  roki/test/joint_float_test.c
+)
+target_link_libraries( joint_float_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_float_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_hooke_test
+  roki/test/joint_hooke_test.c
+)
+target_link_libraries( joint_hooke_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_hooke_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
+)
+
+add_executable( joint_spher_test
+  roki/test/joint_spher_test.c
+)
+target_link_libraries( joint_spher_test PUBLIC ${ROKI_TEST_LINK_LIB} )
+set_target_properties( joint_spher_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_TEST_OUTPUT_DIR}
 )
 
@@ -4108,6 +4292,14 @@ set(ROKI_APP_OUTPUT_DIR
   "${PROJECT_SOURCE_DIR}/build/bin/roki/app"
 )
 
+add_executable( bvh2ztk
+  roki/app/bvh2ztk.c
+)
+target_link_libraries( bvh2ztk PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( bvh2ztk PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
 add_executable( cad2ztk
   roki/app/cad2ztk.c
 )
@@ -4137,6 +4329,14 @@ add_executable( mshape2chain
 )
 target_link_libraries( mshape2chain PUBLIC ${ROKI_APP_LINK_LIB} )
 set_target_properties( mshape2chain PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+
+add_executable( rk_chain_convexify
+  roki/app/rk_chain_convexify.c
+)
+target_link_libraries( rk_chain_convexify PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_chain_convexify PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
 
@@ -4186,6 +4386,11 @@ add_executable( rk_mp
 target_link_libraries( rk_mp PUBLIC ${ROKI_APP_LINK_LIB} )
 set_target_properties( rk_mp PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
+)
+add_custom_command(TARGET rk_mp
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/app/test.zv
+  $<TARGET_FILE_DIR:rk_mp>/
 )
 
 add_executable( urdf2ztk
@@ -4295,6 +4500,7 @@ set_target_properties( org_inertia_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
+
 add_executable( cd_test
   roki/example/cd/cd_test.c
 )
@@ -4303,11 +4509,12 @@ set_target_properties( cd_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( chain_bball_test
-  roki/example/chain/bball_test.c
+
+add_executable( chain_boundingball_test
+  roki/example/chain/boundingball_test.c
 )
-target_link_libraries( chain_bball_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( chain_bball_test PROPERTIES
+target_link_libraries( chain_boundingball_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( chain_boundingball_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
@@ -4348,6 +4555,14 @@ add_executable( chain_gravity_test
 )
 target_link_libraries( chain_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( chain_gravity_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_executable( inertia_mat_benchmark_test
+  roki/example/chain/inertia_mat_benchmark_test.c
+)
+target_link_libraries( inertia_mat_benchmark_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( inertia_mat_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
@@ -4396,6 +4611,21 @@ add_custom_command(TARGET contact_ztk_test
   $<TARGET_FILE_DIR:contact_ztk_test>/
 )
 
+add_executable( H5_ik_test
+  roki/example/ik/H5_ik_test.c
+)
+target_link_libraries( H5_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( H5_ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET H5_ik_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/walk.zcs
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/walk.zvs
+  $<TARGET_FILE_DIR:H5_ik_test>/
+)
+
 add_executable( force_ik_test
   roki/example/ik/force_ik_test.c
 )
@@ -4408,6 +4638,14 @@ add_custom_command(TARGET force_ik_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
   ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
   $<TARGET_FILE_DIR:force_ik_test>/
+)
+
+add_executable( example_ik_test
+  roki/example/ik/ik_test.c
+)
+target_link_libraries( example_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( example_ik_test PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
 add_executable( puma_acc_track_test
@@ -4441,6 +4679,7 @@ target_link_libraries( puma_vel_track_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( puma_vel_track_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
+
 
 add_executable( manip_test
   roki/example/jacobi/manip_test.c
@@ -4590,7 +4829,7 @@ file(GLOB ROKI_GL_HEADERS
 list(FILTER ROKI_GL_HEADERS EXCLUDE REGEX ".*roki_glx.h$")
 list(FILTER ROKI_GL_HEADERS EXCLUDE REGEX ".*roki_glut.h$")
 
-add_library(roki-gl SHARED 
+add_library(roki-gl SHARED
   ${ROKI_GL_SOURCES}
   ${ROKI_GL_HEADERS}
 )
