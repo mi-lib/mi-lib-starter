@@ -3912,22 +3912,12 @@ set(ZEO_EXAMPLE_ELEM_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/elem"
 )
 
-add_executable( edge3d_closest_test
-  zeo/example/elem/edge3d_closest_test.c
+add_executable( edge2d_closest_test
+  zeo/example/elem/edge2d_closest_test.c
 )
-target_include_directories( edge3d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( edge3d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( edge3d_closest_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( edge3d_linscale_test
-  zeo/example/elem/edge3d_linscale_test.c
-)
-target_include_directories( edge3d_linscale_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( edge3d_linscale_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( edge3d_linscale_test PROPERTIES
+target_include_directories( edge2d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( edge2d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( edge2d_closest_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
 )
