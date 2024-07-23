@@ -5163,19 +5163,28 @@ add_custom_command(TARGET H5_ik_test
   $<TARGET_FILE_DIR:H5_ik_test>/
 )
 
-add_executable( force_ik_test
-  roki/example/ik/force_ik_test.c
+add_executable( ik_conf_ztk_test
+  roki/example/ik/ik_conf_ztk_test.c
 )
-target_link_libraries( force_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( force_ik_test PROPERTIES
+target_link_libraries( ik_conf_ztk_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( ik_conf_ztk_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_custom_command(TARGET force_ik_test
+add_executable( prioritized_ik_test
+  roki/example/ik/prioritized_ik_test.c
+)
+target_link_libraries( prioritized_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( prioritized_ik_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
+)
+
+add_custom_command(TARGET prioritized_ik_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/iktest.ztk
-  $<TARGET_FILE_DIR:force_ik_test>/
+  ${PROJECT_SOURCE_DIR}/roki/example/ik/branched.ztk
+  $<TARGET_FILE_DIR:prioritized_ik_test>/
 )
 
 add_executable( example_ik_test
@@ -5187,29 +5196,11 @@ set_target_properties( example_ik_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( puma_acc_track_test
-  roki/example/ik/puma_acc_track_test.c
-)
-target_link_libraries( puma_acc_track_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( puma_acc_track_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( puma_ik_test
   roki/example/ik/puma_ik_test.c
 )
 target_link_libraries( puma_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( puma_ik_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( puma_imp_test
-  roki/example/ik/puma_imp_test.c
-)
-target_link_libraries( puma_imp_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( puma_imp_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
