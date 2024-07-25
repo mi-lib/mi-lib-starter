@@ -5156,13 +5156,6 @@ set_target_properties( H5_ik_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_custom_command(TARGET H5_ik_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/walk.zcs
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/walk.zvs
-  $<TARGET_FILE_DIR:H5_ik_test>/
-)
-
 add_executable( ik_conf_ztk_test
   roki/example/ik/ik_conf_ztk_test.c
 )
@@ -5179,12 +5172,6 @@ target_link_libraries( prioritized_ik_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( prioritized_ik_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_custom_command(TARGET prioritized_ik_test
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/example/ik/branched.ztk
-  $<TARGET_FILE_DIR:prioritized_ik_test>/
 )
 
 add_executable( example_ik_test
