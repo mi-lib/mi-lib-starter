@@ -14,7 +14,11 @@ compile(){
   if [ -d ${lib} ]; then
     cd ${lib}
     make clean
-    make CC=${cc} STD=${std} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    if [ -n ${std} ]; then
+	make CC=${cc} STD=${std} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    else
+	make CC=${cc} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    fi
     cd -
   else
     echo "cannot find directory" ${lib}
@@ -88,7 +92,6 @@ case $1 in
     ;;
   debug)
     cc=gcc
-    std=c89
     debug=y
     for lib in ${LIBS}
     do
@@ -97,7 +100,6 @@ case $1 in
     ;;
   *)
     cc=gcc
-    std=c89
     for lib in ${LIBS}
     do
       compile
