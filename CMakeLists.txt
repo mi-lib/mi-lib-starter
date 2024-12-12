@@ -301,36 +301,6 @@ set(ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/array"
 )
 
-add_executable( array_append_test
-  zeda/example/array/array_append_test.c
-)
-target_include_directories( array_append_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( array_append_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( array_append_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
-)
-
-add_executable( array_delete_test
-  zeda/example/array/array_delete_test.c
-)
-target_include_directories( array_delete_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( array_delete_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( array_delete_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
-)
-
-add_executable( array_insert_test
-  zeda/example/array/array_insert_test.c
-)
-target_include_directories( array_insert_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( array_insert_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( array_insert_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
-)
-
 add_executable( array_quicksort_test
   zeda/example/array/array_quicksort_test.c
 )
@@ -3435,6 +3405,15 @@ set_target_properties( sphere_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
+add_executable( vec_data_test
+  zeo/test/vec_data_test.c
+)
+target_link_libraries( vec_data_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec_data_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
 add_executable( vec2d_test
   zeo/test/vec2d_test.c
 )
@@ -3467,15 +3446,6 @@ add_executable( vec6d_test
 )
 target_link_libraries( vec6d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( vec6d_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
-)
-
-add_executable( vec_list_test
-  zeo/test/vec_list_test.c
-)
-target_link_libraries( vec_list_test PUBLIC ${ZEO_TEST_LINK_LIB} )
-set_target_properties( vec_list_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
@@ -3717,17 +3687,6 @@ set_target_properties( obb_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
-
-add_executable( simplex_test
-  zeo/example/bv/simplex_test.c
-)
-target_include_directories( simplex_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( simplex_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( simplex_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
-)
-
 
 set(ZEO_EXAMPLE_COLCHK_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/colchk"
@@ -4127,32 +4086,6 @@ set_target_properties( terra_ztk_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MAP_OUTPUT_DIR}
 )
 
-
-set(ZEO_EXAMPLE_MISC_OUTPUT_DIR
-  "${ZEO_EXAMPLE_OUTPUT_DIR}/misc"
-)
-
-add_executable( 3d_enum_test
-  zeo/example/misc/3d_enum_test.c
-)
-target_include_directories( 3d_enum_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( 3d_enum_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( 3d_enum_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MISC_OUTPUT_DIR}
-)
-
-add_executable( dir_rev_test
-  zeo/example/misc/dir_rev_test.c
-)
-target_include_directories( dir_rev_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( dir_rev_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( dir_rev_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MISC_OUTPUT_DIR}
-)
-
-
 set(ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/mshape"
 )
@@ -4336,16 +4269,6 @@ set(ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/pointcloud"
 )
 
-add_executable( barycenter_test
-  zeo/example/pointcloud/barycenter_test.c
-)
-target_include_directories( barycenter_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( barycenter_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( barycenter_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
-)
-
 add_executable( pca_test_example
   zeo/example/pointcloud/pca_test.c
 )
@@ -4512,16 +4435,6 @@ add_executable( tree_test_example
 target_include_directories( tree_test_example PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( tree_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( tree_test_example PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
-)
-
-add_executable( vec_list_qsort_test
-  zeo/example/vec/vec_list_qsort_test.c
-)
-target_include_directories( vec_list_qsort_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( vec_list_qsort_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( vec_list_qsort_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
 )
@@ -4996,15 +4909,6 @@ set_target_properties( body_contig_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( body_gravity_test
-  roki/example/body/gravity_test.c
-)
-target_link_libraries( body_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( body_gravity_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( mp_xform_test
   roki/example/body/mp_xform_test.c
 )
@@ -5079,11 +4983,11 @@ set_target_properties( copy_state_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( chain_gravity_test
+add_executable( gravity_test
   roki/example/chain/gravity_test.c
 )
-target_link_libraries( chain_gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( chain_gravity_test PROPERTIES
+target_link_libraries( gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( gravity_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
