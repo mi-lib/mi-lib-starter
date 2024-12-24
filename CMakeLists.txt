@@ -4974,15 +4974,6 @@ set_target_properties( com_vel_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( copy_state_test
-  roki/example/chain/copy_state_test.c
-)
-target_link_libraries( copy_state_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( copy_state_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( gravity_test
   roki/example/chain/gravity_test.c
 )
