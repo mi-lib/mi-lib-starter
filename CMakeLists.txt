@@ -331,52 +331,12 @@ set(ZEDA_EXAMPLE_LIST_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/list"
 )
 
-add_executable( list_append_test
-  zeda/example/list/list_append_test.c
-)
-target_include_directories( list_append_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( list_append_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( list_append_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
-)
-
-add_executable( list_dup_test
-  zeda/example/list/list_dup_test.c
-)
-target_include_directories( list_dup_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( list_dup_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( list_dup_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
-)
-
 add_executable( list_purge_test
   zeda/example/list/list_purge_test.c
 )
 target_include_directories( list_purge_test PUBLIC ${ZEDA_INCLUDE_DIR})
 target_link_libraries( list_purge_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
 set_target_properties( list_purge_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
-)
-
-add_executable( list_quicksort_test
-  zeda/example/list/list_quicksort_test.c
-)
-target_include_directories( list_quicksort_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( list_quicksort_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( list_quicksort_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
-)
-
-add_executable( list_swap_test
-  zeda/example/list/list_swap_test.c
-)
-target_include_directories( list_swap_test PUBLIC ${ZEDA_INCLUDE_DIR})
-target_link_libraries( list_swap_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
-set_target_properties( list_swap_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
 )
@@ -3628,12 +3588,12 @@ set_target_properties( aabb3d_xform_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
 
-add_executable( boundingdisk2d_test
-  zeo/example/bv/boundingdisk2d_test.c
+add_executable( boundingball2d_test
+  zeo/example/bv/boundingball2d_test.c
 )
-target_include_directories( boundingdisk2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( boundingdisk2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( boundingdisk2d_test PROPERTIES
+target_include_directories( boundingball2d_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( boundingball2d_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( boundingball2d_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_BV_OUTPUT_DIR}
 )
