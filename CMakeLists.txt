@@ -3447,6 +3447,15 @@ set_target_properties( zeo_gjk PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
 )
 
+add_executable( zeo_ph2pcd
+  zeo/app/zeo_ph2pcd.c
+)
+target_link_libraries( zeo_ph2pcd PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_ph2pcd PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
+)
+
 add_executable( zeo_phconv
   zeo/app/zeo_phconv.c
 )
@@ -3461,15 +3470,6 @@ add_executable( zeo_qhull
 )
 target_link_libraries( zeo_qhull PUBLIC ${ZEO_APP_LINK_LIB} )
 set_target_properties( zeo_qhull PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
-)
-
-add_executable( zeo_stl2ztk
-  zeo/app/zeo_stl2ztk.c
-)
-target_link_libraries( zeo_stl2ztk PUBLIC ${ZEO_APP_LINK_LIB} )
-set_target_properties( zeo_stl2ztk PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
 )
@@ -3831,6 +3831,16 @@ set(ZEO_EXAMPLE_ELEM_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/elem"
 )
 
+add_executable( disk2d_point_is_inside_test
+  zeo/example/elem/disk2d_point_is_inside_test.c
+)
+target_include_directories( disk2d_point_is_inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( disk2d_point_is_inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( disk2d_point_is_inside_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
+)
+
 add_executable( edge2d_closest_test
   zeo/example/elem/edge2d_closest_test.c
 )
@@ -3851,12 +3861,22 @@ set_target_properties( edge3d_point_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
 )
 
-add_executable( plane3d_mean_test
-  zeo/example/elem/plane3d_mean_test.c
+add_executable( ellips2d_closest_test
+  zeo/example/elem/ellips2d_closest_test.c
 )
-target_include_directories( plane3d_mean_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( plane3d_mean_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( plane3d_mean_test PROPERTIES
+target_include_directories( ellips2d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( ellips2d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( ellips2d_closest_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
+)
+
+add_executable( tri2d_point_is_inside_test
+  zeo/example/elem/tri2d_point_is_inside_test.c
+)
+target_include_directories( tri2d_point_is_inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( tri2d_point_is_inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( tri2d_point_is_inside_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
 )
@@ -3877,6 +3897,16 @@ add_executable( tri3d_closest_test
 target_include_directories( tri3d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( tri3d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( tri3d_closest_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
+)
+
+add_executable( tri3d_point_is_inside_test
+  zeo/example/elem/tri3d_point_is_inside_test.c
+)
+target_include_directories( tri3d_point_is_inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( tri3d_point_is_inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( tri3d_point_is_inside_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
 )
@@ -4239,19 +4269,34 @@ set_target_properties( pca_test_example PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
 )
 
-add_executable( pcd_io_test
-  zeo/example/pointcloud/pcd_io_test.c
+add_executable( pointcloud_normal_test
+  zeo/example/pointcloud/pointcloud_normal_test.c
 )
-target_include_directories( pcd_io_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( pcd_io_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( pcd_io_test PROPERTIES
+target_include_directories( pointcloud_normal_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( pointcloud_normal_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( pointcloud_normal_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
 )
-add_custom_command(TARGET pcd_io_test
- POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
- ${PROJECT_SOURCE_DIR}/zeo/example/pointcloud/sample.pcd
- $<TARGET_FILE_DIR:pcd_io_test>/
+
+add_executable( icp_test
+  zeo/example/pointcloud/icp_test.c
+)
+target_include_directories( icp_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( icp_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( icp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
+)
+
+add_executable( meanplane_test
+  zeo/example/pointcloud/meanplane_test.c
+)
+target_include_directories( meanplane_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( meanplane_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( meanplane_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_POINTCLOUD_OUTPUT_DIR}
 )
 
 
