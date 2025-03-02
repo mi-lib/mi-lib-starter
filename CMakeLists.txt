@@ -1118,6 +1118,16 @@ set_target_properties( ip_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
 )
 
+add_executable( lag_vel_acc_approx_test
+  zm/example/ip/lag_vel_acc_approx_test.c
+)
+target_include_directories( lag_vel_acc_approx_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( lag_vel_acc_approx_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( lag_vel_acc_approx_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
+
 add_executable( pex_test_example
   zm/example/ip/pex_test.c
 )
@@ -1168,6 +1178,15 @@ set_target_properties( seg_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
 )
 
+add_executable( trapezoidal_velocity_test
+  zm/example/ip/trapezoidal_velocity_test.c
+)
+target_include_directories( trapezoidal_velocity_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( trapezoidal_velocity_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( trapezoidal_velocity_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_IP_OUTPUT_DIR}
+)
 
 set(ZM_EXAMPLE_LE_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/le"
@@ -2377,6 +2396,17 @@ set_target_properties( distrib_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
 )
 
+add_executable( histogram_test
+  zm/example/stat/histogram_test.c
+)
+target_include_directories( histogram_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( histogram_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( histogram_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
+)
+
+
 add_executable( max_min_test
   zm/example/stat/max_min_test.c
 )
@@ -3365,11 +3395,11 @@ set_target_properties( sphere_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
-add_executable( vec_data_test
-  zeo/test/vec_data_test.c
+add_executable( vec3d_data_test
+  zeo/test/vec3d_data_test.c
 )
-target_link_libraries( vec_data_test PUBLIC ${ZEO_TEST_LINK_LIB} )
-set_target_properties( vec_data_test PROPERTIES
+target_link_libraries( vec3d_data_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec3d_data_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
@@ -3388,6 +3418,15 @@ add_executable( vec3d_test
 )
 target_link_libraries( vec3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( vec3d_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( vec3d_list_test
+  zeo/test/vec3d_list_test.c
+)
+target_link_libraries( vec3d_list_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( vec3d_list_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
@@ -4414,22 +4453,12 @@ set(ZEO_EXAMPLE_VEC_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/vec"
 )
 
-add_executable( tree_array_test
-  zeo/example/vec/tree_array_test.c
+add_executable( nn_benchmark_test
+  zeo/example/vec/nn_benchmark_test.c
 )
-target_include_directories( tree_array_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tree_array_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tree_array_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
-)
-
-add_executable( tree_list_test
-  zeo/example/vec/tree_list_test.c
-)
-target_include_directories( tree_list_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tree_list_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tree_list_test PROPERTIES
+target_include_directories( nn_benchmark_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( nn_benchmark_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( nn_benchmark_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
 )
@@ -4440,6 +4469,16 @@ add_executable( tree_test_example
 target_include_directories( tree_test_example PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( tree_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( tree_test_example PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
+)
+
+add_executable( vicinity_benchmark_test
+  zeo/example/vec/vicinity_benchmark_test.c
+)
+target_include_directories( vicinity_benchmark_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( vicinity_benchmark_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( vicinity_benchmark_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_VEC_OUTPUT_DIR}
 )
@@ -4864,15 +4903,15 @@ file(GLOB_RECURSE ROKI_EXAMPLE_SOURCES
 # message(STATUS "ROKI_EXAMPLE_SOURCES=${ROKI_EXAMPLE_SOURCES}")
 set_source_files_properties(${ROKI_EXAMPLE_SOURCES} PROPERTIES LANGUAGE CXX )
 
-add_executable( body_am_test
-  roki/example/body/body_am_test.c
+add_executable( body_angularmomentum_test
+  roki/example/body/body_angularmomentum_test.c
 )
-target_link_libraries( body_am_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( body_am_test PROPERTIES
+target_link_libraries( body_angularmomentum_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( body_angularmomentum_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
-add_custom_command(TARGET body_am_test
+add_custom_command(TARGET body_angularmomentum_test
   PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
   ${PROJECT_SOURCE_DIR}/roki/example/model
   ${ROKI_EXAMPLE_OUTPUT_DIR}/
@@ -4970,11 +5009,11 @@ set_target_properties( com_vel_spher_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( com_vel_test
-  roki/example/chain/com_vel_test.c
+add_executable( com_vel_humanoid_test
+  roki/example/chain/com_vel_humanoid_test.c
 )
-target_link_libraries( com_vel_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( com_vel_test PROPERTIES
+target_link_libraries( com_vel_humanoid_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
+set_target_properties( com_vel_humanoid_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
