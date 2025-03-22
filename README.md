@@ -45,20 +45,20 @@ are installed under ~/usr/include and ~/usr/lib, respectively.
 
 Do:
    ```sh
-   % scripts/mi-lib-install
+   % scripts/install_packages
    ```
 to download source codes from the Git repositories as zipped files, or
    ```sh
-   % scripts/mi-lib-install clone
+   % scripts/install_packages git
    ```
 to clone the Git repositories. In the former case, the information about the
-epositories is lost. It is followed by a process to compile and install the files.
+repositories is lost. It is followed by a process to compile and install the files.
 
 ### install files as debian packages
 
 Do:
    ```sh
-   % scripts/mi-lib-install deb
+   % scripts/install_packages deb
    ```
 to make .deb packages, which will be stored under deb/, and then, install them
 by dpkg. The files will be installed under /usr/ in this case.
@@ -67,7 +67,7 @@ by dpkg. The files will be installed under /usr/ in this case.
 
 Do:
    ```sh
-   % scripts/mi-lib-uninstall [deb]
+   % scripts/uninstall_packages [deb]
    ```
 where deb option is valid only if the libraries are installed as debian packages.
 

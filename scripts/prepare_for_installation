@@ -1,0 +1,51 @@
+#!/bin/sh
+
+## check if installer has to be run by the superuser
+SUDO=
+if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
+  SUDO="sudo"
+fi
+
+if [ -z ${PREFIX} ]; then
+  PREFIX=${HOME}/usr
+fi
+
+## make directories to install
+make_directories(){
+    BINDIR=${PREFIX}/bin
+    INCDIR=${PREFIX}/include
+    LIBDIR=${PREFIX}/lib
+    for dir in ${BINDIR} ${INCDIR} ${LIBDIR}
+    do
+	if [ ! -d ${dir} ]; then
+	    echo "making directory" ${dir} "..."
+	    ${SUDO} mkdir -m 755 -p ${dir}
+	fi
+    done
+}
+
+make_directories
+
+## check if environmental variables are valid
+
+### path
+if [ -z `echo ${PATH} | grep ${BINDIR}` ]; then
+  echo "Add ${BINDIR} into your PATH by"
+  echo "  export PATH=${BINDIR}:\$PATH"
+  echo "for Bourne shell family (bash, zsh, ksh, etc.), or by"
+  echo "  set path = ( ${BINDIR} \$path )"
+  echo "for C shell family (csh, tcsh etc.)."
+  exit 1
+fi
+echo ${BINDIR} "... valid path."
+
+### LD_LIBRARY_PATH
+if [ -z `echo $LD_LIBRARY_PATH | grep $LIBDIR` ]; then
+  echo "Add ${LIBDIR} into your LD_LIBRARY_PATH by"
+  echo "  export LD_LIBRARY_PATH=${LIBDIR}:\$LD_LIBRARY_PATH"
+  echo "for Bourne shell family (bash, zsh, ksh, etc.), or by"
+  echo "  setenv LD_LIBRARY_PATH ${LIBDIR}:\$LD_LIBRARY_PATH"
+  echo "for C shell family (csh, tcsh etc.)."
+  exit 1
+fi
+echo ${LIBDIR} "in LD_LIBRARY_PATH."

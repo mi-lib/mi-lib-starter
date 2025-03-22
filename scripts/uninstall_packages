@@ -1,0 +1,58 @@
+#!/bin/sh
+ROOT_DIRECTORY=$(realpath $(dirname $0)/../)
+FILE_DIRECTORY=$(realpath $(dirname $0))
+CURRENT_DIRECTORY=$(pwd)
+
+# read variables in config file.
+. ${ROOT_DIRECTORY}/config
+## read a list of libraries to build.
+. ${ROOT_DIRECTORY}/liblist
+
+## check if installer has to be run by the superuser
+SUDO=
+if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
+  SUDO="sudo"
+fi
+
+echo "uninstall libraries..."
+
+if [ -z ${PREFIX} ]; then
+  PREFIX=${HOME}/usr
+fi
+
+# uninstall libraries in the reverse order.
+LIBS_REV=
+for lib in ${LIBS}
+do
+    LIBS_REV="${lib} ${LIBS_REV}"
+done
+
+uninstall_deb(){
+  # uninstall Debian packages
+  sudo dpkg --purge ${LIBS}
+}
+
+uninstall_lib(){
+  if [ -d ${lib} ]; then
+    cd ${lib}; ${SUDO} make uninstall; cd -
+  else
+    echo "cannot find directory" ${lib}
+  fi
+}
+
+cd ${ROOT_DIRECTORY}
+case $1 in
+  deb)
+    uninstall_deb
+    ;;
+  *)
+    for lib in ${LIBS_REV}
+    do
+      uninstall_lib
+    done
+    ;;
+esac
+
+cd ${CURRENT_DIRECTORY}
+echo "uninstallation completed."
+exit 0

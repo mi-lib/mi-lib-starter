@@ -1,0 +1,25 @@
+#!/bin/sh
+FILE_DIRECTORY=$(realpath $(dirname $0))
+
+${FILE_DIRECTORY}/install_dependencies || { echo 'failed to install dependencies' ; exit 1; }
+${FILE_DIRECTORY}/prepare_for_installation || { echo 'failed to prepare for installation' ; exit 1; }
+
+case $1 in
+  git-cpp)
+    ${FILE_DIRECTORY}/download_packages git
+    ${FILE_DIRECTORY}/build_packages cpp
+    ;;
+  git)
+    ${FILE_DIRECTORY}/download_packages git
+    ${FILE_DIRECTORY}/build_packages
+    ;;
+  deb)
+    ${FILE_DIRECTORY}/download_packages zip
+    ${FILE_DIRECTORY}/build_packages deb
+    ;;
+  *)
+    ${FILE_DIRECTORY}/download_packages zip
+    ${FILE_DIRECTORY}/build_packages
+    ;;
+esac
+exit 0

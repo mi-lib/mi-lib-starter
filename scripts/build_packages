@@ -1,9 +1,22 @@
 #!/bin/sh
+ROOT_DIRECTORY=$(realpath $(dirname $0)/../)
+FILE_DIRECTORY=$(realpath $(dirname $0))
+CURRENT_DIRECTORY=$(pwd)
 
 # read variables in config file.
-. ./config
+. ${ROOT_DIRECTORY}/config
 ## read a list of libraries to build.
-. ./liblist
+. ${ROOT_DIRECTORY}/liblist
+
+## check if installer has to be run by the superuser
+SUDO=
+if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
+  SUDO="sudo"
+fi
+
+if [ -z ${PREFIX} ]; then
+  PREFIX=${HOME}/usr
+fi
 
 cc=
 std=
@@ -13,11 +26,20 @@ debug=
 compile(){
   if [ -d ${lib} ]; then
     cd ${lib}
+    # udpate config file
+    if [ -n "${PREFIX}" ]; then
+        rm config;
+        cat config.org | sed -e "/^PREFIX/c\PREFIX=${PREFIX}" > config;
+    fi
+    if [ ! -f config ]; then
+        cp config.org config;
+    fi
+    # compile
     make clean
     if [ -n ${std} ]; then
-	make CC=${cc} STD=${std} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+	    make CC=${cc} STD=${std} DEBUG=${debug} && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
     else
-	make CC=${cc} DEBUG=${debug} && make install || ( echo  "failed to compile " ${lib}; exit 1 )
+	    make CC=${cc} DEBUG=${debug} && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
     fi
     cd -
   else
@@ -30,8 +52,11 @@ compile(){
 makedeb(){
   if [ -d ${lib} ]; then
     cd ${lib}
-    make deb && mv *.deb ../deb
+    make deb
+    ls
+    mv *.deb ../deb
     cd -
+    sudo dpkg -i deb/${lib}-dev_*.*.*.deb
   else
     echo "cannot find directory" ${lib}
     exit 1
@@ -50,18 +75,7 @@ makeclean(){
   fi
 }
 
-# git pull
-dopull(){
-  if [ -d ${lib} ]; then
-    cd ${lib}
-    git pull
-    cd -
-  else
-    echo "cannot find directory" ${lib}
-    exit 1
-  fi
-}
-
+cd ${ROOT_DIRECTORY}
 case $1 in
   deb)
     rm deb/*.deb
@@ -76,13 +90,7 @@ case $1 in
       makeclean
     done
     ;;
-  pull)
-    for lib in ${LIBS}
-    do
-      dopull
-    done
-    ;;
-  cpplib)
+  cpp)
     cc=g++
     std=c++17
     for lib in ${LIBS}
@@ -106,5 +114,6 @@ case $1 in
     done
     ;;
 esac
-
+cd ${CURRENT_DIRECTORY}
+echo "build process \`$1\` completed."
 exit 0
