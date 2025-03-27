@@ -1,0 +1,28 @@
+#!/bin/sh
+FILE_DIRECTORY=$(realpath $(dirname $0))
+
+${FILE_DIRECTORY}/install_dependencies || { echo 'failed to install dependencies' ; exit 1; }
+${FILE_DIRECTORY}/preprocess || { echo 'failed to prepare for installation' ; exit 1; }
+
+OPTION=$1
+case $OPTION in
+  git-cpp)
+    ${FILE_DIRECTORY}/download git
+    ${FILE_DIRECTORY}/build cpp
+    ;;
+  git)
+    ${FILE_DIRECTORY}/download git
+    ${FILE_DIRECTORY}/build
+    ;;
+  deb)
+    ${FILE_DIRECTORY}/download zip
+    ${FILE_DIRECTORY}/build deb
+    ;;
+  *)
+    OPTION="default"
+    ${FILE_DIRECTORY}/download zip
+    ${FILE_DIRECTORY}/build
+    ;;
+esac
+echo "install process \`$OPTION\` completed."
+exit 0

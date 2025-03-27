@@ -76,7 +76,9 @@ makeclean(){
 }
 
 cd ${ROOT_DIRECTORY}
-case $1 in
+
+OPTION=$1
+case $OPTION in
   deb)
     rm deb/*.deb
     for lib in ${LIBS}
@@ -107,6 +109,7 @@ case $1 in
     done
     ;;
   *)
+    OPTION="default"
     cc=gcc
     for lib in ${LIBS}
     do
@@ -115,5 +118,5 @@ case $1 in
     ;;
 esac
 cd ${CURRENT_DIRECTORY}
-echo "build process \`$1\` completed."
+echo "build process \`$OPTION\` completed."
 exit 0
