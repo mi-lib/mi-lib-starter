@@ -27,7 +27,7 @@ The libraries include:
 
 ## install
 
-You have two ways to install the mi-lib. Namely,
+You have two options to install the mi-lib. Namely,
  - to specify directories to install files
  - to install files as debian packages
 
@@ -43,13 +43,13 @@ Edit PREFIX in ./config in order to specify directory to install the files, if
 necessary. The default directory is ~/usr. In this case, header files and libraries
 are installed under ~/usr/include and ~/usr/lib, respectively.
 
-Do:
+Then, do:
    ```sh
-   % scripts/install_packages
+   % scripts/install
    ```
 to download source codes from the Git repositories as zipped files, or
    ```sh
-   % scripts/install_packages git
+   % scripts/install git
    ```
 to clone the Git repositories. In the former case, the information about the
 repositories is lost. It is followed by a process to compile and install the files.
@@ -58,18 +58,21 @@ repositories is lost. It is followed by a process to compile and install the fil
 
 Do:
    ```sh
-   % scripts/install_packages deb
+   % scripts/install deb
    ```
 to make .deb packages, which will be stored under deb/, and then, install them
 by dpkg. The files will be installed under /usr/ in this case.
 
 ## uninstall
 
-Do:
+If you have installed the libraries via dpkg as debian packages, do:
    ```sh
-   % scripts/uninstall_packages [deb]
+   % scripts/uninstall deb
    ```
-where deb option is valid only if the libraries are installed as debian packages.
+Otherwise, do
+   ```sh
+   % scripts/uninstall
+   ```
 
 --------------------------------------------------------------------------------
 # How to use libraries
@@ -99,6 +102,12 @@ If your code test.c uses RoKi, for example, it will be compiled into a.out by
 ```sh
 % gcc `roki-config --cflags` test.c `roki-config -l`
 ```
+
+--------------------------------------------------------------------------------
+## Contributers
+
+Tomomichi Sugihara
+Kenta Imanishi
 
 --------------------------------------------------------------------------------
 ## Contact
