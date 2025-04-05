@@ -1,0 +1,67 @@
+#!/bin/sh
+ROOT_DIRECTORY=$(realpath $(dirname $0)/../)
+FILE_DIRECTORY=$(realpath $(dirname $0))
+CURRENT_DIRECTORY=$(pwd)
+## read variables in config file.
+. ${ROOT_DIRECTORY}/config
+## read a list of libraries to build.
+. ${ROOT_DIRECTORY}/liblist
+
+## download zip files from GitHub repositories and unzip them.
+download_and_unzip(){
+  echo "downloading" ${lib} "..."
+  wget https://github.com/mi-lib/${lib}/archive/refs/heads/main.zip || exit 1
+  echo "unarchiving" ${lib} "..."
+  unzip main.zip
+  rm main.zip
+  rename 's/-main//' *-main
+}
+
+## git clone repositories
+git_clone_ssh(){
+  echo "cloning" ssh:${lib} "..."
+  git clone git@github.com:mi-lib/${lib}.git
+}
+
+## git clone repositories
+git_clone_https(){
+  echo "cloning" https:${lib} "..."
+  git clone https://github.com/mi-lib/${lib}.git
+}
+
+## git pull repositories
+git_pull(){
+  echo "pulling" ${lib} "..."
+  git pull
+}
+
+# main process
+cd ${ROOT_DIRECTORY}
+case $1 in
+  zip)
+    for lib in ${LIBS}
+    do
+      download_and_unzip
+    done
+    ;;
+  git-https)
+    for lib in ${LIBS}
+    do
+      git_clone_https
+    done
+    ;;
+  git-pull)
+    for lib in ${LIBS}
+    do
+      git_pull
+    done
+    ;;
+  *)
+    for lib in ${LIBS}
+    do
+      git_clone_ssh
+    done
+    ;;
+esac
+cd ${CURRENT_DIRECTORY}
+exit 0

@@ -1,0 +1,122 @@
+#!/bin/sh
+ROOT_DIRECTORY=$(realpath $(dirname $0)/../)
+FILE_DIRECTORY=$(realpath $(dirname $0))
+CURRENT_DIRECTORY=$(pwd)
+
+# read variables in config file.
+. ${ROOT_DIRECTORY}/config
+## read a list of libraries to build.
+. ${ROOT_DIRECTORY}/liblist
+
+## check if installer has to be run by the superuser
+SUDO=
+if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
+  SUDO="sudo"
+fi
+
+if [ -z ${PREFIX} ]; then
+  PREFIX=${HOME}/usr
+fi
+
+cc=
+std=
+debug=
+
+# compile
+compile(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    # udpate config file
+    if [ -n "${PREFIX}" ]; then
+        rm config;
+        cat config.org | sed -e "/^PREFIX/c\PREFIX=${PREFIX}" > config;
+    fi
+    if [ ! -f config ]; then
+        cp config.org config;
+    fi
+    # compile
+    make clean
+    if [ -n ${std} ]; then
+	    make CC=${cc} STD=${std} DEBUG=${debug} && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    else
+	    make CC=${cc} DEBUG=${debug} && ${SUDO} make install || ( echo  "failed to compile " ${lib}; exit 1 )
+    fi
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+# makedeb
+makedeb(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    make deb
+    ls
+    mv *.deb ../deb
+    cd -
+    sudo dpkg -i deb/${lib}-dev_*.*.*.deb
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+# makeclean
+makeclean(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    make clean
+    cd -
+  else
+    echo "cannot find directory" ${lib}
+    exit 1
+  fi
+}
+
+cd ${ROOT_DIRECTORY}
+
+OPTION=$1
+case $OPTION in
+  deb)
+    rm deb/*.deb
+    for lib in ${LIBS}
+    do
+      makedeb
+    done
+    ;;
+  clean)
+    for lib in ${LIBS}
+    do
+      makeclean
+    done
+    ;;
+  cpp)
+    cc=g++
+    std=c++17
+    for lib in ${LIBS}
+    do
+      compile
+    done
+    ;;
+  debug)
+    cc=gcc
+    debug=y
+    for lib in ${LIBS}
+    do
+      compile
+    done
+    ;;
+  *)
+    OPTION="default"
+    cc=gcc
+    for lib in ${LIBS}
+    do
+      compile
+    done
+    ;;
+esac
+cd ${CURRENT_DIRECTORY}
+echo "build process \`$OPTION\` completed."
+exit 0
