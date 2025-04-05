@@ -592,6 +592,7 @@ set_target_properties( dijkstra_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+
 add_executable( ieee_test
   zm/test/ieee_test.c
 )
@@ -608,6 +609,16 @@ add_executable( le_test
 target_include_directories( le_test PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( le_test PUBLIC ${ZM_TEST_LINK_LIB} )
 set_target_properties( le_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( mat_eig_test
+  zm/test/mat_eig_test.c
+)
+target_include_directories( mat_eig_test PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( mat_eig_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( mat_eig_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
@@ -672,6 +683,7 @@ set_target_properties( stat_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+
 add_executable( vec_test
   zm/test/vec_test.c
 )
@@ -726,6 +738,16 @@ add_executable( zm_ave
 target_include_directories( zm_ave PUBLIC ${ZM_INCLUDE_DIR})
 target_link_libraries( zm_ave PUBLIC ${ZM_APP_LINK_LIB} )
 set_target_properties( zm_ave PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
+)
+
+add_executable( zm_histogram
+  zm/app/zm_histogram.c
+)
+target_include_directories( zm_histogram PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( zm_histogram PUBLIC ${ZM_APP_LINK_LIB} )
+set_target_properties( zm_histogram PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_APP_OUTPUT_DIR}
 )
@@ -888,107 +910,6 @@ set_target_properties( condnum_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
 )
-
-add_executable( dqr_test
-  zm/example/eig/dqr_test.c
-)
-target_include_directories( dqr_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( dqr_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( dqr_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( eigsys_test
-  zm/example/eig/eigsys_test.c
-)
-target_include_directories( eigsys_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( eigsys_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( eigsys_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( eigsys_large_test
-  zm/example/eig/eigsys_large_test.c
-)
-target_include_directories( eigsys_large_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( eigsys_large_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( eigsys_large_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( hessenberg_test
-  zm/example/eig/hessenberg_test.c
-)
-target_include_directories( hessenberg_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( hessenberg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( hessenberg_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( jacobi_test_example
-  zm/example/eig/jacobi_test.c
-)
-target_include_directories( jacobi_test_example PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( jacobi_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( jacobi_test_example PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( power_test
-  zm/example/eig/power_test.c
-)
-target_include_directories( power_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( power_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( power_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( svd_large_test
-  zm/example/eig/svd_large_test.c
-)
-target_include_directories( svd_large_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( svd_large_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( svd_large_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( svd_maxmin_test
-  zm/example/eig/svd_maxmin_test.c
-)
-target_include_directories( svd_maxmin_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( svd_maxmin_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( svd_maxmin_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( svd_test
-  zm/example/eig/svd_test.c
-)
-target_include_directories( svd_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( svd_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( svd_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
-add_executable( sym_eig_test
-  zm/example/eig/sym_eig_test.c
-)
-target_include_directories( sym_eig_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( sym_eig_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( sym_eig_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_EIG_OUTPUT_DIR}
-)
-
 
 set(ZM_EXAMPLE_FOURIER_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/fourier"
@@ -1222,15 +1143,6 @@ set_target_properties( le_gen_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
 
-add_executable( le_mpnull_test
-  zm/example/le/le_mpnull_test.c
-)
-target_include_directories( le_mpnull_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( le_mpnull_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( le_mpnull_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
 
 add_executable( le_nullspace_test
   zm/example/le/le_nullspace_test.c
@@ -1262,72 +1174,12 @@ set_target_properties( le_sr_nullspace_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
 
-add_executable( lyapnov_test
-  zm/example/le/lyapnov_test.c
-)
-target_include_directories( lyapnov_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( lyapnov_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( lyapnov_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( mat_inv_test
-  zm/example/le/mat_inv_test.c
-)
-target_include_directories( mat_inv_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( mat_inv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( mat_inv_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
 add_executable( matdecomp_benchmark_test
   zm/example/le/matdecomp_benchmark_test.c
 )
 target_include_directories( matdecomp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( matdecomp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( matdecomp_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( mpinv_test
-  zm/example/le/mpinv_test.c
-)
-target_include_directories( mpinv_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( mpinv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( mpinv_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( mul_inv_test
-  zm/example/le/mul_inv_test.c
-)
-target_include_directories( mul_inv_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( mul_inv_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( mul_inv_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( sweep_out_test
-  zm/example/le/sweep_out_test.c
-)
-target_include_directories( sweep_out_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( sweep_out_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( sweep_out_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( tridiagonal_test
-  zm/example/le/tridiagonal_test.c
-)
-target_include_directories( tridiagonal_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( tridiagonal_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( tridiagonal_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
@@ -1517,6 +1369,16 @@ set_target_properties( line_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
 )
 
+add_executable( permutation_test
+  zm/example/misc/permutation_test.c
+)
+target_include_directories( permutation_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( permutation_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( permutation_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MISC_OUTPUT_DIR}
+)
+
 add_executable( sigmoid_test
   zm/example/misc/sigmoid_test.c
 )
@@ -1552,15 +1414,6 @@ set_target_properties( dm_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
 )
 
-# add_executable( lm_test
-#   zm/example/nle/lm_test.c
-# )
-# target_include_directories( lm_test PUBLIC ${ZM_INCLUDE_DIR} )
-# target_link_libraries( lm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-# set_target_properties( lm_test PROPERTIES
-#   LINKER_LANGUAGE CXX
-# )
-
 add_executable( single_test
   zm/example/nle/single_test.c
 )
@@ -1580,17 +1433,6 @@ set_target_properties( ss_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
 )
-
-add_executable( steffensen_test
-  zm/example/nle/steffensen_test.c
-)
-target_include_directories( steffensen_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( steffensen_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( steffensen_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NLE_OUTPUT_DIR}
-)
-
 
 set(ZM_EXAMPLE_NURBS_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/nurbs"
@@ -2376,16 +2218,6 @@ set(ZM_EXAMPLE_STAT_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/stat"
 )
 
-add_executable( combi_measure_test
-  zm/example/stat/combi_measure_test.c
-)
-target_include_directories( combi_measure_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( combi_measure_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( combi_measure_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
-)
-
 add_executable( distrib_test
   zm/example/stat/distrib_test.c
 )
@@ -2396,23 +2228,12 @@ set_target_properties( distrib_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
 )
 
-add_executable( histogram_test
+add_executable( histogram_test_example
   zm/example/stat/histogram_test.c
 )
-target_include_directories( histogram_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( histogram_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( histogram_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
-)
-
-
-add_executable( max_min_test
-  zm/example/stat/max_min_test.c
-)
-target_include_directories( max_min_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( max_min_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( max_min_test PROPERTIES
+target_include_directories( histogram_test_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( histogram_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( histogram_test_example PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
 )
@@ -2423,36 +2244,6 @@ add_executable( normaldistrib_test
 target_include_directories( normaldistrib_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( normaldistrib_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( normaldistrib_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
-)
-
-add_executable( pascal_test
-  zm/example/stat/pascal_test.c
-)
-target_include_directories( pascal_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( pascal_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( pascal_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
-)
-
-add_executable( perm_test
-  zm/example/stat/perm_test.c
-)
-target_include_directories( perm_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( perm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( perm_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
-)
-
-add_executable( sum_test
-  zm/example/stat/sum_test.c
-)
-target_include_directories( sum_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( sum_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( sum_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_STAT_OUTPUT_DIR}
 )
