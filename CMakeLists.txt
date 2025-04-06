@@ -877,11 +877,21 @@ set_target_properties( peak_test PROPERTIES
 )
 
 add_executable( ransac_test
-  zm/example/data/ransac_test.c
+  zm/example/mva/ransac_test.c
 )
 target_include_directories( ransac_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( ransac_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( ransac_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_DATA_OUTPUT_DIR}
+)
+
+add_executable( ransac_multi_test
+  zm/example/mva/ransac_multi_test.c
+)
+target_include_directories( ransac_multi_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ransac_multi_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ransac_multi_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_DATA_OUTPUT_DIR}
 )
@@ -1225,7 +1235,7 @@ set(ZM_EXAMPLE_MCA_OUTPUT_DIR
 )
 
 add_executable( cluster_gen_test
-  zm/example/mca/cluster_gen_test.c
+  zm/example/mva/cluster_gen_test.c
 )
 target_include_directories( cluster_gen_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( cluster_gen_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1235,7 +1245,7 @@ set_target_properties( cluster_gen_test PROPERTIES
 )
 
 add_executable( gmm_bic_test
-  zm/example/mca/gmm_bic_test.c
+  zm/example/mva/gmm_bic_test.c
 )
 target_include_directories( gmm_bic_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( gmm_bic_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1245,7 +1255,7 @@ set_target_properties( gmm_bic_test PROPERTIES
 )
 
 add_executable( gmm_lsm_test
-  zm/example/mca/gmm_lsm_test.c
+  zm/example/mva/gmm_lsm_test.c
 )
 target_include_directories( gmm_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( gmm_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1255,7 +1265,7 @@ set_target_properties( gmm_lsm_test PROPERTIES
 )
 
 add_executable( gng_test
-  zm/example/mca/gng_test.c
+  zm/example/mva/gng_test.c
 )
 target_include_directories( gng_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( gng_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1265,7 +1275,7 @@ set_target_properties( gng_test PROPERTIES
 )
 
 add_executable( kmeans_lsm_test
-  zm/example/mca/kmeans_lsm_test.c
+  zm/example/mva/kmeans_lsm_test.c
 )
 target_include_directories( kmeans_lsm_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( kmeans_lsm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1275,7 +1285,7 @@ set_target_properties( kmeans_lsm_test PROPERTIES
 )
 
 add_executable( kmeans_test
-  zm/example/mca/kmeans_test.c
+  zm/example/mva/kmeans_test.c
 )
 target_include_directories( kmeans_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( kmeans_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1285,7 +1295,7 @@ set_target_properties( kmeans_test PROPERTIES
 )
 
 add_executable( kmedoids_test
-  zm/example/mca/kmedoids_test.c
+  zm/example/mva/kmedoids_test.c
 )
 target_include_directories( kmedoids_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( kmedoids_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1295,7 +1305,7 @@ set_target_properties( kmedoids_test PROPERTIES
 )
 
 add_executable( pca_test
-  zm/example/mca/pca_test.c
+  zm/example/mva/pca_test.c
 )
 target_include_directories( pca_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( pca_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1305,7 +1315,7 @@ set_target_properties( pca_test PROPERTIES
 )
 
 add_executable( rand_test
-  zm/example/mca/rand_test.c
+  zm/example/mva/rand_test.c
 )
 target_include_directories( rand_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( rand_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1315,7 +1325,7 @@ set_target_properties( rand_test PROPERTIES
 )
 
 add_executable( xmeans_bic_test
-  zm/example/mca/xmeans_bic_test.c
+  zm/example/mva/xmeans_bic_test.c
 )
 target_include_directories( xmeans_bic_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( xmeans_bic_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
@@ -1325,7 +1335,7 @@ set_target_properties( xmeans_bic_test PROPERTIES
 )
 
 add_executable( xmeans_test
-  zm/example/mca/xmeans_test.c
+  zm/example/mva/xmeans_test.c
 )
 target_include_directories( xmeans_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( xmeans_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
