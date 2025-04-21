@@ -1,5 +1,10 @@
 #!/bin/sh
 
+ROOT_DIRECTORY=$(realpath $(dirname $0)/../)
+
+# read variables in config file.
+. ${ROOT_DIRECTORY}/config
+
 ## check if installer has to be run by the superuser
 SUDO=
 if [ `ls -ld ${PREFIX} | cut -d " " -f 3` != `whoami` ]; then
