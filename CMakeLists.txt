@@ -643,6 +643,16 @@ set_target_properties( zm_misc_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+add_executable( nurbs_test
+  zm/test/nurbs_test.c
+)
+target_include_directories( nurbs_test PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( nurbs_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( nurbs_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
 add_executable( pex_test
   zm/test/pex_test.c
 )
@@ -1478,12 +1488,22 @@ set_target_properties( nurbs_nn_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
 )
 
-add_executable( nurbs_test
+add_executable( nurbs_test__zm_example
   zm/example/nurbs/nurbs_test.c
 )
-target_include_directories( nurbs_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( nurbs_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( nurbs_test PROPERTIES
+target_include_directories( nurbs_test__zm_example PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_test__zm_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_test__zm_example PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
+)
+
+add_executable( nurbs_ztk_test
+  zm/example/nurbs/nurbs_ztk_test.c
+)
+target_include_directories( nurbs_ztk_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( nurbs_ztk_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_ztk_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_NURBS_OUTPUT_DIR}
 )
@@ -4019,12 +4039,12 @@ set_target_properties( nurbs_curve_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_NURBS_OUTPUT_DIR}
 )
 
-add_executable( nurbs_test_example
+add_executable( nurbs_test__zeo_example
   zeo/example/nurbs/nurbs_test.c
 )
-target_include_directories( nurbs_test_example PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( nurbs_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( nurbs_test_example PROPERTIES
+target_include_directories( nurbs_test__zeo_example PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( nurbs_test__zeo_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( nurbs_test__zeo_example PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_NURBS_OUTPUT_DIR}
 )
