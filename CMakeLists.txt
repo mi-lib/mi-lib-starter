@@ -970,6 +970,16 @@ set_target_properties( astar_dijkstra_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
 )
 
+add_executable( gng_test
+  zm/example/graph/gng_test.c
+)
+target_include_directories( gng_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( gng_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( gng_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_GRAPH_OUTPUT_DIR}
+)
+
 add_executable( graph_test
   zm/example/graph/graph_test.c
 )
@@ -1274,15 +1284,6 @@ set_target_properties( gmm_lsm_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
 )
 
-add_executable( gng_test
-  zm/example/mva/gng_test.c
-)
-target_include_directories( gng_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( gng_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( gng_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MCA_OUTPUT_DIR}
-)
 
 add_executable( kmeans_lsm_test
   zm/example/mva/kmeans_lsm_test.c
@@ -2283,22 +2284,22 @@ set(ZM_EXAMPLE_VEC_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/vec"
 )
 
+add_executable( rdp_test
+  zm/example/vec/rdp_test.c
+)
+target_include_directories( rdp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( rdp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( rdp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
+)
+
 add_executable( tree_test
   zm/example/vec/tree_test.c
 )
 target_include_directories( tree_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( tree_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( tree_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
-)
-
-add_executable( vec_norm_test
-  zm/example/vec/vec_norm_test.c
-)
-target_include_directories( vec_norm_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( vec_norm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( vec_norm_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_VEC_OUTPUT_DIR}
 )
