@@ -5261,7 +5261,7 @@ add_custom_command(TARGET phantomize_test
 )
 set_target_properties( phantomize_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_GL_EXAMPLE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_GL_EXAMPLE_CHAIN_OUTPUT_DIR}
 )
 add_custom_command(TARGET phantomize_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory
