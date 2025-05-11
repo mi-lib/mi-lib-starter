@@ -1,0 +1,33 @@
+﻿{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 17,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-default",
+      "displayName": "Windows x64 Debug",
+      "description": "Sets Ninja generator, compilers, x64 architecture, build and install directory, debug build type",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+        "CMAKE_C_COMPILER": "$env{VCINSTALLDIR}Tools/Llvm/x64/bin/clang-cl.exe",
+        "CMAKE_CXX_COMPILER": "$env{VCINSTALLDIR}Tools/Llvm/x64/bin/clang-cl.exe"
+      },
+      "toolset": "ClangCL",
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "intelliSenseMode": "windows-clang-x64"
+        }
+      }
+    }
+  ]
+}

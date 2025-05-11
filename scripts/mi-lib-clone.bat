@@ -52,8 +52,11 @@ exit /b 0
     set LIB=%1
     
     if "%LIB%"=="libxml2" (
-        echo git.exe clone -b 2.9 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
-        git.exe clone -b 2.9 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+        echo git.exe clone -b 2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+        git.exe clone -b 2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+    ) else if "%LIB%"=="glfw" (
+        echo git.exe clone -b 3.4 https://github.com/glfw/glfw.git %LIB%
+        git.exe clone -b 3.4 https://github.com/glfw/glfw.git %LIB%
     ) else (
         echo git.exe clone https://github.com/mi-lib/%LIB%.git
         git.exe clone https://github.com/mi-lib/%LIB%.git
@@ -65,12 +68,22 @@ exit /b 0
 :download_and_unzip
     echo download_and_unzip %LIB%
     set LIB=%1
-    
+
     if "%LIB%"=="libxml2" (
         set TAG=2.9
         set ZIP_FILENAME=%LIB%-%TAG%
-        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/2.9/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
-        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/2.9/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+    ) else if "%LIB%"=="glfw" (
+        set TAG=3.4
+        set ZIP_FILENAME=%LIB%-%TAG%
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
+    ) else if "%LIB%"=="glew" (
+        set TAG=2.2.0
+        set ZIP_FILENAME=%LIB%-%TAG%
+        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
+        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
     ) else (
         set BRANCH=main
         set ZIP_FILENAME=%LIB%-%BRANCH%
@@ -82,10 +95,10 @@ exit /b 0
     call powershell -command "Expand-Archive -Force %ZIP_FILENAME%.zip %CURDIR%"
     
     echo xcopy /Y/S/I %ZIP_FILENAME%\* %LIB%
-    xcopy /Y/S/I %ZIP_FILENAME%\* %LIB%
+    xcopy /Y/S/I %CURDIR%\%ZIP_FILENAME%\* %LIB%
     
     echo rmdir /s/q %ZIP_FILENAME%
-    rmdir /s/q %ZIP_FILENAME%
+    rmdir /s/q %CURDIR%\%ZIP_FILENAME%
     
     exit /b 0
 

@@ -9,6 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if (MSVC)
   message("BUILD_TARGET_OS is windows")
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+  set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
   unset(CMAKE_C_FLAGS)
   unset(CMAKE_C_FLAGS_DEBUG)
   unset(CMAKE_C_FLAGS_RELEASE)
@@ -19,6 +20,7 @@ if (MSVC)
   set(CLANG_CL_PATH "$ENV{VCINSTALLDIR}Tools/Llvm/x64/bin/clang-cl.exe")
   string(REPLACE "\\" "/" CLANG_CL_PATH ${CLANG_CL_PATH})
 
+  add_compile_definitions(_ALLOW_KEYWORD_MACROS)
   # set(CMAKE_C_COMPILER ${CLANG_CL_PATH})
   # set(CMAKE_CXX_COMPILER ${CLANG_CL_PATH})
 endif()
@@ -50,6 +52,51 @@ else()
   message(STATUS "LIBXML2_INCLUDE_DIRECTORY = ${LIBXML2_INCLUDE_DIRECTORY}")
   return()
 endif()
+
+
+# libglew ----------------------------------------------------------------------
+
+if (MSVC)
+  set(GLEW_INCLUDE_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/glew/include
+  )
+  set(GLEW_LIBRARIES
+    ${PROJECT_SOURCE_DIR}/glew/lib/Release/x64/glew32.lib
+  )
+  set(GLEW_DLL_LIBRARIES
+    ${PROJECT_SOURCE_DIR}/glew/bin/Release/x64/glew32.dll
+  )
+endif()
+
+# libglfw ----------------------------------------------------------------------
+
+#find_package(glfw REQUIRED)
+#find_package(GLFW REQUIRED)
+
+# set(BUILD_SHARED_LIBS ON)
+if (MSVC)
+  set(GLFW_BUILD_EXAMPLES OFF)
+  set(GLFW_BUILD_TESTS OFF)
+  set(GLFW_BUILD_DOCS OFF)
+  set(GLFW_BUILD_WIN32 ON)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+
+  add_subdirectory(glfw)
+
+  set(GLFW_INCLUDE_DIRECTORY
+    ${PROJECT_SOURCE_DIR}/glfw/include
+  )
+
+  if(TARGET glfw)
+    message(STATUS "target GLFW is found.")
+    message(STATUS "GLFW_INCLUDE_DIRECTORY = ${GLFW_INCLUDE_DIRECTORY}")
+  else()
+    message(FATAL_ERROR "target glfw is not found.")
+    message(STATUS "GLFW_INCLUDE_DIRECTORY = ${GLFW_INCLUDE_DIRECTORY}")
+    return()
+  endif()
+endif()
+
 
 
 # mi-lib ----------------------------------------------------------------------
@@ -4672,11 +4719,6 @@ set_target_properties( rk_mp PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
-add_custom_command(TARGET rk_mp
-  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki/app/test.zv
-  $<TARGET_FILE_DIR:rk_mp>/
-)
 
 add_executable( urdf2ztk
   roki/app/urdf2ztk.c
@@ -5165,8 +5207,82 @@ target_include_directories(roki-gl PUBLIC ${ROKI_GL_INCLUDE_DIR})
 
 add_dependencies(roki-gl roki zeo zm zeda LibXml2)
 
-target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW )
+if (MSVC)
+  target_include_directories(roki-gl PUBLIC
+      ${GLEW_INCLUDE_DIRECTORY}
+      ${GLFW_INCLUDE_DIRECTORY}
+  )
+  target_compile_definitions(roki-gl PUBLIC __ROKI_GL_USE_GLEW=1)
+  add_custom_command(TARGET roki-gl
+    POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+    ${GLEW_LIBRARIES}
+    ${GLEW_DLL_LIBRARIES}
+    $<TARGET_FILE_DIR:roki-gl>/
+  )
+  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 OpenGL32 GLU32 glfw ${GLEW_LIBRARIES})
+else()
+  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW )
+endif()
 
+
+# roki-gl example ------------------------------------------------------------------
+
+set(ROKI_GL_EXAMPLE_LINK_LIB
+  roki-gl
+  roki
+  zeo
+  zm
+  zeda
+  LibXml2
+)
+
+message(STATUS "ROKI_GL_EXAMPLE_LINK_LIB=${ROKI_GL_EXAMPLE_LINK_LIB}")
+
+set(ROKI_GL_EXAMPLE_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki-gl/example"
+)
+
+file(GLOB_RECURSE ROKI_GL_EXAMPLE_SOURCES
+  roki-gl/example/?*.c
+)
+# message(STATUS "ROKI_GL_EXAMPLE_SOURCES=${ROKI_GL_EXAMPLE_SOURCES}")
+set_source_files_properties(${ROKI_GL_EXAMPLE_SOURCES} PROPERTIES LANGUAGE CXX )
+
+add_executable( phantomize_test
+  roki-gl/example/chain/phantomize_test.c
+)
+target_link_libraries( phantomize_test PUBLIC ${ROKI_GL_EXAMPLE_LINK_LIB} )
+set(ROKI_GL_EXAMPLE_CHAIN_OUTPUT_DIR
+  "${PROJECT_SOURCE_DIR}/build/bin/roki-gl/example/chain"
+)
+add_custom_command(TARGET phantomize_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory
+  ${ROKI_GL_EXAMPLE_CHAIN_OUTPUT_DIR}
+)
+set_target_properties( phantomize_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ROKI_GL_EXAMPLE_OUTPUT_DIR}
+)
+add_custom_command(TARGET phantomize_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory
+  ${ROKI_GL_EXAMPLE_OUTPUT_DIR}/model/
+)
+add_custom_command(TARGET phantomize_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/armadillo.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/box.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/bunny.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/dragon.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/ellipsoid.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/happy_buddha.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/lathe.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/prism.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/puma.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/pyramid.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/scc.ztk
+  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/torus.ztk
+  ${ROKI_GL_EXAMPLE_OUTPUT_DIR}/model/
+)
 
 # test include & link ------------------------------------------------------------------
 
