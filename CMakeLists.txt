@@ -5269,12 +5269,9 @@ add_custom_command(TARGET phantomize_test
 )
 add_custom_command(TARGET phantomize_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/armadillo.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/box.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/bunny.ztk
-  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/dragon.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/ellipsoid.ztk
-  ${PROJECT_SOURCE_DIR}/roki-gl/example/model/happy_buddha.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/lathe.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/prism.ztk
   ${PROJECT_SOURCE_DIR}/roki-gl/example/model/puma.ztk
