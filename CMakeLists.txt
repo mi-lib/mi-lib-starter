@@ -10,6 +10,8 @@ if (MSVC)
   message("BUILD_TARGET_OS is windows")
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
   set(USE_MSVC_RUNTIME_LIBRARY_DLL ON)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+
   unset(CMAKE_C_FLAGS)
   unset(CMAKE_C_FLAGS_DEBUG)
   unset(CMAKE_C_FLAGS_RELEASE)
@@ -79,7 +81,7 @@ if (MSVC)
   set(GLFW_BUILD_TESTS OFF)
   set(GLFW_BUILD_DOCS OFF)
   set(GLFW_BUILD_WIN32 ON)
-  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
   add_subdirectory(glfw)
 
