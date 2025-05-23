@@ -4776,9 +4776,13 @@ set_target_properties( body_angularmomentum_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 add_custom_command(TARGET body_angularmomentum_test
+  POST_BUILD COMMAND ${CMAKE_COMMAND} -E make_directory
+  ${ROKI_EXAMPLE_OUTPUT_DIR}/model
+)
+add_custom_command(TARGET body_angularmomentum_test
   PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory
   ${PROJECT_SOURCE_DIR}/roki/example/model
-  ${ROKI_EXAMPLE_OUTPUT_DIR}/
+  ${ROKI_EXAMPLE_OUTPUT_DIR}/model
 )
 
 add_executable( body_com_test

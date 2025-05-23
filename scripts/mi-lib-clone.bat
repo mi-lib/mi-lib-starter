@@ -52,8 +52,8 @@ exit /b 0
     set LIB=%1
     
     if "%LIB%"=="libxml2" (
-        echo git.exe clone -b 2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
-        git.exe clone -b 2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+        echo git.exe clone -b v2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
+        git.exe clone -b v2.14.2 https://gitlab.gnome.org/GNOME/libxml2.git %LIB%
     ) else if "%LIB%"=="glfw" (
         echo git.exe clone -b 3.4 https://github.com/glfw/glfw.git %LIB%
         git.exe clone -b 3.4 https://github.com/glfw/glfw.git %LIB%
@@ -70,7 +70,7 @@ exit /b 0
     set LIB=%1
 
     if "%LIB%"=="libxml2" (
-        set TAG=2.9
+        set TAG=v2.14.2
         set ZIP_FILENAME=%LIB%-%TAG%
         echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
         bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
