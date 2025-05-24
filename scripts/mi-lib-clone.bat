@@ -38,6 +38,7 @@ for %%d in ( %LIBS% ) do (
         echo %%d directory already exists.
         call :download_and_unzip %%d
     )
+    call scripts\mi-lib-export-header.bat
 )
 
 
