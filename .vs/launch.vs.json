@@ -1,0 +1,15 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "mi-lib-starter_test.exe (${workspaceRoot}\\build\\bin\\mi-lib-starter_test.exe)",
+      "name": "mi-lib-starter_test.exe",
+      "env": {
+        "PATH": "%PATH%;${workspaceRoot}\\build\\lib"
+      }
+    }
+  ]
+}
