@@ -33,12 +33,12 @@ Visual Studio を使用して mi-lib を使用したい人向け。
 1. コマンドプロンプトを開き、本リポジトリのトップディレクトリへ移動しておく。
 2. トップディレクトリにて以下のようにバッチファイルを実行。   
     ```
-    > scripts\mi-lib-clone.bat
+    > scripts\win-download.bat
     ``` 
 
 内部処理では、もしもリポジトリのフォルダが何もなければクローンによりダウンロードし、そうではなく既にリポジトリのフォルダが存在していれば、zipをダウンロードしフォルダへ展開する。
 
-- 成功すれば、以下のリポジトリ群がトップディレクトリにクローンされる。
+- 成功すれば、以下のリポジトリ群がトップディレクトリにダウンロードされる。
   - libxml2
   - zeda
   - zm
@@ -57,7 +57,8 @@ Visual Studio を使用して mi-lib を使用したい人向け。
   - ``nuez/include/neuz/neuz_export.h``
   - ``dzco/include/dzco/dzco_export.h``
   - ``roki/include/roki/roki_export.h``
-  - ``roki-gl/include/roki_gl/roki_gl.h``
+  - ``roki-df/include/roki_fd/roki_fd_export.h``
+  - ``roki-gl/include/roki_gl/roki_gl_export.h``
 
 &nbsp;
 
@@ -85,7 +86,7 @@ Visual Studio を使用して mi-lib を使用したい人向け。
 
 ## 4. サンプルの実行手順
 
-以下に実行手順の例を記述しておく。
+以下にサンプルの実行手順の例示。
 
 ### 4.1. (パターン1) Visual Studio 上でのデバッグ実行
 
@@ -121,13 +122,13 @@ Visual Studio を使用して mi-lib を使用したい人向け。
 
 ### 4.2. (パターン2) コマンドプロンプト上での実行
 
-Windowsの環境変数 `%PATH%` にライブラリへのパスを通して実行する。通すための batファイルを用意している。
+Windowsの環境変数 `%PATH%` にライブラリへのパスを通して実行する。そのための batファイルを用意している。
 
 1. コマンドプロンプトを開き、本リポジトリのトップディレクトリへ移動しておく。
-2. ``mi-lib-set-env-path.bat`` を一度実行する。  
+2. ``win-set-env-path.bat`` を一度実行する。  
     たとえば、トップディレクトリから以下のように実行する。  
     ```
-    > scripts\mi-lib-set-env-path.bat
+    > scripts\win-set-env-path.bat
     ```  
     これにより、生成されたライブラリへのパスが環境変数 PATH に追記される(本コマンドプロンプト端末上でのみ有効)。    
 3. テスト/サンプル/アプリを実行する。  

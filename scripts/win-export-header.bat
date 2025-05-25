@@ -15,7 +15,7 @@ echo CURDIR=%CURDIR%
 
 if not exist %CONFIG% (
     echo Not exists '%CONFIG%' in current direcotry : %CURDIR% .
-    echo Try 'scripts\mi-llb-export-header.bat'
+    echo Try 'scripts\win-export-header.bat'
     exit /b 1
 )
 
@@ -37,7 +37,7 @@ for %%d in ( %LIBS% ) do (
         cd ../
     ) else (
         echo WARNING : directory %%d not exists!!
-        echo ... Try 'scripts\mi-lib-clone.bat'
+        echo ... Try 'scripts\win-clone.bat'
     )
 
     echo ======
