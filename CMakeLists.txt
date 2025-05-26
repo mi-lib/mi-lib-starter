@@ -5214,13 +5214,7 @@ if (MSVC)
       ${GLFW_INCLUDE_DIRECTORY}
   )
   target_compile_definitions(roki-gl PUBLIC __ROKI_GL_USE_GLEW=1)
-  add_custom_command(TARGET roki-gl
-    POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
-    ${GLEW_LIBRARIES}
-    ${GLEW_DLL_LIBRARIES}
-    $<TARGET_FILE_DIR:roki-gl>/
-  )
-  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 OpenGL32 GLU32 glfw glew32.lib)
+  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 OpenGL32 GLU32 glfw ${GLEW_LIBRARIES})
 else()
   target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW)
 endif()
