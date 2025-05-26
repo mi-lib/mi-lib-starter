@@ -72,16 +72,11 @@ endif()
 
 # libglfw ----------------------------------------------------------------------
 
-#find_package(glfw REQUIRED)
-#find_package(GLFW REQUIRED)
-
-# set(BUILD_SHARED_LIBS ON)
 if (MSVC)
   set(GLFW_BUILD_EXAMPLES OFF)
   set(GLFW_BUILD_TESTS OFF)
   set(GLFW_BUILD_DOCS OFF)
   set(GLFW_BUILD_WIN32 ON)
-  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
   add_subdirectory(glfw)
 
@@ -5225,9 +5220,9 @@ if (MSVC)
     ${GLEW_DLL_LIBRARIES}
     $<TARGET_FILE_DIR:roki-gl>/
   )
-  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 OpenGL32 GLU32 glfw ${GLEW_LIBRARIES})
+  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 OpenGL32 GLU32 glfw glew32.lib)
 else()
-  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW )
+  target_link_libraries(roki-gl PUBLIC roki zeo zm zeda LibXml2 GL GLU glfw jpeg tiff z png GLEW)
 endif()
 
 
