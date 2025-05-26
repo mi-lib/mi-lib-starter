@@ -74,7 +74,7 @@ else()
 
   # source package
   # (LibXml2 is Defined at the libxml2/CMakeLists.txt)
-  add_subdirectory(${PROJECT_SOURCE_DIR}/libxml2)
+  add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/../libxml2)
 
   # target_compile_options(
   #   LibXml2 PUBLIC
@@ -83,7 +83,7 @@ else()
   # )
 
   set(LIBXML2_INCLUDE_DIRECTORY
-    ${PROJECT_SOURCE_DIR}/libxml2/include
+    ${CMAKE_CURRENT_LIST_DIR}/../libxml2/include
   )
 
 endif()
