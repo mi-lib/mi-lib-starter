@@ -4384,6 +4384,8 @@ add_library(roki SHARED
   # ${ROKI_HEADERS}
 )
 
+add_compile_definitions(__ROKI_USE_URDF true)
+
 target_precompile_headers(roki PUBLIC ${ROKI_HEADERS})
 
 target_compile_definitions(roki PRIVATE __ROKI_BUILD_DLL__)
