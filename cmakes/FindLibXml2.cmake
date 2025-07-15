@@ -37,6 +37,7 @@ find_package_handle_standard_args(XML2
   REQUIRED_VARS
     XML2_INCLUDE_DIR
     XML2_LIBRARY
+  NAME_MISMATCHED
 )
 
 # if Found xml2 And if name "LibXml2" is not defined
