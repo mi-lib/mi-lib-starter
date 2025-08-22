@@ -707,6 +707,36 @@ set_target_properties( pex_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+add_executable( opt_lp_test
+  zm/test/opt_lp_test.c
+)
+target_include_directories( opt_lp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( opt_lp_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( opt_lp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( opt_lcp_test
+  zm/test/opt_lcp_test.c
+)
+target_include_directories( opt_lcp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( opt_lcp_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( opt_lcp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+add_executable( opt_qp_test
+  zm/test/opt_qp_test.c
+)
+target_include_directories( opt_qp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( opt_qp_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( opt_qp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
 add_executable( raw_mat_test
   zm/test/raw_mat_test.c
 )
@@ -1837,27 +1867,6 @@ set_target_properties( opt_benchmark_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
 )
-
-add_executable( qp_benchmark_test
-  zm/example/opt/qp_benchmark_test.c
-)
-target_include_directories( qp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( qp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( qp_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
-)
-
-add_executable( qp_test
-  zm/example/opt/qp_test.c
-)
-target_include_directories( qp_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( qp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( qp_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
-)
-
 
 set(ZM_EXAMPLE_OSCILLATOR_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/oscillator"
