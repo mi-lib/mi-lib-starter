@@ -2380,9 +2380,9 @@ set_target_properties( vec_sort_test PROPERTIES
 
 # neuz ----------------------------------------------------------------------
 
+
 file(GLOB NEUZ_SOURCES
-  neuz/src/neuz_activator.c
-  neuz/src/neuz_neuron.c
+  neuz/src/?*.c
 )
 
 set_source_files_properties(${NEUZ_SOURCES} PROPERTIES LANGUAGE CXX)
