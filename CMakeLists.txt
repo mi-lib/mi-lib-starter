@@ -59,15 +59,35 @@ endif()
 # libglew ----------------------------------------------------------------------
 
 if (MSVC)
-  set(GLEW_INCLUDE_DIRECTORY
+  set(GLEW_INCLUDE_DIRECTORY 
     ${PROJECT_SOURCE_DIR}/glew/include
   )
-  set(GLEW_LIBRARIES
-    ${PROJECT_SOURCE_DIR}/glew/lib/Release/x64/glew32.lib
+  set(GLEW_ORIGINAL_LIB_PATH
+      ${PROJECT_SOURCE_DIR}/glew/lib/Release/x64/glew32.lib
   )
-  set(GLEW_DLL_LIBRARIES
+  if(EXISTS ${GLEW_ORIGINAL_LIB_PATH})
+    execute_process(COMMAND ${CMAKE_COMMAND} -E copy
+      ${GLEW_ORIGINAL_LIB_PATH} ${LIBRARY_OUTPUT_PATH}/
+    )
+    set(GLEW_LIBRARIES
+      ${LIBRARY_OUTPUT_PATH}/glew32.lib
+    )
+  else()
+    message(FATAL_ERROR "Not Found ${GLEW_ORIGINAL_LIB_PATH} !!")
+  endif()
+  set(GLEW_ORIGINAL_DLL_LIBRARIES
     ${PROJECT_SOURCE_DIR}/glew/bin/Release/x64/glew32.dll
   )
+  if(EXISTS ${GLEW_ORIGINAL_DLL_LIBRARIES})
+    execute_process(COMMAND ${CMAKE_COMMAND} -E copy
+      ${GLEW_ORIGINAL_DLL_LIBRARIES} ${LIBRARY_OUTPUT_PATH}/
+    )
+    set(GLEW_DLL_LIBRARIES
+      ${LIBRARY_OUTPUT_PATH}/glew32.dll
+    )
+  else()
+    message(FATAL_ERROR "Not Found ${GLEW_ORIGINAL_DLL_PATH} !!")
+  endif()
 endif()
 
 # libglfw ----------------------------------------------------------------------
