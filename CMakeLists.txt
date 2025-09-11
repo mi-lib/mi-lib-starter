@@ -3071,6 +3071,8 @@ target_precompile_headers(zeo PUBLIC ${ZEO_HEADERS})
 
 target_compile_definitions(zeo PRIVATE __ZEO_BUILD_DLL__)
 
+add_compile_definitions(__ZEO_USE_DAE true)
+
 if (MSVC)
   # default C version is ANSI C89/90 at MSVC
   target_compile_definitions(zeo PRIVATE _CRT_SECURE_NO_WARNINGS)
