@@ -3292,6 +3292,15 @@ set_target_properties( sphere_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
+add_executable( ph_test
+  zeo/test/ph_test.c
+)
+target_link_libraries( ph_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( ph_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
 add_executable( vec3d_data_test
   zeo/test/vec3d_data_test.c
 )
@@ -3627,6 +3636,16 @@ set_target_properties( aabb_tri_intersect_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
 )
 
+add_executable( aabox_sphere_colchk_test
+  zeo/example/colchk/aabox_sphere_colchk_test.c
+)
+target_include_directories( aabox_sphere_colchk_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( aabox_sphere_colchk_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( aabox_sphere_colchk_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
+)
+
 add_executable( box_colchk_test
   zeo/example/colchk/box_colchk_test.c
 )
@@ -3707,12 +3726,12 @@ set_target_properties( ph_intersect_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
 )
 
-add_executable( vast_colchk_test
-  zeo/example/colchk/vast_colchk_test.c
+add_executable( colchk_benchmark_test
+  zeo/example/colchk/colchk_benchmark_test.c
 )
-target_include_directories( vast_colchk_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( vast_colchk_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( vast_colchk_test PROPERTIES
+target_include_directories( colchk_benchmark_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( colchk_benchmark_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( colchk_benchmark_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
 )
@@ -3803,56 +3822,6 @@ add_executable( ellips2d_closest_test
 target_include_directories( ellips2d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( ellips2d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( ellips2d_closest_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( tri2d_point_is_inside_test
-  zeo/example/elem/tri2d_point_is_inside_test.c
-)
-target_include_directories( tri2d_point_is_inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tri2d_point_is_inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tri2d_point_is_inside_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( tri3d_align_test
-  zeo/example/elem/tri3d_align_test.c
-)
-target_include_directories( tri3d_align_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tri3d_align_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tri3d_align_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( tri3d_closest_test
-  zeo/example/elem/tri3d_closest_test.c
-)
-target_include_directories( tri3d_closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tri3d_closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tri3d_closest_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( tri3d_point_is_inside_test
-  zeo/example/elem/tri3d_point_is_inside_test.c
-)
-target_include_directories( tri3d_point_is_inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tri3d_point_is_inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tri3d_point_is_inside_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
-)
-
-add_executable( tri3d_point_test
-  zeo/example/elem/tri3d_point_test.c
-)
-target_include_directories( tri3d_point_test PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( tri3d_point_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( tri3d_point_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_ELEM_OUTPUT_DIR}
 )
