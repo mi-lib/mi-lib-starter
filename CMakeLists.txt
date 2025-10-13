@@ -4802,43 +4802,6 @@ set_target_properties( body_wrench_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( combine_test
-  roki/example/body/combine_test.c
-)
-target_link_libraries( combine_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( combine_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( body_contig_test
-  roki/example/body/contig_test.c
-)
-target_link_libraries( body_contig_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( body_contig_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( mp_xform_test
-  roki/example/body/mp_xform_test.c
-)
-target_link_libraries( mp_xform_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( mp_xform_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( org_inertia_test
-  roki/example/body/org_inertia_test.c
-)
-target_link_libraries( org_inertia_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( org_inertia_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-
 add_executable( cd_test
   roki/example/cd/cd_test.c
 )
