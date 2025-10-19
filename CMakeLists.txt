@@ -3746,6 +3746,15 @@ set_target_properties( veclist_plane_intersect_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
 )
 
+add_executable( ph_box_contact_test
+  zeo/example/colchk/ph_box_contact_test.c
+)
+target_include_directories( ph_box_contact_test PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( ph_box_contact_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( ph_box_contact_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_COLCHK_OUTPUT_DIR}
+)
 
 set(ZEO_EXAMPLE_COLOR_OUTPUT_DIR
   "${ZEO_EXAMPLE_OUTPUT_DIR}/color"
