@@ -357,12 +357,33 @@ set(ZEDA_EXAMPLE_OUTPUT_DIR
 
 file(GLOB_RECURSE ZEDA_EXAMPLE_SOURCES
   zeda/example/?*.c
+  zeda/example/?*.cpp
 )
 # message(STATUS "ZEDA_EXAMPLE_SOURCES=${ZEDA_EXAMPLE_SOURCES}")
 set_source_files_properties(${ZEDA_EXAMPLE_SOURCES} PROPERTIES LANGUAGE CXX )
 
 set(ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/array"
+)
+
+add_executable( array_cpp_test
+  zeda/example/array/array_cpp_test.cpp
+)
+target_include_directories( array_cpp_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array_cpp_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array_cpp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
+)
+
+add_executable( array2_cpp_test
+  zeda/example/array/array2_cpp_test.cpp
+)
+target_include_directories( array2_cpp_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( array2_cpp_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( array2_cpp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ARRAY_OUTPUT_DIR}
 )
 
 add_executable( array_quicksort_test
@@ -393,6 +414,16 @@ set_target_properties( csv_test PROPERTIES
 
 set(ZEDA_EXAMPLE_LIST_OUTPUT_DIR
   "${ZEDA_EXAMPLE_OUTPUT_DIR}/list"
+)
+
+add_executable( list_cpp_test
+  zeda/example/list/list_cpp_test.cpp
+)
+target_include_directories( list_cpp_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( list_cpp_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( list_cpp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_LIST_OUTPUT_DIR}
 )
 
 add_executable( list_purge_test
@@ -498,15 +529,25 @@ set_target_properties( ztk_count_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
 )
-
 add_custom_command(TARGET ztk_count_test
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
   ${PROJECT_SOURCE_DIR}/zeda/example/ztk/calcurator.ztk
   ${PROJECT_SOURCE_DIR}/zeda/example/ztk/counttest.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/tag_test.ztk
   ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test1.ztk
   ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test2.ztk
   ${PROJECT_SOURCE_DIR}/zeda/example/ztk/test3.ztk
+  ${PROJECT_SOURCE_DIR}/zeda/example/ztk/print_test.ztk
   $<TARGET_FILE_DIR:ztk_count_test>/
+)
+add_executable( ztk_cpp_parse_test
+  zeda/example/ztk/ztk_cpp_parse_test.cpp
+)
+target_include_directories( ztk_cpp_parse_test PUBLIC ${ZEDA_INCLUDE_DIR})
+target_link_libraries( ztk_cpp_parse_test PUBLIC ${ZEDA_EXAMPLE_LINK_LIB} )
+set_target_properties( ztk_cpp_parse_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEDA_EXAMPLE_ZTK_OUTPUT_DIR}
 )
 
 add_executable( ztk_eval_test
@@ -2518,6 +2559,15 @@ add_custom_command(TARGET xor_test
   ${PROJECT_SOURCE_DIR}/neuz/example/xor.ztk
   $<TARGET_FILE_DIR:xor_test>/
 )
+add_executable( xor_cpp_test
+  neuz/example/xor_cpp_test.cpp
+)
+target_include_directories( xor_cpp_test PUBLIC ${NEUZ_INCLUDE_DIR} )
+target_link_libraries( xor_cpp_test PUBLIC ${NEUZ_EXAMPLE_LINK_LIB} )
+set_target_properties( xor_cpp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${NEUZ_EXAMPLE_OUTPUT_DIR}
+)
 
 # dzco ----------------------------------------------------------------------
 
@@ -3108,6 +3158,7 @@ set(ZEO_TEST_OUTPUT_DIR
 
 file(GLOB ZEO_TEST_SOURCES
   zeo/test/?*.c
+  zeo/test/?*.cpp
 )
 set_source_files_properties(${ZEO_TEST_SOURCES} PROPERTIES LANGUAGE CXX )
 
@@ -3153,6 +3204,15 @@ add_executable( coord2d_test
 )
 target_link_libraries( coord2d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
 set_target_properties( coord2d_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
+add_executable( cpp_vec3d_data_test
+  zeo/test/cpp_vec3d_data_test.cpp
+)
+target_link_libraries( cpp_vec3d_data_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( cpp_vec3d_data_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
