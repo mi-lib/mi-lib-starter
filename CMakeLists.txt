@@ -718,6 +718,16 @@ set_target_properties( le_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+add_executable( mat_decomp_test
+  zm/test/mat_decomp_test.c
+)
+target_include_directories( mat_decomp_test PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( mat_decomp_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( mat_decomp_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
 add_executable( mat_eig_test
   zm/test/mat_eig_test.c
 )
@@ -1288,37 +1298,6 @@ set_target_properties( hotelling_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
 
-add_executable( le_benchmark_test
-  zm/example/le/le_benchmark_test.c
-)
-target_include_directories( le_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( le_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( le_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( le_gen_benchmark_test
-  zm/example/le/le_gen_benchmark_test.c
-)
-target_include_directories( le_gen_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( le_gen_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( le_gen_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-
-add_executable( le_nullspace_test
-  zm/example/le/le_nullspace_test.c
-)
-target_include_directories( le_nullspace_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( le_nullspace_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( le_nullspace_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
 add_executable( le_ref_test
   zm/example/le/le_ref_test.c
 )
@@ -1328,27 +1307,6 @@ set_target_properties( le_ref_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
 )
-
-add_executable( le_sr_nullspace_test
-  zm/example/le/le_sr_nullspace_test.c
-)
-target_include_directories( le_sr_nullspace_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( le_sr_nullspace_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( le_sr_nullspace_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
-add_executable( matdecomp_benchmark_test
-  zm/example/le/matdecomp_benchmark_test.c
-)
-target_include_directories( matdecomp_benchmark_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( matdecomp_benchmark_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( matdecomp_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_LE_OUTPUT_DIR}
-)
-
 
 set(ZM_EXAMPLE_MAT_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/mat"
@@ -1370,16 +1328,6 @@ add_executable( mat_norm_test
 target_include_directories( mat_norm_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( mat_norm_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( mat_norm_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MAT_OUTPUT_DIR}
-)
-
-add_executable( mat_reg_test
-  zm/example/mat/mat_reg_test.c
-)
-target_include_directories( mat_reg_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( mat_reg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( mat_reg_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_MAT_OUTPUT_DIR}
 )
@@ -1649,46 +1597,6 @@ set(ZM_EXAMPLE_ODE_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/ode"
 )
 
-add_executable( adams_test
-  zm/example/ode/adams_test.c
-)
-target_include_directories( adams_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( adams_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( adams_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( beuler_test
-  zm/example/ode/beuler_test.c
-)
-target_include_directories( beuler_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( beuler_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( beuler_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( cmp_test_example
-  zm/example/ode/cmp_test.c
-)
-target_include_directories( cmp_test_example PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( cmp_test_example PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( cmp_test_example PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( cmp2_test
-  zm/example/ode/cmp2_test.c
-)
-target_include_directories( cmp2_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( cmp2_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( cmp2_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
 add_executable( cmp_dc_test
   zm/example/ode/cmp_dc_test.c
 )
@@ -1724,136 +1632,35 @@ add_custom_command(TARGET dualpend_test
   $<TARGET_FILE_DIR:dualpend_test>/
 )
 
-add_executable( euler_test
-  zm/example/ode/euler_test.c
+add_executable( ode2_cmp_test
+  zm/example/ode/ode2_cmp_test.c
 )
-target_include_directories( euler_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( euler_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( euler_test PROPERTIES
+target_include_directories( ode2_cmp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode2_cmp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode2_cmp_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
 )
 
-add_executable( gauss_test
-  zm/example/ode/gauss_test.c
+add_executable( ode_cmp_circle_test
+  zm/example/ode/ode_cmp_circle_test.c
 )
-target_include_directories( gauss_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( gauss_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( gauss_test PROPERTIES
+target_include_directories( ode_cmp_circle_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode_cmp_circle_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode_cmp_circle_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
 )
 
-add_executable( gear_test
-  zm/example/ode/gear_test.c
+add_executable( ode_cmp_exp_test
+  zm/example/ode/ode_cmp_exp_test.c
 )
-target_include_directories( gear_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( gear_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( gear_test PROPERTIES
+target_include_directories( ode_cmp_exp_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( ode_cmp_exp_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( ode_cmp_exp_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
 )
-
-add_executable( heun_test
-  zm/example/ode/heun_test.c
-)
-target_include_directories( heun_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( heun_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( heun_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( ode2_leapfrog_test
-  zm/example/ode/ode2_leapfrog_test.c
-)
-target_include_directories( ode2_leapfrog_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( ode2_leapfrog_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( ode2_leapfrog_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( ode2_regular_test
-  zm/example/ode/ode2_regular_test.c
-)
-target_include_directories( ode2_regular_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( ode2_regular_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( ode2_regular_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( ode2_sympl_test
-  zm/example/ode/ode2_sympl_test.c
-)
-target_include_directories( ode2_sympl_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( ode2_sympl_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( ode2_sympl_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( radau_test
-  zm/example/ode/radau_test.c
-)
-target_include_directories( radau_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( radau_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( radau_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( rk4_test
-  zm/example/ode/rk4_test.c
-)
-target_include_directories( rk4_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( rk4_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( rk4_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( rk5_test
-  zm/example/ode/rk5_test.c
-)
-target_include_directories( rk5_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( rk5_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( rk5_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( rkf45_test
-  zm/example/ode/rkf45_test.c
-)
-target_include_directories( rkf45_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( rkf45_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( rkf45_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( rkg_test
-  zm/example/ode/rkg_test.c
-)
-target_include_directories( rkg_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( rkg_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( rkg_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
-add_executable( tr_test
-  zm/example/ode/tr_test.c
-)
-target_include_directories( tr_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( tr_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( tr_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_ODE_OUTPUT_DIR}
-)
-
 
 set(ZM_EXAMPLE_OPT_OUTPUT_DIR
   "${ZM_EXAMPLE_OUTPUT_DIR}/opt"
@@ -4880,7 +4687,6 @@ set_target_properties( cd_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-
 add_executable( chain_boundingball_test
   roki/example/chain/boundingball_test.c
 )
@@ -4899,65 +4705,11 @@ set_target_properties( chain2vert_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
 
-add_executable( com_vel_spher_test
-  roki/example/chain/com_vel_spher_test.c
-)
-target_link_libraries( com_vel_spher_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( com_vel_spher_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
 add_executable( com_vel_humanoid_test
   roki/example/chain/com_vel_humanoid_test.c
 )
 target_link_libraries( com_vel_humanoid_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
 set_target_properties( com_vel_humanoid_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( gravity_test
-  roki/example/chain/gravity_test.c
-)
-target_link_libraries( gravity_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( gravity_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( inertia_mat_benchmark_test
-  roki/example/chain/inertia_mat_benchmark_test.c
-)
-target_link_libraries( inertia_mat_benchmark_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( inertia_mat_benchmark_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( joint_index_size_test
-  roki/example/chain/joint_index_size_test.c
-)
-target_link_libraries( joint_index_size_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( joint_index_size_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( joint_index_test
-  roki/example/chain/joint_index_test.c
-)
-target_link_libraries( joint_index_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( joint_index_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
-)
-
-add_executable( joint_vec_test
-  roki/example/chain/joint_vec_test.c
-)
-target_link_libraries( joint_vec_test PUBLIC ${ROKI_EXAMPLE_LINK_LIB} )
-set_target_properties( joint_vec_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_EXAMPLE_OUTPUT_DIR}
 )
