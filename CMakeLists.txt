@@ -849,6 +849,17 @@ set_target_properties( vec_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+add_executable( cpp_vec_test
+  zm/test/cpp_vec_test.cpp
+)
+target_include_directories( cpp_vec_test PUBLIC ${ZM_INCLUDE_DIR})
+target_link_libraries( cpp_vec_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( cpp_vec_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
+
 
 # zm app ----------------------------------------------------------------------
 
@@ -3015,6 +3026,15 @@ set_target_properties( coord2d_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
 )
 
+add_executable( cpp_frame3d_test
+  zeo/test/cpp_frame3d_test.cpp
+)
+target_link_libraries( cpp_frame3d_test PUBLIC ${ZEO_TEST_LINK_LIB} )
+set_target_properties( cpp_frame3d_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_TEST_OUTPUT_DIR}
+)
+
 add_executable( cpp_vec3d_data_test
   zeo/test/cpp_vec3d_data_test.cpp
 )
@@ -3241,11 +3261,11 @@ file(GLOB ZEO_APP_SOURCES
 )
 set_source_files_properties(${ZEO_APP_SOURCES} PROPERTIES LANGUAGE CXX )
 
-add_executable( mshape2gp
-  zeo/app/mshape2gp.c
+add_executable( zeo_multishapeplot
+  zeo/app/zeo_multishapeplot.c
 )
-target_link_libraries( mshape2gp PUBLIC ${ZEO_APP_LINK_LIB} )
-set_target_properties( mshape2gp PROPERTIES
+target_link_libraries( zeo_multishapeplot PUBLIC ${ZEO_APP_LINK_LIB} )
+set_target_properties( zeo_multishapeplot PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_APP_OUTPUT_DIR}
 )
@@ -3857,77 +3877,77 @@ set_target_properties( terra_ztk_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MAP_OUTPUT_DIR}
 )
 
-set(ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR
-  "${ZEO_EXAMPLE_OUTPUT_DIR}/mshape"
+set(ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR
+  "${ZEO_EXAMPLE_OUTPUT_DIR}/multishape"
 )
 
-add_executable( bball_test_example
-  zeo/example/mshape/bball_test.c
+add_executable( boundingball_test_example
+  zeo/example/multishape/boundingball_test.c
 )
-target_include_directories( bball_test_example PUBLIC ${ZEO_INCLUDE_DIR} )
-target_link_libraries( bball_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
-set_target_properties( bball_test_example PROPERTIES
+target_include_directories( boundingball_test_example PUBLIC ${ZEO_INCLUDE_DIR} )
+target_link_libraries( boundingball_test_example PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
+set_target_properties( boundingball_test_example PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
-add_custom_command(TARGET bball_test_example
+add_custom_command(TARGET boundingball_test_example
   POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy
   ${PROJECT_SOURCE_DIR}/zeo/example/model/box.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/mirror.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/octahedron.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/scc.ztk
   ${PROJECT_SOURCE_DIR}/zeo/example/model/sphere.ztk
-  $<TARGET_FILE_DIR:bball_test_example>/
+  $<TARGET_FILE_DIR:boundingball_test_example>/
 )
 
 add_executable( clone_test
-  zeo/example/mshape/clone_test.c
+  zeo/example/multishape/clone_test.c
 )
 target_include_directories( clone_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( clone_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( clone_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
 
 add_executable( closest_test
-  zeo/example/mshape/closest_test.c
+  zeo/example/multishape/closest_test.c
 )
 target_include_directories( closest_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( closest_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( closest_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
 
 add_executable( contig_test
-  zeo/example/mshape/contig_test.c
+  zeo/example/multishape/contig_test.c
 )
 target_include_directories( contig_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( contig_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( contig_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
 
 add_executable( handmade_test
-  zeo/example/mshape/handmade_test.c
+  zeo/example/multishape/handmade_test.c
 )
 target_include_directories( handmade_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( handmade_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( handmade_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
 
 add_executable( inside_test
-  zeo/example/mshape/inside_test.c
+  zeo/example/multishape/inside_test.c
 )
 target_include_directories( inside_test PUBLIC ${ZEO_INCLUDE_DIR} )
 target_link_libraries( inside_test PUBLIC ${ZEO_EXAMPLE_LINK_LIB} )
 set_target_properties( inside_test PROPERTIES
   LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MSHAPE_OUTPUT_DIR}
+  RUNTIME_OUTPUT_DIRECTORY ${ZEO_EXAMPLE_MULTISHAPE_OUTPUT_DIR}
 )
 
 
@@ -4505,29 +4525,29 @@ set_target_properties( cad2ztk PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
 
-add_executable( chain2gp
-  roki/app/chain2gp.c
+add_executable( rk_chainplot
+  roki/app/rk_chainplot.c
 )
-target_link_libraries( chain2gp PUBLIC ${ROKI_APP_LINK_LIB} )
-set_target_properties( chain2gp PROPERTIES
+target_link_libraries( rk_chainplot PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_chainplot PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
 
-add_executable( chain2mshape
-  roki/app/chain2mshape.c
+add_executable( rk_chain2multishape
+  roki/app/rk_chain2multishape.c
 )
-target_link_libraries( chain2mshape PUBLIC ${ROKI_APP_LINK_LIB} )
-set_target_properties( chain2mshape PROPERTIES
+target_link_libraries( rk_chain2multishape PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_chain2multishape PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
 
-add_executable( mshape2chain
-  roki/app/mshape2chain.c
+add_executable( rk_multishape2chain
+  roki/app/rk_multishape2chain.c
 )
-target_link_libraries( mshape2chain PUBLIC ${ROKI_APP_LINK_LIB} )
-set_target_properties( mshape2chain PROPERTIES
+target_link_libraries( rk_multishape2chain PUBLIC ${ROKI_APP_LINK_LIB} )
+set_target_properties( rk_multishape2chain PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ROKI_APP_OUTPUT_DIR}
 )
