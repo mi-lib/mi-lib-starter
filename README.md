@@ -51,7 +51,12 @@ to download source codes from the Git repositories as zipped files, or
    ```sh
    % scripts/install git
    ```
-to clone the Git repositories. In the former case, the information about the
+to clone the Git repositories via SSH.
+If via HTTPS, run the following.
+   ```sh
+   % scripts/install git-https
+   ```
+In the former case, the information about the
 repositories is lost. It is followed by a process to compile and install the files.
 
 ### install files as debian packages
