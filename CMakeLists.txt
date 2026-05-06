@@ -778,6 +778,16 @@ set_target_properties( pex_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
 )
 
+add_executable( opt_linesearch_test
+  zm/test/opt_linesearch_test.c
+)
+target_include_directories( opt_linesearch_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( opt_linesearch_test PUBLIC ${ZM_TEST_LINK_LIB} )
+set_target_properties( opt_linesearch_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_TEST_OUTPUT_DIR}
+)
+
 add_executable( opt_lp_test
   zm/test/opt_lp_test.c
 )
@@ -1697,16 +1707,6 @@ set_target_properties( lcp_benchmark_test PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
 )
 
-add_executable( line_search_test
-  zm/example/opt/line_search_test.c
-)
-target_include_directories( line_search_test PUBLIC ${ZM_INCLUDE_DIR} )
-target_link_libraries( line_search_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
-set_target_properties( line_search_test PROPERTIES
-  LINKER_LANGUAGE CXX
-  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_OPT_OUTPUT_DIR}
-)
-
 add_executable( lp_benchmark_test
   zm/example/opt/lp_benchmark_test.c
 )
@@ -2132,6 +2132,16 @@ add_executable( sf_beta_test
 target_include_directories( sf_beta_test PUBLIC ${ZM_INCLUDE_DIR} )
 target_link_libraries( sf_beta_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
 set_target_properties( sf_beta_test PROPERTIES
+  LINKER_LANGUAGE CXX
+  RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
+)
+
+add_executable( cdf_test
+  zm/example/sf/cdf_test.c
+)
+target_include_directories( cdf_test PUBLIC ${ZM_INCLUDE_DIR} )
+target_link_libraries( cdf_test PUBLIC ${ZM_EXAMPLE_LINK_LIB} )
+set_target_properties( cdf_test PROPERTIES
   LINKER_LANGUAGE CXX
   RUNTIME_OUTPUT_DIRECTORY ${ZM_EXAMPLE_SF_OUTPUT_DIR}
 )
