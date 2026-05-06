@@ -14,6 +14,14 @@ case $OPTION in
     ${FILE_DIRECTORY}/download git
     ${FILE_DIRECTORY}/build
     ;;
+  git-https-cpp)
+    ${FILE_DIRECTORY}/download git-https
+    ${FILE_DIRECTORY}/build cpp
+    ;;
+  git-https)
+    ${FILE_DIRECTORY}/download git-https
+    ${FILE_DIRECTORY}/build
+    ;;
   deb)
     ${FILE_DIRECTORY}/download zip
     ${FILE_DIRECTORY}/build deb

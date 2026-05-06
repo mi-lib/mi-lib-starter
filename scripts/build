@@ -20,7 +20,9 @@ fi
 
 cc=
 std=
-debug=
+if [ -z ${debug} ]; then
+  debug=
+fi
 
 # compile
 compile(){
@@ -75,6 +77,17 @@ makeclean(){
   fi
 }
 
+# dump all libinfo
+libsinfo(){
+  if [ -d ${lib} ]; then
+    cd ${lib}
+    LIBINFO=$(cat libinfo)
+    cd ${ROOT_DIRECTORY}
+    echo "${LIBINFO}" >> libsinfo
+    echo "" >> libsinfo
+  fi
+}
+
 cd ${ROOT_DIRECTORY}
 
 OPTION=$1
@@ -107,6 +120,14 @@ case $OPTION in
     do
       compile
     done
+    ;;
+  libsinfo)
+    rm -rf libsinfo
+    for lib in ${LIBS}
+    do
+      libsinfo
+    done
+    cat libsinfo
     ;;
   *)
     OPTION="default"

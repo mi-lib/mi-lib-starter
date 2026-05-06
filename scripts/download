@@ -32,6 +32,7 @@ git_clone_https(){
 ## git pull repositories
 git_pull(){
   echo "pulling" ${lib} "..."
+  git fetch --all
   git pull
 }
 
