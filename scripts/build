@@ -78,13 +78,15 @@ makeclean(){
 }
 
 # dump all libinfo
+LIBSINFOFILE=libsinfo_tmp
+
 libsinfo(){
   if [ -d ${lib} ]; then
     cd ${lib}
     LIBINFO=$(cat libinfo)
     cd ${ROOT_DIRECTORY}
-    echo "${LIBINFO}" >> libsinfo
-    echo "" >> libsinfo
+    echo "${LIBINFO}" >> ${LIBSINFOFILE}
+    echo "" >> ${LIBSINFOFILE}
   fi
 }
 
@@ -122,12 +124,13 @@ case $OPTION in
     done
     ;;
   libsinfo)
-    rm -rf libsinfo
+    rm -f ${LIBSINFOFILE}
     for lib in ${LIBS}
     do
       libsinfo
     done
-    cat libsinfo
+    cat ${LIBSINFOFILE}
+    rm -f ${LIBSINFOFILE}
     ;;
   *)
     OPTION="default"

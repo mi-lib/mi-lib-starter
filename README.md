@@ -47,17 +47,17 @@ Then, do:
    ```sh
    % scripts/install
    ```
-to download source codes from the Git repositories as zipped files, or
+to download source codes from Github as zipped files without inheriting information
+about the repositories. Another option is to clone the Github repositories via SSH
+by
    ```sh
    % scripts/install git
    ```
-to clone the Git repositories via SSH.
-If via HTTPS, run the following.
+or via HTTPS by
    ```sh
    % scripts/install git-https
    ```
-In the former case, the information about the
-repositories is lost. It is followed by a process to compile and install the files.
+Any of the above is followed by a process to compile and install the files.
 
 ### install files as debian packages
 
@@ -113,6 +113,7 @@ If your code test.c uses RoKi, for example, it will be compiled into a.out by
 
 Tomomichi Sugihara
 Kenta Imanishi
+Daishi Kaneta
 
 --------------------------------------------------------------------------------
 ## Contact
