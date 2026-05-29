@@ -6,13 +6,21 @@ ${FILE_DIRECTORY}/preprocess || { echo 'failed to prepare for installation' ; ex
 
 OPTION=$1
 case $OPTION in
+  git)
+    ${FILE_DIRECTORY}/download git
+    ${FILE_DIRECTORY}/build
+    ;;
   git-cpp)
     ${FILE_DIRECTORY}/download git
     ${FILE_DIRECTORY}/build cpp
     ;;
-  git)
-    ${FILE_DIRECTORY}/download git
+  git-https)
+    ${FILE_DIRECTORY}/download git-https
     ${FILE_DIRECTORY}/build
+    ;;
+  git-https-cpp)
+    ${FILE_DIRECTORY}/download git-https
+    ${FILE_DIRECTORY}/build cpp
     ;;
   deb)
     ${FILE_DIRECTORY}/download zip
