@@ -14,7 +14,7 @@ echo CURDIR=%CURDIR%
 
 if not exist %CONFIG% (
     echo Not exists '%CONFIG%' in current direcotry : %CURDIR% .
-    echo Try 'scripts\win-clone.bat'
+    echo Try 'scripts\win-download.bat' from the top directory
     exit /b 1
 )
 
@@ -38,10 +38,8 @@ for %%d in ( %LIBS% ) do (
         echo %%d directory already exists.
         call :download_and_unzip %%d
     )
-    call scripts\win-export-header.bat
 )
-
-
+call scripts\win-export-header.bat
 
 exit /b 0
 @REM End of Main Routine
@@ -71,25 +69,13 @@ exit /b 0
     set LIB=%1
 
     if "%LIB%"=="libxml2" (
-        set TAG=v2.14.2
-        set ZIP_FILENAME=%LIB%-%TAG%
-        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
-        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        call :download_and_unzip_libxml2 %LIB%
     ) else if "%LIB%"=="glfw" (
-        set TAG=3.4
-        set ZIP_FILENAME=%LIB%-%TAG%
-        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
-        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
+        call :download_and_unzip_glfw %LIB%
     ) else if "%LIB%"=="glew" (
-        set TAG=2.2.0
-        set ZIP_FILENAME=%LIB%-%TAG%
-        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
-        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
+        call :download_and_unzip_glew %LIB%
     ) else (
-        set BRANCH=main
-        set ZIP_FILENAME=%LIB%-%BRANCH%
-        echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
-        bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+        call :download_and_unzip_milib %LIB%
     )
     
     echo call powershell -command "Expand-Archive -Force %ZIP_FILENAME%.zip %CURDIR%"
@@ -103,3 +89,38 @@ exit /b 0
     
     exit /b 0
 
+:download_and_unzip_libxml2
+    set LIB=%1
+    set TAG=v2.14.2
+    set ZIP_FILENAME=%LIB%-%TAG%
+    echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+    bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://gitlab.gnome.org/GNOME/%LIB%/-/archive/%TAG%/%ZIP_FILENAME%.zip %CURDIR%\%ZIP_FILENAME%.zip
+
+    exit /b 0
+
+:download_and_unzip_glfw
+    set LIB=%1
+    set TAG=3.4
+    set ZIP_FILENAME=%LIB%-%TAG%
+    echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
+    bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/glfw/%LIB%/archive/refs/tags/%TAG%.zip %CURDIR%\%ZIP_FILENAME%.zip
+
+    exit /b 0
+
+:download_and_unzip_glew
+    set LIB=%1
+    set TAG=2.2.0
+    set ZIP_FILENAME=%LIB%-%TAG%
+    echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
+    bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground  https://sourceforge.net/projects/glew/files/glew/%TAG%/glew-%TAG%-win32.zip %CURDIR%\%ZIP_FILENAME%.zip
+
+    exit /b 0
+
+:download_and_unzip_milib
+    set LIB=%1
+    set BRANCH=main
+    set ZIP_FILENAME=%LIB%-%BRANCH%
+    echo bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+    bitsadmin.exe /TRANSFER httpsdowload /download /priority foreground https://github.com/mi-lib/%LIB%/archive/refs/heads/main.zip %CURDIR%\%ZIP_FILENAME%.zip
+
+    exit /b 0

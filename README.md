@@ -47,12 +47,17 @@ Then, do:
    ```sh
    % scripts/install
    ```
-to download source codes from the Git repositories as zipped files, or
+to download source codes from Github as zipped files without inheriting information
+about the repositories. Another option is to clone the Github repositories via SSH
+by
    ```sh
    % scripts/install git
    ```
-to clone the Git repositories. In the former case, the information about the
-repositories is lost. It is followed by a process to compile and install the files.
+or via HTTPS by
+   ```sh
+   % scripts/install git-https
+   ```
+Any of the above is followed by a process to compile and install the files.
 
 ### install files as debian packages
 
@@ -112,6 +117,7 @@ If you want to use CMake build tool, Try ["How to cmake build mi-lib"](cmakes/RE
 
 Tomomichi Sugihara
 Kenta Imanishi
+Daishi Kaneta
 
 --------------------------------------------------------------------------------
 ## Contact
